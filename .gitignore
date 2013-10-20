@@ -20,3 +20,6 @@
 # other ruby ignore
 *.gem
 *.rbc
+
+# sublime files
+*.sublime*

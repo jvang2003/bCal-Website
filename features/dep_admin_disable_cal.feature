@@ -5,13 +5,14 @@ Feature: department admin can disable calendars
 	So that I can prevent it's use without deleting it from the system.
 
 Background: calendars have been added  
-
 	Given the following calendars exist:
-	| calendar | api-key     | privacy |
-	| Room 1   | 13123213213 | public  |
-	| Room 2   | 12313123123 | public  |
+	| calendar | api-key     | privacy | fee-required |
+	| Room 1   | 13123213213 | public  | false        |
+	| Room 2   | 12313123123 | public  | false        |
 
-Scenario: disable the first calendar
+	Given I am logged in as a department admin
+	
+Scenario: department admin disable the first calendar
 	When I disable calendar for "Room 1"
-	I should not be able to add an event to "Room 1"
-	But I should be able to add an event to "Room 2"
+	Then calendar "Room 1" should be disabled
+	But calendar "Room 2" should not be disabled

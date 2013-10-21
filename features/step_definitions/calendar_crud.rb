@@ -4,10 +4,6 @@ Given /the following calendar exist/ do |calendars_table| #done
     end
 end
 
-Given /I am on the "(.*)" page/ do |page| #done
-    visit path_to(page)
-end
-
 When /I try to create a calendar "(.*)"/ do |calendar| #done
     click_link("Create new Calendar") #will visit path_to('/calendars/new')
 end
@@ -34,7 +30,7 @@ end
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done
     cal = Calendars.find(calendar)
     attributes = details.split(%r{,\s*})
-    fill_in(:api_key,:with => attributes[0])
+    fill_in(:api_key, :with => attributes[0])
     if (attributes[1] == "public")
         uncheck("private")
     else
@@ -44,10 +40,6 @@ When /I change the values for calendar "(.*)" with the following: (.*)/ do |cale
     check(attributes[2]) unless attributes[2] == "no"
     cal.save
     click_button("update" + calendar)
-end
-
-When /I try to destroy the calendar "(.*)"/ do |calendar|
-    visit path_to() 
 end
 
 Then /I should see the calendar "(.*)" in the department_admin page/ do |calendar| #done

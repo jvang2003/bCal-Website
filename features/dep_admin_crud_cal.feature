@@ -10,7 +10,6 @@ Background: calendars have been added to the database
     |calendar1      |123     |public | yes          |
     |calendar2      |345     |private| no           |
   
-    And I am on the "department_admin page"
     And I am logged in as a department admin
     
 Scenario: able to create calendar

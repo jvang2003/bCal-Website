@@ -47,3 +47,4 @@ Then /I should not see calendar "([^\"]*)"/ do |calendar_name|
 		assert page.has_content?(text)
 	end
 end
+

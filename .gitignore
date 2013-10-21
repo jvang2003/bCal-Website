@@ -23,3 +23,5 @@
 
 # sublime files
 *.sublime*
+
+#*.rb~

@@ -33,7 +33,7 @@ When /I make the visibility of calendar "([^\"]*)" (public|private)/ do |calenda
 	if privacy == "private"
 		check(calendar_name + "_privacy")
 	else
-		uncheck(calendar_name + "privacy")
+		uncheck(calendar_name + "_privacy")
 	end
 	click_button("update_" + calendar_name)
 end

@@ -19,7 +19,7 @@ Scenario: able to create calendar
 
 Scenario: able to read calendar
     When I try to read a calendar "calendar2"
-    Then I should see the calendar "calendar2" with the values for the following: calendar2,123,public,fee_required_checked
+    Then I should see the values for calendar "calendar2" with the following: calendar2,123,public,fee_required_checked
 
 
 Scenario: able to see calendar prepopulated when editing
@@ -29,7 +29,7 @@ Scenario: able to see calendar prepopulated when editing
 Scenario: able to see the updated changes after editing
     When I try to update a calendar "calendar1"
     And I change the values for calendar "calendar1" with the following: 103,public,yes
-    Then I should see the calendar "calendar1" with the values for the following: calendar1,103,public fee_required_checked
+    Then I should see the values for calendar "calendar1" with the following: calendar1,103,public,fee_required_checked
 
 Scenario: able to destroy a calendar
     When I delete calendar "calendar1"

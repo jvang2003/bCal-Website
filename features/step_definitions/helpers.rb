@@ -5,3 +5,4 @@ module Helpers
 		fill_in(:password, :with => password)
 		click_button("Log In")
 	end
+end

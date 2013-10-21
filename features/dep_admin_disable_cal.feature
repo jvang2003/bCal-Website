@@ -11,8 +11,8 @@ Background: calendars have been added
 	| Room 2   | 12313123123 | public  | false        |
 
 	Given I am logged in as a department admin
-	
+
 Scenario: department admin disable the first calendar
-	When I disable calendar for "Room 1"
+	When I disable calendar "Room 1"
 	Then calendar "Room 1" should be disabled
 	But calendar "Room 2" should not be disabled

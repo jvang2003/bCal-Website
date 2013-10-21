@@ -29,6 +29,15 @@ When /I (dis|en)able calendar "([^\"]*)"/ do |choice, calendar_name|
 	click_button("update_" + calendar_name)
 end
 
+When /I make the visibility of calendar "([^\"]*)" (public|private)/ do |calendar_name, privacy|
+	if privacy == "private"
+		check(calendar_name + "_privacy")
+	else
+		uncheck(calendar_name + "privacy")
+	end
+	click_button("update_" + calendar_name)
+end
+
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|
 	cal = Calendar.find(calendar_name)
 	cal.fee_required.should == !no_fee
@@ -39,6 +48,20 @@ Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
 	cal = Calendar.find(calendar_name)
 	cal.disabled.should == !enabled
 end
+
+Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
+	cal = Calendar.find(calendar_name)
+	if privacy == "private"
+		cal.privacy.should == enabled
+	else
+		cal.privacy.should == !enabled
+	end
+end
+
+
+
+
+
 
 
 

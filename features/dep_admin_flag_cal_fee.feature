@@ -14,5 +14,6 @@ Background: calendars have been added
 	Given I am logged in as a department admin
 
 Scenario: change the first calendar to require a fee
-	When I make calendar "Room 1" fees required
+	When I try to update a calendar "Room 1"
+	When I make the calendar fees required
 	Then the calendar "Room 1" should require a fee

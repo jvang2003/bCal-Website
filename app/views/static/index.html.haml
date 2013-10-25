@@ -1,1 +1,32 @@
-%h1 Coming Soon
+/ - if @dept-admin
+/ when u uncomment the if push the next line in by an indentation
+%a{:href => 'calendar/new', :class => 'btn btn-success btn-large create-cal'} Create new calendar
+
+%table{:class => 'table'}
+	%thead
+		%tr
+			%th Name
+			%th API key
+			%th Visibility
+			%th Fee Required?
+			%th Enabled
+			%th Update
+	%tbody
+		/ - @calendars.each do |cal|
+		/ %tr
+		/ 	%td = cal.name
+		/ 	%td = cal.key
+		/ 	%td = cal.visib
+		/ 	%td = cal.fee_required
+		/ 	%td = cal.enabled
+		/ 	%td
+		/ 		%a{:href => 'calendar/edit/' + cal.id, :class => 'btn btn-info'} = 'Update ' + cal.name
+		%tr
+			%td
+				%a{:href => 'calendar/1'} Fifth Floor Davis
+			%td 124321
+			%td Public
+			%td false
+			%td true
+			%td
+				%a{:href => 'calendar/edit/1', :class => 'btn btn-info'} Update Fifth Floor Davis

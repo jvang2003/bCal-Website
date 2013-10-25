@@ -5,7 +5,7 @@ Given /the following calendars exist$/ do |calendars_table| #done
 end
 
 When /I try to create a calendar "(.*)"/ do |calendar| #done
-    click_link("Create new Calendar") #will visit path_to('/calendars/new')
+    click_link("Create new calendar") #will visit path_to('/calendars/new')
 end
 
 When /I fill in the form for calendar with the following: (.*)/ do |calendar| #done
@@ -23,7 +23,7 @@ When /I try to read a calendar "(.*)"/ do |calendar| #done
 end
 
 When /I try to update a calendar "(.*)"/ do |calendar| #done
-    click_button("update #{calendar}")
+    click_button("Update #{calendar}")
 end
 
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done

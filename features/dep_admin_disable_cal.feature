@@ -13,6 +13,7 @@ Background: calendars have been added
 	Given I am logged in as a department admin
 
 Scenario: department admin disable the first calendar
-	When I disable calendar "Room 1"
+	When I try to update a calendar "Room 1"
+	And I disable the calendar
 	Then calendar "Room 1" should be disabled
 	But calendar "Room 2" should not be disabled

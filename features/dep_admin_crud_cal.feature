@@ -6,9 +6,9 @@ Feature: department admin can CRUD calendars
 
 Background: calendars have been added to the database
     Given the following calendars exist:
-    |name           |api-key | flag  | fee_required |
-    |calendar1      |123     |public | yes          |
-    |calendar2      |345     |private| no           |
+    |name           |api-key |visib  | fee_required |enabled|
+    |calendar1      |123     |public | true         |true   |
+    |calendar2      |345     |private| false        |false  |
   
     And I am logged in as a department admin
     
@@ -32,6 +32,7 @@ Scenario: able to see the updated changes after editing
     Then I should see the calendar "calendar1" with the values for the following: calendar1,103,public fee_required_checked
 
 Scenario: able to destroy a calendar
+    When I try to update a calendar "calendar1"
     When I delete calendar "calendar1"
     Then I should not see calendar "calendar1"
     

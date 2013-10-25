@@ -11,31 +11,31 @@ Given /the following calendars exist/ do |calendars_table|
 end 
 
 
-When /I make calendar "([^\"]*)" (no )?fee(?:s)? required/ do |calendar_name, no_fee_required|
+When /I make the calendar (no )?fee(?:s)? required/ do |no_fee_required|
 	if no_fee_required
-		uncheck(calendar_name + "_fee_required")
+		uncheck("fee_required")
 	else
-		check(calendar_name + "_fee_required")
+		check("fee_required")
 	end
-	click_button("update_" + calendar_name)
+	click_button("Send") #This is assuming we are on the edit page
 end
 
-When /I (dis|en)able calendar "([^\"]*)"/ do |choice, calendar_name|
-	if choice == "en"
-		uncheck(calendar_name + "_disabled")
+When /I (dis|en)able the calendar/ do |choice|
+	if choice == "true" #is this supposed to be bool or string??
+		uncheck("enabled")
 	else
-		check(calendar_name + "_disabled")
+		check("enabled")
 	end
-	click_button("update_" + calendar_name)
+	click_button("Send")
 end
 
-When /I make the visibility of calendar "([^\"]*)" (public|private)/ do |calendar_name, privacy|
-	if privacy == "private"
-		check(calendar_name + "_privacy")
+When /I make the visibility of the calendar to (public|private)/ do |privacy|
+	if privacy == "Private"
+		check("visib")
 	else
-		uncheck(calendar_name + "_privacy")
+		uncheck("visib")
 	end
-	click_button("update_" + calendar_name)
+	click_button("Send")
 end
 
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|

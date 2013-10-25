@@ -14,5 +14,6 @@ Background: calendars have been added
 	Given I am logged in as a department admin
 
 Scenario: make the first calendar private
-	When I make the visibility of calendar "Room 1" private
+	When I try to update a calendar "Room 1"
+	When I make the visibility of the calendar private
 	Then the visibility of calendar "Room 1" should be private

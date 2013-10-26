@@ -39,30 +39,36 @@ When /I make the visibility of the calendar to (public|private)/ do |privacy|
 end
 
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|
-	cal = Calendar.find(calendar_name)
-	cal.fee_required.should == !no_fee
-end
-
-
-Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
-	cal = Calendar.find(calendar_name)
-	cal.disabled.should == !enabled
-end
-
-Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
-	cal = Calendar.find(calendar_name)
-	if privacy == "private"
-		cal.privacy.should == enabled
+	visit path_to(calendar_name)
+	if no_fee
+		page.index("no fee required").should != nil
 	else
-		cal.privacy.should == !enabled
+		page.index("no fee required").should == nil
 	end
 end
 
 
+Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
+	visit path_to(calendar_name)
+	if enabled
+		page.index("disabled").should == nil
+	else
+		page.index("disabled").should != nil
+	end
+end
 
+# check visibility of calendar as admin, otherwise you shouldn't be able to follow link
+Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
+	visit path_to(calendar_name)
+	if privacy == "private"
+		page.index("private").should != nil
+	else
+		page.index("private").should == nil
+	end
+end
 
-
-
-
-
+# check visibility of calendar as someone who can't view it
+Then /I should (not )?see the calendar "([^\"]*)" do |not_visible, calendar_name|
+	assert (page.index(calendar_name) == nil) == not_visible
+end
 

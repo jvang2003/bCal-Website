@@ -1,7 +1,7 @@
 BCalIntegration::Application.routes.draw do
     get "calendar/new"
   post "calendar/create" =>"calendar#create"
-  get "calendar/edit/:id" => "calendar#edit"
+  get "calendar/edit/:id"=>"calendar#edit"
   get "calendar/:id" => "calendar#show"
 
   # The priority is based upon order of creation:

@@ -29,7 +29,7 @@ class CalendarController < ApplicationController
             @calendar.name=params["name"]
             @calendar.visib=params["visib"]
             @calendar.key=params["key"]
-            @calendar.fee_required=params["key_required"]
+            @calendar.fee_required=params["fee_required"]
 	    @calendar.save!
         end
         redirect_to '/'

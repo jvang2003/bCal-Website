@@ -1,7 +1,7 @@
 BCalIntegration::Application.routes.draw do
   get "calendar/new"
   post "calendar/create" =>"calendar#create"
-  post "calendar/update/:id" => "calendar#update"
+  put "calendar/update/:id" => "calendar#update"
   get "calendar/edit/:id"=>"calendar#edit"
   get "calendar/:id" => "calendar#show"
 

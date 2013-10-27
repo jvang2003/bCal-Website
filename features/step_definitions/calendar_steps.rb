@@ -68,7 +68,7 @@ Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |cale
 end
 
 # check visibility of calendar as someone who can't view it
-Then /I should (not )?see the calendar "([^\"]*)" do |not_visible, calendar_name|
+Then /I should (not )?see the calendar "([^\"]*)"/ do |not_visible, calendar_name|
 	assert (page.index(calendar_name) == nil) == not_visible
 end
 

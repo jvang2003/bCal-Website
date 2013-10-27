@@ -9,7 +9,7 @@
 			%th API key
 			%th Visibility
 			%th Fee Required?
-			%th Enabled
+			%th Disabled
 			%th Update
 	%tbody
 		- @calendars.each do |cal|
@@ -18,6 +18,6 @@
 			%td= cal.key
 			%td= cal.visib
 			%td= cal.fee_required
-			%td true
+			%td= cal.disabled
 			%td
 				%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'}= 'Update ' + cal.name

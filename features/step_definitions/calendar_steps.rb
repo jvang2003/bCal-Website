@@ -22,9 +22,9 @@ end
 
 When /I (dis|en)able the calendar/ do |choice|
 	if choice == "true" #is this supposed to be bool or string??
-		uncheck("enabled")
+		check("disabled")
 	else
-		check("enabled")
+		uncheck("disabled")
 	end
 	click_button("Send")
 end

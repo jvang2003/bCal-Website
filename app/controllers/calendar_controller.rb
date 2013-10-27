@@ -9,7 +9,7 @@ class CalendarController < ApplicationController
 	@calendar=Calendar.find_by_id(params[:id])
   end
   def create
-	Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"])
+	Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"])
         flash[:notice]="Calendar has been successfully created"
         redirect_to '/'
   end
@@ -29,6 +29,7 @@ class CalendarController < ApplicationController
         @calendar.visib=params["visib"]
         @calendar.key=params["key"]
         @calendar.fee_required=params["fee_required"]
+        @calendar.disabled=params["disabled"]
 	@calendar.save!
         flash[:notice]="Calendar has been successfully updated"
         redirect_to '/'

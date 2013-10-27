@@ -20,7 +20,9 @@
       %li
         %label{:for => "fee_required"} Fee required?
         = check_box_tag "fee_required", true, params[:new] ? false : @calendar.fee_required
-        / %input{:type => "checkbox", :name => "fee_required", :class => "checkbox", :check => "do "}
+      %li
+        %label{:for => "disabled"} Disabled?
+        = check_box_tag "disabled", true, params[:new] ? false : @calendar.disabled
 
     %input{:type => "submit", :value => "Send", :class => "button"}
 

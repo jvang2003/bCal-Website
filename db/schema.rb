@@ -14,8 +14,12 @@
 ActiveRecord::Schema.define(:version => 20131018005411) do
 
   create_table "calendars", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "name"
+    t.string   "fee_required"
+    t.string   "key"
+    t.string   "visib"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "users", :force => true do |t|

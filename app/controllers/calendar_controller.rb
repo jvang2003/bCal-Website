@@ -2,12 +2,33 @@ class CalendarController < ApplicationController
   def new
   	render "edit" #same view as edit
   end
+  def index
+	@calendars=Calendar.find(:all)
+  end
   def edit
+	id=params[:id]
+	@calendar=Calendar.find_by_id(id)
+        if(@calendar)
+            @calendar.name=params["name"]
+            @calendar.visib=params["visib"]
+            @calendar.key=params["key"]
+            @calendar.fee_required=params["key_required"]
+	    @calendar.save!
+        end
+        redirect_to '/'
   end
   def create
+	@calendar=Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"])
+        flash[:notice]="Calendar successfully created"
+        redirect_to '/'
   end
   def show
+	@calendar=Calendar.find(params[:id])
   end
   def destroy
+	@calendar=Calendar.find(params[:id])
+        @calendar.destroy
+        flash[:notice]="Calendar has been deleted"
+        redirect_to '/'
   end
 end

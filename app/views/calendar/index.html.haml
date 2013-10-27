@@ -14,10 +14,10 @@
 	%tbody
 		- @calendars.each do |cal|
 			%tr
-			%td = cal.name
-			%td = cal.key
-			%td = cal.visib
-			%td = cal.fee_required
-			%td = cal.enabled
+			%td= cal.name
+			%td= cal.key
+			%td= cal.visib
+			%td= cal.fee_required
+			%td true
 			%td
-				%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'} = 'Update ' + cal.name
+				%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'}= 'Update ' + cal.name

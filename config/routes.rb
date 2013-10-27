@@ -1,6 +1,6 @@
 BCalIntegration::Application.routes.draw do
-  get "calendar/new"
-  get "calendar/create"
+    get "calendar/new"
+  post "calendar/create" =>"calendar#create"
   get "calendar/edit/:id" => "calendar#edit"
   get "calendar/:id" => "calendar#show"
 
@@ -53,9 +53,9 @@ BCalIntegration::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'static#index'
+  root :to => 'calendar#index'
 
-  match 'about' => 'static#index'
+  match 'about' => 'calendar#index'
 
   # See how all your routes lay out with "rake routes"
 end

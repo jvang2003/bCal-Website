@@ -1,3 +1,3 @@
 class Calendar < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :name, :key,:visib,:fee_required
 end

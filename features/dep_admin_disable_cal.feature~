@@ -6,7 +6,7 @@ Feature: department admin can disable calendars
 
 Background: calendars have been added  
 	Given the following calendars exist:
-	| calendar | key         | visib   | fee-required |
+	| calendar | key         | privacy     | fee-required |
 	| Room 1   | 13123213213 | public  | false        |
 	| Room 2   | 12313123123 | public  | false        |
 

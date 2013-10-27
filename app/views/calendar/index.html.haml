@@ -13,11 +13,11 @@
 			%th Update
 	%tbody
 		- @calendars.each do |cal|
-			%tr
-			%td= link_to"#{cal.name}",show_calendar_path(cal)
-			%td= cal.key
-			%td= cal.visib
-			%td= cal.fee_required ? 'Yes':'No'
-			%td= cal.disabled ? 'Yes' : 'No'
+			%tr{:id => cal.name}
+			%td{:class => "name"}= link_to"#{cal.name}",show_calendar_path(cal)
+			%td{:class => "key"}= cal.key
+			%td{:class => "visib"}= cal.visib
+			%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
+			%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
 			%td
 				%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'}= 'Update ' + cal.name

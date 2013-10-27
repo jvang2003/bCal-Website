@@ -25,4 +25,5 @@
     %input{:type => "submit", :value => "Send", :class => "button"}
 
 / %a{:href => 'calendar/destroy', :class => 'btn btn-danger'} Destroy this calendar
-= link_to 'Destroy this calendar', '/', :confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"
+-if !params[:new]
+  = link_to 'Destroy this calendar',@calendar.id.to_s,:method=>:delete,:confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"

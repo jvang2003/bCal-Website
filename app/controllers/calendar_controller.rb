@@ -9,7 +9,7 @@ class CalendarController < ApplicationController
 	@calendar=Calendar.find_by_id(params[:id])
   end
   def create
-	@calendar=Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"])
+	Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"])
         flash[:notice]="Calendar successfully created"
         redirect_to '/'
   end

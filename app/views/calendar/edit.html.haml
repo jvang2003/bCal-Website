@@ -1,24 +1,24 @@
 %h1 
   = params[:new] ? "Create a new calendar" : "Edit " + @calendar.name
-%form{ :action => params[:new] ? "create" : "update", :method => params[:new] ? "post" : "put"}
+%form{ :action => params[:new] ? "create" : "../update/#{params[:id]}", :method => "post"}
   %fieldset
     %ol
       %li
         %label{:for => "name"} Name:
-        %input{:type => "text", :name => "name", :class => "text", :value => @calendar.name}
+        %input{:type => "text", :name => "name", :class => "text", :value => params[:new] ? "" : @calendar.name}
       %li
         %label{:for => "key"} API key:
-        %input{:type => "text", :name => "key", :class => "text", :value => @calendar.key}
+        %input{:type => "text", :name => "key", :class => "text", :value => params[:new] ? "" : @calendar.key}
       %li
         %label{:for => "visib"} Visibility:
         %select{:name => "visib"}
-          %option{:value => "Public", :selected => @calendar.visib == 'Public'} Public
-          %option{:value => "Private", :selected => @calendar.visib == 'Private'} Private
+          %option{:value => "Public", :selected => params[:new] ? false : @calendar.visib == 'Public'} Public
+          %option{:value => "Private", :selected => params[:new] ? false : @calendar.visib == 'Private'} Private
           / %option{:value => "Public"} Public
           / %option{:value => "Private"} Private
       %li
         %label{:for => "fee_required"} Fee required?
-        = check_box_tag "fee_required", @calendar.fee_required, @calendar.fee_required
+        = check_box_tag "fee_required", params[:new] ? false : @calendar.fee_required, params[:new] ? false : @calendar.fee_required
         / %input{:type => "checkbox", :name => "fee_required", :class => "checkbox", :check => "do "}
 
     %input{:type => "submit", :value => "Send", :class => "button"}

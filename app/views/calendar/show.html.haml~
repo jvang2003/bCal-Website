@@ -1,22 +1,22 @@
-/ %h1 @calendar.name
-%h1 Fifth Floor Davis (Test Calendar)
+%h1 @calendar.name
 %ul
 	%li
 		Name:
-		/ = @calendar.name
-		Fifth Floor Davis (Test Calendar)
+		= @calendar.name
 	/ I imagine all the data below this is rendered for admin only
 	/ When u uncomment the if push everything affected by the if in by an indentation
 	/ - if @dept_admin
 	%li
 		API key:
-		/ = @calendar.key
-		1234123
+		= @calendar.key
+		
 	%li
 		Visibility:
-		/ = @calendar.visib
-		Public
+		= @calendar.visib
+		
 	%li
-		Fee required?
-		/ = @calendar.fee_required
-		false
+		Fee required ? :
+		= @calendar.fee_required
+
+
+		

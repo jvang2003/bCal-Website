@@ -1,10 +1,11 @@
 BCalIntegration::Application.routes.draw do
-  get "calendar/new"
+  get "calendar/new" 
   post "calendar/create" =>"calendar#create"
   put "calendar/update/:id" => "calendar#update"
   get "calendar/edit/:id"=>"calendar#edit"
-  get "calendar/:id" => "calendar#show"
+  get "calendar/:id" => "calendar#show" ,:as => :show_calendar
   delete "calendar/edit/:id" => "calendar#destroy"
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

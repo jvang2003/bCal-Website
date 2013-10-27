@@ -1,5 +1,4 @@
-/ %h1 @calendar.name
-%h1 Fifth Floor Davis (Test Calendar)
+%h1 #{@calendar.name}
 %ul
 	%li
 		Name:
@@ -16,6 +15,8 @@
 		= @calendar.visib
 		
 	%li
-		Fee required?
+		Fee required ? :
 		= @calendar.fee_required
+
+
 		

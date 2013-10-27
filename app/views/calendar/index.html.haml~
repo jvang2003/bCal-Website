@@ -1,6 +1,6 @@
 / - if @dept-admin
 / when u uncomment the if push the next line in by an indentation
-%a{:href => 'calendar/new', :class => 'btn btn-success btn-large create-cal'} Create new calendar
+%a{:href => 'calendar/new?new=true', :class => 'btn btn-success btn-large create-cal'} Create new calendar
 
 %table{:class => 'table'}
 	%thead
@@ -9,15 +9,15 @@
 			%th API key
 			%th Visibility
 			%th Fee Required?
-			%th Enabled
+			%th Disabled
 			%th Update
 	%tbody
 		- @calendars.each do |cal|
 			%tr
-			%td= cal.name
+			%td= link_to"#{cal.name}",show_calendar_path(cal)
 			%td= cal.key
 			%td= cal.visib
-			%td= cal.fee_required
-			%td= cal.enabled
+			%td= cal.fee_required ? 'Yes':'No'
+			%td= cal.disabled ? 'Yes' ; 'No'
 			%td
 				%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'}= 'Update ' + cal.name

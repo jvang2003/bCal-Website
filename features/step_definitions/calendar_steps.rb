@@ -52,17 +52,17 @@ end
 
 
 Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
-	visit path_to(calendar_name)
+	save_and_open_page
+	el = find('#' + calendar_name.gsub(' ', '_') + ' .disabled')
 	if enabled
-		page.index("disabled").should == nil
+		el.text.should == "No"
 	else
-		page.index("disabled").should != nil
+		el.text.should_not == "Yes"
 	end
 end
 
 # check visibility of calendar as admin, otherwise you shouldn't be able to follow link
 Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
-	visit path_to(calendar_name)
 	if privacy == "private"
 		page.index("private").should != nil
 	else

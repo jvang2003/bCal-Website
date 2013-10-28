@@ -28,22 +28,25 @@ When /I try to read a calendar "(.*)"/ do |calendar| #done
 end
 
 When /I try to update a calendar "(.*)"/ do |calendar| #done
+<<<<<<< Updated upstream
     find('a', :text => "Update #{calendar}").click
+=======
+    click_link("Update #{calendar}")
+>>>>>>> Stashed changes
 end
 
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done
-    cal = Calendar.find(calendar)
+    assert page.has_content?("Edit #{calendar}")
+    cal = Calendar.find_by_name(calendar)
     attributes = details.split(%r{,\s*})
-    fill_in(:api_key, :with => attributes[0])
+    fill_in(:key, :with => attributes[0])
     if (attributes[1] == "public")
-        uncheck("private")
+        select("Private", :from => "visib")
     else
-        uncheck("public")
+        select("Public", :from => "visib")
     end
-    check(attributes[1])
-    check(attributes[2]) unless attributes[2] == "no"
-    cal.save
-    click_button("update" + calendar)
+    check("Fee required?") unless attributes[2] == "no"
+    click_button("Send")
 end
 
 Then /I should see the calendar "(.*)" in the department_admin page/ do |calendar| #done
@@ -60,25 +63,27 @@ Then /I should see the calendar (".*") with the values for the following: (.*)$/
   non_check_box_attr = attributes.slice(0, 3)
   check_box_attr = attributes.slice(3, 5)
   non_check_box_attr.each do |attribute|
-    if page.respond_to? :should
-      page.should have_content(attribute)
+   if page.respond_to? :should
+     page.should have_content(attribute)
+   else
+    assert page.has_content?(attribute)
+   end
+  end
+  check_box_attr.each do |attribute| #for each check_box attributes, check if the check box are checked accordingly
+    subbed = attribute.gsub("#{attribute}_", "")
+    attribute = attribute.gsub("_checked", "")
+    cal = Calendar.find_by_name(calendar)
+    #print(find(:css, "#{calendar}").value)
+    if subbed == "checked"
+     cal.#{attribute}.should == true
     else
-      assert page.has_content?(attribute)
+     cal.attribute.should == false
     end
   end
-  #check_box_attr.each do |attribute| #for each check_box attributes, check if the check box are checked accordingly
-  # subbed = attribute.gsub("#{attribute}_", "")
-   # text = find("#" + calendar).all(:css, ".#{subbed}").first.text
-    #if subbed == "checked"
-     # text.should_not == ""
-    #else
-     # text.should == ""
-    #end
-  #end
 end
 
 Then /the form filled for calendar "(.*)"/ do |calendar|
-  cal = Calendar.find(calendar)
+  cal = Calendar.find_by_name(calendar)
   if page.respond_to? :should
     page.should have_content(cal.name)
   else
@@ -87,7 +92,7 @@ Then /the form filled for calendar "(.*)"/ do |calendar|
 end
 
 When /I (?:delete|destroy|remove) calendar "([^\"]*)"$/ do |calendar_name|
-  click_button("delete_" + calendar_name)
+  click_link("Destroy this calendar")
 end
 
 Then /I should be seeing the calendar "([^\"]*)" in the department admin page$/ do |calendar_name|
@@ -100,9 +105,9 @@ end
 
 Then /I should not see calendar "([^\"]*)"/ do |calendar_name|
   if page.respond_to? :should
-    page.should have_no_content(text)
+    page.should have_no_content(calendar_name)
   else
-    assert page.has_no_content?(text)
+    assert page.has_no_content?(calendar_name)
   end
 end
 

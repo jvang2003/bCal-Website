@@ -28,11 +28,7 @@ When /I try to read a calendar "(.*)"/ do |calendar| #done
 end
 
 When /I try to update a calendar "(.*)"/ do |calendar| #done
-<<<<<<< Updated upstream
     find('a', :text => "Update #{calendar}").click
-=======
-    click_link("Update #{calendar}")
->>>>>>> Stashed changes
 end
 
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done

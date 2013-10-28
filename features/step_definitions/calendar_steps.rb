@@ -23,10 +23,8 @@ end
 
 When /I (dis|en)able the calendar/ do |choice|
 	if choice == "true" #is this supposed to be bool or string??
-		save_and_open_page
 		check("disabled")
 	else
-		save_and_open_page
 		uncheck("disabled")
 	end
 	click_button("Send")
@@ -52,8 +50,7 @@ end
 
 
 Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
-	save_and_open_page
-	el = find('#' + calendar_name.gsub(' ', '_') + ' .disabled')
+	el = find('#' + calendar_name.gsub(' ', '_')).find('.disabled')
 	if enabled
 		el.text.should == "No"
 	else

@@ -14,10 +14,10 @@
 	%tbody
 		- @calendars.each do |cal|
 			%tr{:id => cal.name.gsub(' ', '_')}
-			%td{:class => "name"}= link_to"#{cal.name}",show_calendar_path(cal)
-			%td{:class => "key"}= cal.key
-			%td{:class => "visib"}= cal.visib
-			%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
-			%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
-			%td
-				%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'}= 'Update ' + cal.name
+				%td{:class => "name"}= link_to"#{cal.name}",show_calendar_path(cal)
+				%td{:class => "key"}= cal.key
+				%td{:class => "visib"}= cal.visib
+				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
+				%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
+				%td
+					%a{:href => 'calendar/edit/' + cal.id.to_s, :class => 'btn btn-info'}= 'Update ' + cal.name

@@ -1,7 +1,7 @@
 
 Given /(?:|I) am logged in as a dep(?:t|artment)? admin(?:strator)?$/ do  
 	User.create!(:name => 'dept_admin_user', :password => 'testing')
-	login('dept_admin_user', 'testing')
+	# login('dept_admin_user', 'testing') TODO: IMPLEMENT USER AUTHENTICATION
 end
 
 =begin
@@ -25,6 +25,7 @@ When /I (dis|en)able the calendar/ do |choice|
 	if choice == "true" #is this supposed to be bool or string??
 		check("disabled")
 	else
+		save_and_open_page
 		uncheck("disabled")
 	end
 	click_button("Send")

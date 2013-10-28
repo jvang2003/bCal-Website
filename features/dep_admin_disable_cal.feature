@@ -4,13 +4,14 @@ Feature: department admin can disable calendars
 	I want to disable a calendar
 	So that I can prevent it's use without deleting it from the system.
 
-Background: calendars have been added  
+Background: calendars have been added to the database
 	Given the following calendars exist:
-	| calendar | key         | visib   | fee-required |
-	| Room 1   | 13123213213 | public  | false        |
-	| Room 2   | 12313123123 | public  | false        |
+	| name     | key         | visib   | fee_required | disabled |
+	| Room 1   | 13123213213 | Public  | false        | false    |
+	| Room 2   | 12313123123 | Public  | false        | false    |
 
 	Given I am logged in as a department admin
+	And I am on the homepage
 
 Scenario: department admin disable the first calendar
 	When I try to update a calendar "Room 1"

@@ -28,7 +28,7 @@ When /I try to read a calendar "(.*)"/ do |calendar| #done
 end
 
 When /I try to update a calendar "(.*)"/ do |calendar| #done
-    puts find('a', :text => "Update #{calendar}")
+    find('a', :text => "Update #{calendar}").click
 end
 
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done

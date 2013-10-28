@@ -23,6 +23,7 @@ end
 
 When /I (dis|en)able the calendar/ do |choice|
 	if choice == "true" #is this supposed to be bool or string??
+		save_and_open_page
 		check("disabled")
 	else
 		save_and_open_page

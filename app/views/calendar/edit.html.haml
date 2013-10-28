@@ -1,7 +1,7 @@
 %h1 
   = params[:new] ? "Create a new calendar" : "Edit " + @calendar.name
 / %form{ :action => params[:new] ? "create" : "../update/#{params[:id]}", :method => "post"}
-= form_tag((params[:new] ? "create" : "../update/#{params[:id]}"), :method => (params[:new] ? "post" : "put")) do
+= form_tag((params[:new] ? "create" : url_for(:controller => 'calendar', :action => 'update', :id => params[:id])), :method => (params[:new] ? "post" : "put")) do
   %fieldset
     %ol
       %li

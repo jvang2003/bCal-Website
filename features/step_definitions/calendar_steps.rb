@@ -22,7 +22,7 @@ When /I make the calendar (no )?fee(?:s)? required/ do |no_fee_required|
 end
 
 When /I (dis|en)able the calendar/ do |choice|
-	if choice == "true" #is this supposed to be bool or string??
+	if choice == "dis" #is this supposed to be bool or string??
 		check("disabled")
 	else
 		uncheck("disabled")
@@ -31,7 +31,7 @@ When /I (dis|en)able the calendar/ do |choice|
 end
 
 When /I make the visibility of the calendar to (public|private)/ do |privacy|
-	if privacy == "Private"
+	if privacy == "private"
 		check("visib")
 	else
 		uncheck("visib")
@@ -40,21 +40,22 @@ When /I make the visibility of the calendar to (public|private)/ do |privacy|
 end
 
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|
-	visit path_to(calendar_name)
+        el = find('#' + calendar_name.gsub(' ', '_')).find('.fee_required')
 	if no_fee
-		page.index("no fee required").should != nil
+		el.text.should == "No"
 	else
-		page.index("no fee required").should == nil
+		el.text.should == "Yes"
 	end
 end
 
 
 Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
 	el = find('#' + calendar_name.gsub(' ', '_')).find('.disabled')
+        print(enabled)
 	if enabled
 		el.text.should == "No"
 	else
-		el.text.should_not == "Yes"
+		el.text.should == "Yes"
 	end
 end
 

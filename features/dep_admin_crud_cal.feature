@@ -28,8 +28,8 @@ Scenario: able to see calendar prepopulated when editing
 
 Scenario: able to see the updated changes after editing
     When I try to update a calendar "calendar1"
-    And I change the values for calendar "calendar1" with the following: 103,public,yes
-    Then I should see the calendar "calendar1" with the values for the following: calendar1,103,public fee_required_checked
+    And I change the values for calendar "calendar1" with the following: 103,Public,yes
+    Then I should see the calendar "calendar1" with the values for the following: calendar1,103,Public, fee_required_checked
 
 Scenario: able to destroy a calendar
     When I try to update a calendar "calendar1"

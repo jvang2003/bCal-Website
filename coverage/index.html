@@ -21,21 +21,21 @@
       <img src="./assets/0.4.5/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2013-10-27T19:51:44-07:00">2013-10-27T19:51:44-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2013-10-27T20:35:41-07:00">2013-10-27T20:35:41-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     All Files
-    (<span class="red">51.16%</span>)
+    (<span class="green">100.0%</span>)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>10</b> files in total.
     <b>43</b> relevant lines. 
-    <span class="green"><b>22</b> lines covered</span> and
-    <span class="red"><b>21</b> lines missed </span>
+    <span class="green"><b>43</b> lines covered</span> and
+    <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -61,11 +61,11 @@
       
       <tr>
         <td><a href="#93bee46904692614393db72afa80e8ed6078aee1" class="src_link" title="./app/controllers/calendar_controller.rb">./app/controllers/calendar_controller.rb</a></td>
-        <td class="red">27.59 %</td>
+        <td class="green">100.0 %</td>
         <td>37</td>
         <td>29</td>
-        <td>8</td>
-        <td>21</td>
+        <td>29</td>
+        <td>0</td>
       </tr>
       
       <tr>
@@ -148,14 +148,14 @@
           <div class="file_list_container" id="Controllers">
   <h2>
     Controllers
-    (<span class="red">40.0%</span>)
+    (<span class="green">100.0%</span>)
   </h2>
   <a name="Controllers"></a>
   <div>
     <b>4</b> files in total.
     <b>35</b> relevant lines. 
-    <span class="green"><b>14</b> lines covered</span> and
-    <span class="red"><b>21</b> lines missed </span>
+    <span class="green"><b>35</b> lines covered</span> and
+    <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
     <thead>
@@ -181,11 +181,11 @@
       
       <tr>
         <td><a href="#93bee46904692614393db72afa80e8ed6078aee1" class="src_link" title="./app/controllers/calendar_controller.rb">./app/controllers/calendar_controller.rb</a></td>
-        <td class="red">27.59 %</td>
+        <td class="green">100.0 %</td>
         <td>37</td>
         <td>29</td>
-        <td>8</td>
-        <td>21</td>
+        <td>29</td>
+        <td>0</td>
       </tr>
       
       <tr>
@@ -456,7 +456,7 @@
     <tr>
       <td colspan="3">
         <h3>./app/controllers/calendar_controller.rb</h3>
-        <h4><span class="red">27.59 %</span> covered</h4>
+        <h4><span class="green">100.0 %</span> covered</h4>
       </td>
     </tr>
     <tr>
@@ -494,7 +494,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>3</pre>
       </td>
@@ -502,7 +502,7 @@
         <pre>  	render &quot;edit&quot; #same view as edit</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
@@ -533,7 +533,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="14">
       <td class="line_number">
         <pre>6</pre>
       </td>
@@ -541,7 +541,7 @@
         <pre>	@calendars=Calendar.find(:all)</pre>
       </td>
       <td class="hits">
-        0
+        14
       </td>
     </tr>
   
@@ -572,7 +572,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="6">
       <td class="line_number">
         <pre>9</pre>
       </td>
@@ -580,7 +580,7 @@
         <pre>	@calendar=Calendar.find_by_id(params[:id])</pre>
       </td>
       <td class="hits">
-        0
+        6
       </td>
     </tr>
   
@@ -611,7 +611,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>12</pre>
       </td>
@@ -619,12 +619,12 @@
         <pre>	Calendar.create!(:name=&gt;params[&quot;name&quot;],:visib =&gt; params[&quot;visib&quot;], :key =&gt; params[&quot;key&quot;], :fee_required =&gt; params[&quot;fee_required&quot;], :disabled =&gt; params[&quot;disabled&quot;])</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>13</pre>
       </td>
@@ -632,12 +632,12 @@
         <pre>        flash[:notice]=&quot;Calendar has been successfully created&quot;</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>14</pre>
       </td>
@@ -645,7 +645,7 @@
         <pre>        redirect_to '/'</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
@@ -676,7 +676,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>17</pre>
       </td>
@@ -684,7 +684,7 @@
         <pre>	@calendar=Calendar.find(params[:id])</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
@@ -715,7 +715,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>20</pre>
       </td>
@@ -723,12 +723,12 @@
         <pre>	@calendar=Calendar.find(params[:id])</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>21</pre>
       </td>
@@ -736,12 +736,12 @@
         <pre>        @calendar.destroy</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>22</pre>
       </td>
@@ -749,12 +749,12 @@
         <pre>        flash[:notice]=&quot;Calendar has been deleted&quot;</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="1">
       <td class="line_number">
         <pre>23</pre>
       </td>
@@ -762,7 +762,7 @@
         <pre>        redirect_to '/'</pre>
       </td>
       <td class="hits">
-        0
+        1
       </td>
     </tr>
   
@@ -793,7 +793,7 @@
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>26</pre>
       </td>
@@ -801,12 +801,12 @@
         <pre>	id=params[:id]</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>27</pre>
       </td>
@@ -814,12 +814,12 @@
         <pre>	@calendar=Calendar.find_by_id(id)</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>28</pre>
       </td>
@@ -827,12 +827,12 @@
         <pre>        @calendar.name=params[&quot;name&quot;]</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>29</pre>
       </td>
@@ -840,12 +840,12 @@
         <pre>        @calendar.visib=params[&quot;visib&quot;]</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>30</pre>
       </td>
@@ -853,12 +853,12 @@
         <pre>        @calendar.key=params[&quot;key&quot;]</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>31</pre>
       </td>
@@ -866,12 +866,12 @@
         <pre>        @calendar.fee_required=params[&quot;fee_required&quot;]</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>32</pre>
       </td>
@@ -879,12 +879,12 @@
         <pre>        @calendar.disabled=params[&quot;disabled&quot;]</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>33</pre>
       </td>
@@ -892,12 +892,12 @@
         <pre>	@calendar.save!</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>34</pre>
       </td>
@@ -905,12 +905,12 @@
         <pre>        flash[:notice]=&quot;Calendar has been successfully updated&quot;</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   
     
-    <tr class="miss" data-hits="0">
+    <tr class="hit" data-hits="4">
       <td class="line_number">
         <pre>35</pre>
       </td>
@@ -918,7 +918,7 @@
         <pre>        redirect_to '/'</pre>
       </td>
       <td class="hits">
-        0
+        4
       </td>
     </tr>
   

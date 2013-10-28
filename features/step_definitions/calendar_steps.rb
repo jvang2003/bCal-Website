@@ -22,7 +22,7 @@ When /I make the calendar (no )?fee(?:s)? required/ do |no_fee_required|
 end
 
 When /I (dis|en)able the calendar/ do |choice|
-	if choice == "true" #is this supposed to be bool or string??
+	if choice == "dis" #is this supposed to be bool or string??
 		check("disabled")
 	else
 		uncheck("disabled")
@@ -30,40 +30,45 @@ When /I (dis|en)able the calendar/ do |choice|
 	click_button("Send")
 end
 
-When /I make the visibility of the calendar to (public|private)/ do |privacy|
-	if privacy == "Private"
-		check("visib")
+When /I make the visibility of the calendar (public|private)/ do |privacy|
+	puts privacy
+	puts privacy == "private"
+	if privacy == "private"
+		# find("option", :text => "Private").click
+		select('Private', :from => 'visib')
 	else
-		uncheck("visib")
+		select('Public', :from => 'visib')
 	end
 	click_button("Send")
 end
 
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|
-	visit path_to(calendar_name)
+        el = find('#' + calendar_name.gsub(' ', '_')).find('.fee_required')
 	if no_fee
-		page.index("no fee required").should != nil
+		el.text.should == "No"
 	else
-		page.index("no fee required").should == nil
+		el.text.should == "Yes"
 	end
 end
 
 
 Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
 	el = find('#' + calendar_name.gsub(' ', '_')).find('.disabled')
+        print(enabled)
 	if enabled
 		el.text.should == "No"
 	else
-		el.text.should_not == "Yes"
+		el.text.should == "Yes"
 	end
 end
 
 # check visibility of calendar as admin, otherwise you shouldn't be able to follow link
 Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
+	el = find('#' + calendar_name.gsub(' ', '_')).find('.visib')
 	if privacy == "private"
-		page.index("private").should != nil
+		el.text.should == "Private"
 	else
-		page.index("private").should == nil
+		el.text.should == "Public"
 	end
 end
 

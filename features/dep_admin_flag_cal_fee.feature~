@@ -7,13 +7,13 @@ Feature: department admin can flag calendar fees_required
 Background: calendars have been added
 
 	Given the following calendars exist:
-	| calendar |     key     | visib   | fee-required |
-	| Room 1   | 13123213213 | public  | false        |
-	| Room 2   | 12313123123 | public  | false        | 
+	| name     |     key     | visib   | fee_required |disabled|
+	| Room1    | 13123213213 | public  | false        |true    |
+	| Room2    | 12313123123 | public  | false        |false   |
 
 	Given I am logged in as a department admin
 
 Scenario: change the first calendar to require a fee
-	When I try to update a calendar "Room 1"
+	When I try to update a calendar "Room1"
 	When I make the calendar fees required
-	Then the calendar "Room 1" should require a fee
+	Then the calendar "Room1" should require a fee

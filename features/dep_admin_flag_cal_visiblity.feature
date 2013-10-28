@@ -7,11 +7,12 @@ Feature: department admin can flag calendars as public or private
 Background: calendars have been added
 
 	Given the following calendars exist:
-	| calendar | key | visib   | fee-required |
-	| Room 1   | 1964    | public  | false        |
-	| Room 2   | 2000    | public  | false        |
+	| name     | key     | visib   | fee_required |
+	| Room 1   | 1964    | Public  | false        |
+	| Room 2   | 2000    | Public  | false        |
 
 	Given I am logged in as a department admin
+	And I am on the homepage
 
 Scenario: make the first calendar private
 	When I try to update a calendar "Room 1"

@@ -1,11 +1,14 @@
 BCalIntegration::Application.routes.draw do
-  get "calendar/new" 
-  post "calendar/create" =>"calendar#create"
-  put "calendar/update/:id" => "calendar#update"
-  get "calendar/edit/:id"=>"calendar#edit"
-  get "calendar/:id" => "calendar#show" ,:as => :show_calendar
+  get "calendar/create", :to => "calendar#new", :as => "new_cal" 
+  post "calendar/create", :to => "calendar#create", :as => "create_cal"
+  put "calendar/update/:id", :to => "calendar#update", :as => "update_cal"
+  get "calendar/edit/:id", :to => "calendar#edit", :as => "edit_cal"
+  get "calendar/show/:id", :to => "calendar#show", :as => "show_cal"
   delete "calendar/edit/:id" => "calendar#destroy"
   
+  root :to => 'calendar#index', :as => "calendars"
+
+  match 'about' => 'calendar#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -56,9 +59,6 @@ BCalIntegration::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'calendar#index'
-
-  match 'about' => 'calendar#index'
 
   # See how all your routes lay out with "rake routes"
 end

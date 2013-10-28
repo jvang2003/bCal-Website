@@ -1,31 +1,31 @@
 %h1 
-  = params[:new] ? "Create a new calendar" : "Edit " + @calendar.name
+  = @calendar == nil ? "Create a new calendar" : "Edit " + @calendar.name
 / %form{ :action => params[:new] ? "create" : "../update/#{params[:id]}", :method => "post"}
-= form_tag((params[:new] ? "create" : url_for(:controller => 'calendar', :action => 'update', :id => params[:id])), :method => (params[:new] ? "post" : "put")) do
+= form_tag((@calendar == nil ? "create" : update_cal_path(params[:id])), :method => (@calendar == nil ? "post" : "put")) do
   %fieldset
     %ol
       %li
         %label{:for => "name"} Name:
-        %input{:type => "text", :name => "name", :class => "text", :value => params[:new] ? "" : @calendar.name}
+        %input{:type => "text", :name => "name", :class => "text", :value => @calendar == nil ? "" : @calendar.name}
       %li
         %label{:for => "key"} API key:
-        %input{:type => "text", :name => "key", :class => "text", :value => params[:new] ? "" : @calendar.key}
+        %input{:type => "text", :name => "key", :class => "text", :value => @calendar == nil ? "" : @calendar.key}
       %li
         %label{:for => "visib"} Visibility:
         %select{:name => "visib"}
-          %option{:value => "Public", :selected => params[:new] ? false : @calendar.visib == 'Public'} Public
-          %option{:value => "Private", :selected => params[:new] ? false : @calendar.visib == 'Private'} Private
+          %option{:value => "Public", :selected => @calendar == nil ? false : @calendar.visib == 'Public'} Public
+          %option{:value => "Private", :selected => @calendar == nil ? false : @calendar.visib == 'Private'} Private
           / %option{:value => "Public"} Public
           / %option{:value => "Private"} Private
       %li
         %label{:for => "fee_required"} Fee required?
-        = check_box_tag "fee_required", true, params[:new] ? false : @calendar.fee_required
+        = check_box_tag "fee_required", true, @calendar == nil ? false : @calendar.fee_required
       %li
         %label{:for => "disabled"} Disabled?
-        = check_box_tag "disabled", true, params[:new] ? false : @calendar.disabled
+        = check_box_tag "disabled", true, @calendar == nil ? false : @calendar.disabled
 
     %input{:type => "submit", :value => "Send", :class => "button"}
 
 / %a{:href => 'calendar/destroy', :class => 'btn btn-danger'} Destroy this calendar
--if !params[:new]
-  = link_to 'Destroy this calendar',@calendar.id.to_s,:method=>:delete,:confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"
+-if @calendar != nil
+  = link_to 'Destroy this calendar',@calendar.id.to_s, :method => :delete, :confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"

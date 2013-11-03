@@ -1,0 +1,16 @@
+= form_tag "/request",:method =>:post do
+  = field_set_tag do
+    = label_tag :people,'Number of people'
+    = number_field_tag :people,0,:min =>0
+    = label_tag :email,'Your Email'
+    = email_field_tag :email
+    = label_tag :place,'Place'
+    = text_field_tag :place
+    = label_tag :reason,'Reason for request'
+    = text_area_tag :reason,nil,:rows => 5
+    = label_tag :details,'Details of your event'
+    = text_area_tag :details,nil,:rows => 5
+  %input{:type => "submit", :value => "Send", :class => "button"}
+
+
+

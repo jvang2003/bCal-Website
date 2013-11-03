@@ -7,6 +7,7 @@ BCalIntegration::Application.routes.draw do
   delete "calendar/edit/:id" => "calendar#destroy"
   
   root :to => 'calendar#index', :as => "calendars"
+  resources :request
 
   match 'about' => 'calendar#index'
 

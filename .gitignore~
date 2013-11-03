@@ -24,9 +24,6 @@
 # sublime files
 *.sublime*
 
-#vim files
-*.swp
-
 #temp files
 *.rb~
 *.feature~

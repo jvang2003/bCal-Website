@@ -5,6 +5,7 @@ class CreateRequests < ActiveRecord::Migration
       t.text :reason
       t.text :details
       t.string :place
+      t.datetime :time
 
       t.timestamps
     end

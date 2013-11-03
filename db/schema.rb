@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20131103082824) do
     t.text     "reason"
     t.text     "details"
     t.string   "place"
+    t.datetime "time"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -24,7 +24,7 @@
 # sublime files
 *.sublime*
 
-#temp files
+# editor temp files
 *.rb~
 *.feature~
 *.haml~

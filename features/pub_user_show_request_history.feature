@@ -18,31 +18,31 @@ Background: calendars have been added
 
 Scenario: show all history
 	When I view my request history
-	I should see room "Room 1" with status "Approved"
-	I should see room "Room 2" with status "Pending"
-	I should see room "Room 3" with status "Rejected"
-	I should not see room "Room 4"
+	Then I should see room "Room 1" with status "Approved"
+	And I should see room "Room 2" with status "Pending"
+	And I should see room "Room 3" with status "Rejected"
+	And I should not see room "Room 4"
 
 Scenario: show approved
 	When I view my request history
 	And I filter by Approved
-	I should see room "Room 1" with status "Approved"
-	I should not see room "Room 2"
-	I should not see room "Room 3"
-	I should not see room "Room 4"
+	Then I should see room "Room 1" with status "Approved"
+	And I should not see room "Room 2"
+	And I should not see room "Room 3"
+	And I should not see room "Room 4"
 
 Scenario: show pending
 	When I view my request history
 	And I filter by Pending
-	I should see room "Room 2" with status "Pending"
-	I should not see room "Room 1"
-	I should not see room "Room 3"
-	I should not see room "Room 4"
+	Then I should see room "Room 2" with status "Pending"
+	And I should not see room "Room 1"
+	And I should not see room "Room 3"
+	And I should not see room "Room 4"
 
 Scenario: show rejected 
 	When I view my request history
 	And I filter by Rejected
-	I should see room "Room 3" with status "Rejected"
-	I should not see room "Room 1"
-	I should not see room "Room 2"
-	I should not see room "Room 4"
+	Then I should see room "Room 3" with status "Rejected"
+	And I should not see room "Room 1"
+	And I should not see room "Room 2"
+	And I should not see room "Room 4"

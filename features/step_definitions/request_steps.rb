@@ -1,4 +1,4 @@
-Given /the following requests exist/ do |requsts_table| #done
+Given /the following requests exist/ do |requests_table| #done
     requests_table.hashes.each do |request|
         Request.create!(request)
     end

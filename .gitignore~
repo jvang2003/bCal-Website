@@ -24,10 +24,6 @@
 # sublime files
 *.sublime*
 
-# editor temp files
-#vim files
-*.swp
-
 #temp files
 *.rb~
 *.feature~

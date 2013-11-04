@@ -1,4 +1,4 @@
-Given /^I am logged in as a public user$/ do
+Given /^I am logged in as public user "(.*?)"$/ do |user_id|
   visit '/accounts/public/login'
   fill_in 'user_login', :with => 'public_user'
   fill_in 'user_password', :with => 'aaaaaaaa'

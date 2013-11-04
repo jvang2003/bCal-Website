@@ -29,6 +29,4 @@
 *.swp
 
 #temp files
-*.rb~
-*.feature~
-*.haml~
+*.*~

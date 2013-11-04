@@ -1,4 +1,7 @@
 BCalIntegration::Application.routes.draw do
+  resources :events
+
+
   get "calendar/create", :to => "calendar#new", :as => "new_cal" 
   post "calendar/create", :to => "calendar#create", :as => "create_cal"
   put "calendar/update/:id", :to => "calendar#update", :as => "update_cal"

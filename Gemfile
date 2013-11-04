@@ -51,6 +51,8 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'simplecov'
 end
+
+gem 'google-api-client'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

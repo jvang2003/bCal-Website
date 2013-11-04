@@ -14,13 +14,10 @@ Scenario: when I view a calendar, it is automatically in calendar view
 	Then I should see the embedded calendar
 
 Scenario: when I click on tabular view, it switches to tabular view
-	When I click on "Tabular View"
-	# elements are the columns of attributes of events
-	Then I should see "Name"
-	And I should see "Date"
-	And I should see "Number Attendees"
+	When I switch to tabular view
+	Then I should see the calendar in tabular form
 
-Sceario: when I click on calendar view while in tabular view, it switches to calendar view
-	When I click on "Tabular View"
-	And I click on "Calendar View"
-	Then I should see the embedded calendar
+Scenario: when I click on calendar view while in tabular view, it switches to calendar view
+	When I switch to calendar view
+	And I switch to tabular view
+	Then I should see the calendar in tabular form

@@ -1,6 +1,5 @@
-Thank you for your request
-===============================================
 We have received your request
+===============================================
 
 You have requested room: <%= @info["place"] %>
        number of people: <%= @info["people"] %>

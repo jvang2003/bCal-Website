@@ -13,7 +13,7 @@ Background: calendars have been added
 	| Room 3   | 1       | 1           | 5       | Serious business       | false        | rejected |
 	| Room 4   | 2       | 1           | 2       | No reason whatsoever   | true         | approved |
 
-	Given I am logged in as public user 1
+	# Given I am logged in as public user 1
 	And I am on the homepage
 
 Scenario: show all history

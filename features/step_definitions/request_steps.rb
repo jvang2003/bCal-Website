@@ -5,7 +5,7 @@ Given /the following requests exist/ do |requests_table| #done
 end
 
 When /I view my request history/ do 
-	click_button("View requests")
+	click_link("View requests")
 end
 
 When /I filter by (.*)/ do |filter|

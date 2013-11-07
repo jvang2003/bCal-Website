@@ -7,7 +7,7 @@ Feature: Any user can show the history of all event requests they made
 Background: calendars have been added
 
 	Given the following requests exist:
-	| room     | user_id | calendar_id | num_ppl | reason                 | can_chg_room | status   |
+	| place    | user_id | event_id    | people  | reason                 | can_chg_room | status   |
 	| Room 1   | 1       | 1           | 4       | We're having a partay  | false        | approved |
 	| Room 2   | 1       | 1           | 42      | Office hours           | true         | pending  |
 	| Room 3   | 1       | 1           | 5       | Serious business       | false        | rejected |

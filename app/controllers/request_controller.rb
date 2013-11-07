@@ -8,4 +8,8 @@ class RequestController < ApplicationController
     flash[:notice]="Request has been submitted"
     redirect_to calendars_path
   end
+  def show
+  	@requests = Request.all
+  	# @requests = Request.all(:user_id => @user_id) #TODO: ACTUALLY MAKE THIS USE THE USER ID!!!!
+  end
 end

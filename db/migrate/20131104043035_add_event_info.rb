@@ -1,7 +1,7 @@
 class AddEventInfo < ActiveRecord::Migration
   def up
   	change_table :events do |t|
-  	  t.int :request_id
+  	  t.integer :request_id
   	  t.string :google_cal_id
   	end
   end

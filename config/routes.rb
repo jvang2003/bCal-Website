@@ -8,6 +8,8 @@ BCalIntegration::Application.routes.draw do
   get "calendar/edit/:id", :to => "calendar#edit", :as => "edit_cal"
   get "calendar/show/:id", :to => "calendar#show", :as => "show_cal"
   delete "calendar/edit/:id" => "calendar#destroy"
+
+  get "request/show", :to => "request#show", :as => "show_requests"
   
   root :to => 'calendar#index', :as => "calendars"
   resources :request

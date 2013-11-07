@@ -1,0 +1,16 @@
+%table{:class => 'table'}
+	%thead
+		%tr
+			%th Place
+			%th # People
+			%th Reason
+			%th Time
+			%th Status
+	%tbody
+		- @requests.each do |req|
+			%tr{:id => 'req' + req.id.to_s, :class => req.status.downcase}
+				%td{:class => "place"}= req.place
+				%td{:class => "people"}= req.people
+				%td{:class => "reason"}= req.reason
+				%td{:class => "time"}= req.time
+				%td{:class => "status"}= req.status

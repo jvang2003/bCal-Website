@@ -3,7 +3,7 @@ class RequestController < ApplicationController
   end
   def create
     time=DateTime.new(params["date"]["(1i)"].to_i,params["date"]["(2i)"].to_i,params["date"]["(3i)"].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i)
-    Request.create!(:details=>params["details"],:people => params["people"], :reason => params["reason"],:place => params["place"],:time=>time)
+    Request.create!(:details=>params["details"],:people => params["people"], :reason => params["reason"],:place => params["place"],:time=>time,:status => "pending")
     RequestMailer.request_successful(params).deliver
     flash[:notice]="Request has been submitted"
     redirect_to calendars_path

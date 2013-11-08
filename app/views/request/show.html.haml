@@ -1,3 +1,9 @@
+%select{:id => 'filter'}
+	%option{:value => "All"} All
+	%option{:value => "Pending"} Pending
+	%option{:value => "Approved"} Approved
+	%option{:value => "Rejected"} Rejected
+
 %table{:class => 'table'}
 	%thead
 		%tr
@@ -8,7 +14,7 @@
 			%th Status
 	%tbody
 		- @requests.each do |req|
-			%tr{:id => 'req' + req.id.to_s, :class => req.status.downcase}
+			%tr{:id => 'req' + req.id.to_s, :class => req.status.downcase + ' req'}
 				%td{:class => "place"}= req.place
 				%td{:class => "people"}= req.people
 				%td{:class => "reason"}= req.reason

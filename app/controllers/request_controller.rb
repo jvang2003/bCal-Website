@@ -1,5 +1,5 @@
 class RequestController < ApplicationController
-  before_action :check_auth
+  before_filter :check_auth # was before_action, that's for rails 4
 
   def new
   end

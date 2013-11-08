@@ -15,7 +15,7 @@
 	%tbody
 		- @calendars.each do |cal|
 			%tr{:id => 'cal' + cal.id.to_s}
-				%td{:class => "name"}= link_to"#{cal.name}", show_cal_path(cal)
+				%td{:class => "name"}= link_to"#{cal.name}", show_cal_path(cal, "cal_view")
 				%td{:class => "key"}= cal.key
 				%td{:class => "visib"}= cal.visib
 				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'

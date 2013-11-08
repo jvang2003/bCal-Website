@@ -18,5 +18,21 @@
 		Fee required ? :
 		= @calendar.fee_required
 
+%a{:href => show_cal_path(@calendar.id, "tab_view"), :class => 'btn btn-small'} Tabular View
+%a{:href => show_cal_path(@calendar.id, "cal_view"), :class => 'btn btn-small'} Calendar View
 
-		
+- if @view_type == "cal_view"
+
+- elsif @view_type == "tab_view"
+	%table#events
+		%thead
+			%tr		
+				%th  Event
+				%th  Date-Time
+				%th  Number of Attendees
+		%tbody
+			- @events.each do |e|
+				%tr
+					%td= e.to_s	
+					%td= e.to_s
+					%td= e.to_s

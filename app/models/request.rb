@@ -1,7 +1,7 @@
 require 'google/api_client'
 
 class Request < ActiveRecord::Base
-  attr_accessible :details, :people, :reason, :place, :time
+  attr_accessible :details, :people, :reason, :place, :time, :status
 
   belongs_to :user
   has_one :event

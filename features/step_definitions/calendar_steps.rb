@@ -43,7 +43,7 @@ When /I make the visibility of the calendar (public|private)/ do |privacy|
 end
 
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|
-        el = find('#' + calendar_name.gsub(' ', '_')).find('.fee_required')
+        el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id).find('.fee_required')
 	if no_fee
 		el.text.should == "No"
 	else
@@ -53,7 +53,7 @@ end
 
 
 Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
-	el = find('#' + calendar_name.gsub(' ', '_')).find('.disabled')
+	el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id).find('.disabled')
         print(enabled)
 	if enabled
 		el.text.should == "No"
@@ -64,7 +64,7 @@ end
 
 # check visibility of calendar as admin, otherwise you shouldn't be able to follow link
 Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
-	el = find('#' + calendar_name.gsub(' ', '_')).find('.visib')
+	el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id).find('.visib')
 	if privacy == "private"
 		el.text.should == "Private"
 	else

@@ -14,6 +14,13 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'rspec-rails'
+  gem 'simplecov'
 end
 
 group :test do
@@ -42,17 +49,9 @@ gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'haml-rails'
 
-group :test, :development do
-  gem 'cucumber-rails'
-  gem 'cucumber-rails-training-wheels'
-  gem 'database_cleaner'
-  gem 'capybara'
-  gem 'launchy'
-  gem 'rspec-rails'
-  gem 'simplecov'
-end
-
 gem 'google-api-client'
+gem 'quiet_assets', :group => :development
+gem 'thin'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -16,6 +16,8 @@ BCalIntegration::Application.routes.draw do
 
   match 'about' => 'calendar#index'
 
+  get "oauth_redirect", :to => "calendar#oauth_redirect", :as => :oauth
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

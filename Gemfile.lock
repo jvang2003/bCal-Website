@@ -63,9 +63,11 @@ GEM
       rails (>= 3.0.0)
     cucumber-rails-training-wheels (1.0.0)
       cucumber-rails (>= 1.1.1)
+    daemons (1.1.9)
     database_cleaner (1.1.1)
     diff-lcs (1.2.4)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (2.0.2)
     extlib (0.9.16)
     faraday (0.8.8)
@@ -114,6 +116,8 @@ GEM
       mini_portile (~> 0.5.0)
     pg (0.15.1)
     polyglot (0.3.3)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -179,6 +183,10 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.8)
+    thin (1.6.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.15)
@@ -213,11 +221,13 @@ DEPENDENCIES
   launchy
   mail
   pg
+  quiet_assets
   rails (= 3.2.14)
   rspec-rails
   ruby-debug19
   sass-rails (~> 3.2.3)
   simplecov
   sqlite3
+  thin
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

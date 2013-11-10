@@ -10,11 +10,13 @@ Background: calendars have been added to the database
     |calendar1      |123 |public | true         |true     |
     |calendar2      |345 |private| false        |false    |
   
-    And I am logged in as a public user
+    And I am logged in as public user "public_user"
+    And I am on the homepage
+
     
 Scenario: able to add details
-    When I try to reserve a room with calendar calendar1
-    Then I will be able to fill in abc@gmail.com, EECS, infosession, 30, no, yes
+    When I try to submit a request for reserving a room
+    Then I will be able to fill in 11, abc@gmail.com, Civil Engineering, 125 Cory, infosession, none, yes, no
     
    
 

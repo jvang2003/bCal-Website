@@ -4,6 +4,8 @@
     = number_field_tag :people,0,:min =>0,:required =>true
     = label_tag :email,'Your Email'
     = email_field_tag :email,nil,:placeholder=> "youremail@example.com",:required => true
+    = label_tag :department, 'Department'
+    = text_field_tag :department,nil,:placeholder=> "Civil Engineering",:required => true
     = label_tag :date,'Date'
     = date_select :date ,""
     = label_tag :time,'Time'
@@ -14,7 +16,12 @@
     = text_area_tag :reason,nil,:rows => 5,:required =>true
     = label_tag :details,'Details of your event'
     = text_area_tag :details,nil,:rows => 5,:required =>true
+    %label{:for => "course_related"} Is it course related? (Tick if yes)
+    = check_box_tag "course_related", true, params[:new]
+    %label{:for => "accept_different_room"} If current room is unavailable, will you accept different room? (Tick if yes)
+    = check_box_tag "accept_different_room", true, params[:new]
   = submit_tag "Submit Request",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}
+
 
 
 

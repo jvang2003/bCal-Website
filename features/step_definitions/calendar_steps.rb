@@ -31,8 +31,6 @@ When /I (dis|en)able the calendar/ do |choice|
 end
 
 When /I make the visibility of the calendar (public|private)/ do |privacy|
-	puts privacy
-	puts privacy == "private"
 	if privacy == "private"
 		# find("option", :text => "Private").click
 		select('Private', :from => 'visib')

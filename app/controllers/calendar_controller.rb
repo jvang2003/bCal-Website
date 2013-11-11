@@ -58,9 +58,11 @@ class CalendarController < ApplicationController
     if @view_type == "cal_view" 
      @embed_url
     elsif @view_type == "tab_view"
-      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
-        :parameters => {:calendarId => @calendar.id})
-      @events = result.data.items
+      # result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
+      #   :parameters => {:calendarId => @calendar.id})
+      # @events = result.data.items
+      @events = "nothing here yet without fully implemented athentication and authentication script".split
+
     else
       flash[:notice] = "invalid url .../#{@view_type} ; must be cal_view or tab_view"
     end

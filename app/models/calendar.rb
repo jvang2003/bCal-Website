@@ -4,6 +4,7 @@ class Calendar < ActiveRecord::Base
   has_many :request
   
   attr_accessible :name, :key, :visib, :fee_required, :disabled
+  attr_accessor :gcalendar, :client
   after_initialize :init
 
   def init
@@ -27,9 +28,5 @@ class Calendar < ActiveRecord::Base
 
     self.access_token = @client.authorization.access_token
     self.refresh_token = @client.authorization.refresh_token
-  end
-
-  def client
-  	@client
   end
 end

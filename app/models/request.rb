@@ -4,9 +4,10 @@ class Request < ActiveRecord::Base
   attr_accessible :details, :people, :reason, :place, :time, :status
 
   belongs_to :user
+  belongs_to :calendar
   has_one :event
 
-  after_save check_google_cal
+  after_save :check_google_cal
 
   def check_google_cal
   	if @approved
@@ -15,7 +16,7 @@ class Request < ActiveRecord::Base
   end
 
   def update_google_cal
-	g_cal_id = self.request.calendar
+	g_cal_id = self.calendar
 	result = RequestHelper::gcal_client.execute(:api_method => GCal::g_calendar.events.update,
 					:parameters => {'calendarId' => g_cal_id,
 									'eventId' => @google_id},

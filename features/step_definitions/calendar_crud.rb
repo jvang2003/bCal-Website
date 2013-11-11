@@ -19,7 +19,6 @@ When /I fill in the form for calendar with the following: (.*)/ do |calendar| #d
     select("Public", :from => "visib")
     check("Fee required?") unless attributes[3] == "no"
     check("Disabled?") unless attributes[4] == "no"
-    Calendar.create(:name => attributes[0], :key => attributes[1], :visib => attributes[2], :fee_required => attributes[3], :disabled => attributes[4])
     click_button("Send")
 end
 

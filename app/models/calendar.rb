@@ -11,7 +11,7 @@ class Calendar < ActiveRecord::Base
     @gcalendar = @client.discovered_api 'calendar', 'v3'
 
     if self.access_token and self.refresh_token
-	  @client.authorization.update! :refresh_token => self.refresh_token, :access_token => self.access_token
+	   @client.authorization.update! :refresh_token => self.refresh_token, :access_token => self.access_token
     end
 
     @client.authorization.client_id = '1048722423867.apps.googleusercontent.com'

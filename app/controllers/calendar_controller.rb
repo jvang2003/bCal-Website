@@ -50,8 +50,6 @@ class CalendarController < ApplicationController
   end
 
   def show
-    # This is now handled by find_calendar
-    # @calendar = Calendar.find(params[:id]) 
     @view_type = params[:view_type]
     if @view_type == "cal_view" 
      @embed_url

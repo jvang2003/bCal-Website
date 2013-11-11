@@ -12,7 +12,7 @@ Background: calendars have been added to the database
     |calendar2      |345 |public | false        |false    |Soda      |personal    |EECS     |
     |calendar3      |678 |public | false        |false    |Soda      |personal    |Civil E  |
 
-    And I am logged in as a public user
+    #And I am logged in as a public user
 
 Scenario: able to filter calendars by building
 	When I try to search by building with "Cory"

@@ -50,13 +50,13 @@ class CalendarController < ApplicationController
   end
 
   def show
-    # This is now handled by find_calendar
-    # @calendar = Calendar.find(params[:id]) 
     @view_type = params[:view_type]
     if @view_type == "cal_view" 
      @embed_url
     elsif @view_type == "tab_view"
-      @events = "nothing here yet because retrieving events has yet to be implemented".split
+      result = @calendar.client.execute(:api_method => service.events.list, 
+        :parameters => {:calendarId => @calendar.id})
+      @events = result.data.items
     else
       flash[:notice] = "invalid url .../#{@view_type} ; must be cal_view or tab_view"
     end

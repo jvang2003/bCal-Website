@@ -37,7 +37,15 @@ class CalendarController < ApplicationController
   end
 
   def show
-    @calendar=Calendar.find(params[:id])
+    @calendar = Calendar.find(params[:id])
+    @view_type = params[:view_type]
+    if @view_type == "cal_view" 
+     @embed_url
+    elsif @view_type == "tab_view"
+      @events = "nothing here yet because retrieving events has yet to be implemented".split
+    else
+      flash[:notice] = "invalid url .../#{@view_type} ; must be cal_view or tab_view"
+    end
   end
 
   def destroy

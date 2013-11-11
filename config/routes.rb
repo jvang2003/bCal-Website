@@ -6,10 +6,11 @@ BCalIntegration::Application.routes.draw do
   post "calendar/create", :to => "calendar#create", :as => "create_cal"
   put "calendar/update/:id", :to => "calendar#update", :as => "update_cal"
   get "calendar/edit/:id", :to => "calendar#edit", :as => "edit_cal"
-  get "calendar/show/:id", :to => "calendar#show", :as => "show_cal"
+  get "calendar/show/:id/:view_type", :to => "calendar#show", :as => "show_cal"
   delete "calendar/edit/:id" => "calendar#destroy"
 
-  get "request/show", :to => "request#show", :as => "show_requests"
+  get "/request/show", :to => "request#show", :as => "show_requests"
+  get "/request/create", :to => "request#new", :as => "new_request"
   
   root :to => 'calendar#index', :as => "calendars"
   resources :request

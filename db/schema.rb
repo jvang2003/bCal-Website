@@ -36,11 +36,14 @@ ActiveRecord::Schema.define(:version => 20131110201034) do
     t.text     "details"
     t.string   "place"
     t.datetime "time"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
     t.boolean  "approved"
     t.string   "status"
     t.integer  "calendar_id"
+    t.string   "course_related"
+    t.string   "accept_different_room"
+    t.string   "department"
   end
 
   create_table "users", :force => true do |t|

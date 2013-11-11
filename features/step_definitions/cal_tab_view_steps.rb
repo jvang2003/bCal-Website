@@ -1,6 +1,6 @@
 And /I am on the edit page for "(.*)"/ do |calendar_name|
 	visit ("/")	
-	click_on("Update " + calendar_name)
+	click_on(calendar_name)
 end
 
 Then /I should see the embedded calendar/ do

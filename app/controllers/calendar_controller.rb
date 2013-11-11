@@ -12,7 +12,7 @@ class CalendarController < ApplicationController
   end
 
   before_filter :find_calendar, :only => [:show]
-  # before_filter :check_auth, :only => [:show]
+  before_filter :check_auth, :only => [:auth]
 
   def create
     cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"])
@@ -23,6 +23,10 @@ class CalendarController < ApplicationController
 
   def find_calendar
     @calendar = Calendar.find(params[:id])
+  end
+
+  def auth
+    redirect_to show_cal_path params[:id], :view_type => "cal_view"
   end
 
   def oauth_redirect

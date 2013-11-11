@@ -13,4 +13,6 @@ Then /I should see calendar "([^\"]*)"/ do |calendar_name|
   end
 end
 
-
+Given /that the Google Calendar with API key "(.*)" has been added/ do |key|
+	
+end

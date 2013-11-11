@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111024633) do
+ActiveRecord::Schema.define(:version => 20131111090652) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20131111024633) do
     t.boolean  "disabled"
     t.string   "access_token"
     t.string   "refresh_token"
+    t.string   "building"
+    t.string   "type"
+    t.string   "dept"
   end
 
   create_table "events", :force => true do |t|

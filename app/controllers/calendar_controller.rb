@@ -12,7 +12,7 @@ class CalendarController < ApplicationController
   end
 
   before_filter :find_calendar, :only => [:show]
-  before_filter :check_auth, :only => [:show]
+  # before_filter :check_auth, :only => [:show]
 
   def create
     cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"])

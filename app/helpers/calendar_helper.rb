@@ -1,10 +1,6 @@
 require 'google/api_client'
 
 module CalendarHelper
-	def CalendarHelper::client
-		@client
-	end
-
 	def CalendarHelper::calendar
 		@calendar
 	end
@@ -14,11 +10,6 @@ module CalendarHelper
 			return CalendarHelper::init redirect_uri
 		end
 		return nil
-	end
-
-	def CalendarHelper::handle_code code
-		@client.authorization.code = code
-		@client.authorization.fetch_access_token!
 	end
 
 	private
@@ -34,6 +25,6 @@ module CalendarHelper
 	    @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
 
 	    # Request authorization
-	    return @client.authorization.authorization_uri
+	    @client
 	end
 end

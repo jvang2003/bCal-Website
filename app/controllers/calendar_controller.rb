@@ -11,33 +11,47 @@ class CalendarController < ApplicationController
     @calendar = Calendar.find_by_id(params[:id])
   end
 
+  before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:show]
 
   def create
     cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
-    redirect_to show_cal_path cal.id
+    redirect_to show_cal_path cal.id, :view_type => "cal_view"
+  end
+
+  def find_calendar
+    @calendar = Calendar.find(params[:id])
   end
 
   def oauth_redirect
-    CalendarHelper::handle_code params[:code]
-    flash = session[:flash]
+    calendar = Calendar.find(session[:old_cal_id])
+    if calendar.client.authorization.access_token != nil
+      puts "UHOH"
+      logger.warn "Assigning to a calendar which already has an access token"
+    end
+
+    calendar.oauth_redirect params[:code]
+    calendar.save
+
     flash.keep
     redirect_to session[:old_url]
   end
 
   def check_auth
-    res = CalendarHelper::check_auth "#{request.scheme}://#{request.host_with_port}#{request.script_name}#{oauth_path}"
-    if res != nil
+    auth = @calendar.client.authorization
+    if @calendar.client.authorization.access_token == nil
       session[:old_url] = request.original_url
+      session[:old_cal_id] = @calendar.id
       flash.keep
-      redirect_to res.to_s
+      redirect_to @calendar.client.authorization.authorization_uri.to_s
     end
   end
 
   def show
-    @calendar = Calendar.find(params[:id])
+    # This is now handled by find_calendar
+    # @calendar = Calendar.find(params[:id]) 
     @view_type = params[:view_type]
     if @view_type == "cal_view" 
      @embed_url

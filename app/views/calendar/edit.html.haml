@@ -1,7 +1,7 @@
 %h1 
   = @calendar == nil ? "Create a new calendar" : "Edit " + @calendar.name
 / %form{ :action => params[:new] ? "create" : "../update/#{params[:id]}", :method => "post"}
-= form_tag((@calendar == nil ? "create" : update_cal_path(params[:id])), :method => (@calendar == nil ? "post" : "put")) do
+= form_tag((@calendar == nil ? "create" : update_cal_path(@calendar.id)), :method => (@calendar == nil ? "post" : "put")) do
   %fieldset
     %ol
       %li
@@ -9,7 +9,7 @@
         %input{:type => "text", :name => "name", :class => "text", :value => @calendar == nil ? "" : @calendar.name}
       %li
         %label{:for => "key"} API key:
-        %input{:type => "text", :name => "key", :class => "text", :value => @calendar == nil ? "" : @calendar.key}
+        %input{:type => "text", :name => "key", :class => "text", :value => @calendar == nil ? "" : @calendar.access_token}
       %li
         %label{:for => "visib"} Visibility:
         %select{:name => "visib"}

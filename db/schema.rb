@@ -11,16 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110201034) do
+ActiveRecord::Schema.define(:version => 20131111024633) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
     t.string   "fee_required"
     t.string   "key"
     t.string   "visib"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.boolean  "disabled"
+    t.string   "access_token"
+    t.string   "refresh_token"
   end
 
   create_table "events", :force => true do |t|
@@ -40,10 +42,10 @@ ActiveRecord::Schema.define(:version => 20131110201034) do
     t.datetime "updated_at",            :null => false
     t.boolean  "approved"
     t.string   "status"
-    t.integer  "calendar_id"
     t.string   "course_related"
     t.string   "accept_different_room"
     t.string   "department"
+    t.integer  "calendar_id"
   end
 
   create_table "users", :force => true do |t|

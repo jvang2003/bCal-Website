@@ -29,11 +29,13 @@
 		%thead
 			%tr		
 				%th  Event
-				%th  Date-Time
+				%th  Starting
+				%th  Ending
 				%th  Number of Attendees
 		%tbody
 			- @events.each do |e|
 				%tr
-					%td= e.to_s	
-					%td= e.to_s
-					%td= e.to_s
+					%td= e.summary
+					%td= e.start.dateTime.to_s
+					%td= e.end.dateTime.to_s
+					%td= e.attendees.size

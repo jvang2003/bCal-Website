@@ -8,7 +8,7 @@ Background: calendars have been added to the app
     |name           |key |visib  | fee_required |disabled|
     |testing        |323 |pbulic | false        |true    |
 
-    And I am on the view page for "testing"
+    And I am viewing the calendar "testing"
 
 Scenario: when I view a calendar, it is automatically in calendar view
 	Then I should see the embedded calendar

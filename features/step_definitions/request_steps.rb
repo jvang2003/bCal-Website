@@ -1,5 +1,6 @@
 Given /the following requests exist/ do |requests_table| #done
     requests_table.hashes.each do |request|
+    	request[:time] = Time.parse request[:time]
         Request.create!(request)
     end
 end

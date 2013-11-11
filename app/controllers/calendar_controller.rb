@@ -27,7 +27,7 @@ class CalendarController < ApplicationController
 
   def oauth_redirect
     calendar = Calendar.find(session[:old_cal_id])
-    if calendar.client.authorization.access_token != nil
+    if calendar.access_token != nil
       logger.warn "Assigning to a calendar which already has an access token"
     end
 
@@ -40,8 +40,8 @@ class CalendarController < ApplicationController
 
   def check_auth
     @calendar ||= Calendar.find params[:id]
-    @calendar.client.authorization
-    if @calendar.client.authorization.access_token == nil
+
+    if @calendar.access_token == nil
       session[:old_url] = request.original_url
       session[:old_cal_id] = @calendar.id
       flash.keep

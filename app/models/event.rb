@@ -1,16 +1,19 @@
 class Event < ActiveRecord::Base
   belongs_to :request
 
-  after_save :update_gcal
+  before_save :update_gcal
 
   def serialize
 	{
-		  'summary' => self.request.summary,
-		  'start' => self.request.time,
+		  'summary' => request.summary,
+		  'start' => {
+		    'dateTime' => request.time
+		  },
 	}
   end
 
   def update_gcal
+  	#TODO make this handle errors in updating to the api
   	if self.request and self.request.approved
 	  	client = request.calendar.client
 	  	gcal = request.calendar.gcalendar
@@ -18,20 +21,19 @@ class Event < ActiveRecord::Base
 	  	event = serialize
 
 	  	if google_cal_id != nil
-	  		puts "Update"
-		  	res =client.execute(:api_method => gcal.events.update,
+		  	res = client.execute(:api_method => gcal.events.update,
 		  				   :parameters => {'calendarId' => request.calendar.key, 'eventId' => self.google_cal_id},
 				  		   :body => JSON.dump(event),
 	                       :headers => {'Content-Type' => 'application/json'})
-		  	puts res
 	  	else
-	  		puts "Insert"
 		  	res = client.execute(:api_method => gcal.events.insert,
 		  				   :parameters => {'calendarId' => request.calendar.key},
 				  		   :body => JSON.dump(event),
 	                       :headers => {'Content-Type' => 'application/json'})
-		  	puts res
 	  	end
+	  	# puts res.status
+	  	parsed = JSON.parse(res.body)
+	  	self.google_cal_id = parsed["id"]
 	end
   end
 end

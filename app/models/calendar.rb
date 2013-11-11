@@ -3,38 +3,40 @@ require 'google/api_client'
 class Calendar < ActiveRecord::Base
   has_many :request
   
-  attr_accessible :name, :key, :visib, :fee_required, :disabled
-  attr_accessor :gcalendar, :client
+  attr_accessible :name, :key, :visib, :fee_required, :disabled, :refresh_token, :access_token
+  attr_accessor :gcalendar, :client 
   after_initialize :init
   after_find :init
 
   def init
-    @client = Google::APIClient.new :application_name => "bCal Integration", :application_version => 1
-    @gcalendar = @client.discovered_api 'calendar', 'v3'
+  	if @client == nil and @gcalendar == nil
+	    @client = Google::APIClient.new :application_name => "bCal Integration", :application_version => 1, :authorization => :oauth_2
+	    @gcalendar = @client.discovered_api 'calendar', 'v3'
 
-    if self.access_token and self.refresh_token
-	  update_tokens! :refresh_token => @refresh_token, :access_token => @access_token
-    end
+	    @client.authorization.client_id = '1048722423867.apps.googleusercontent.com'
+	    @client.authorization.client_secret = 'DgAjHWfmn-toHyUObGhecF-m'
+	    @client.authorization.redirect_uri = 'http://localhost:3000/oauth_redirect'
+	    
+	    @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
 
-    @client.authorization.client_id = '1048722423867.apps.googleusercontent.com'
-    @client.authorization.client_secret = 'DgAjHWfmn-toHyUObGhecF-m'
-    @client.authorization.redirect_uri = 'http://localhost:3000/oauth_redirect'
-    
-    @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
+	    if refresh_token and access_token
+		  update_tokens! :refresh_token => refresh_token, :access_token => access_token
+	    end
+	end
   end
 
   def update_tokens! options
-  	@client.authorization.update! options
+  	@client.authorization.update_token! :access_token => options[:access_token], :refresh_token => options[:refresh_token]
 
-    @access_token = @client.authorization.access_token
-    @refresh_token = @client.authorization.refresh_token
+  	self.access_token = options[:access_token]
+  	self.refresh_token = options[:refresh_token]
   end
 
   def oauth_redirect code
     @client.authorization.code = @key = code
     @client.authorization.fetch_access_token!
 
-    @access_token = @client.authorization.access_token
-    @refresh_token = @client.authorization.refresh_token
+  	self.access_token = @client.authorization.access_token
+  	self.refresh_token = @client.authorization.refresh_token
   end
 end

@@ -54,7 +54,7 @@ class CalendarController < ApplicationController
     if @view_type == "cal_view" 
      @embed_url
     elsif @view_type == "tab_view"
-      result = @calendar.client.execute(:api_method => service.events.list, 
+      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
         :parameters => {:calendarId => @calendar.id})
       @events = result.data.items
     else

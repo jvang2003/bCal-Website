@@ -20,7 +20,7 @@ class Calendar < ActiveRecord::Base
 	    @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
 
 	    if refresh_token and access_token
-		  update_tokens! :refresh_token => refresh_token, :access_token => access_token
+		    update_tokens! :refresh_token => refresh_token, :access_token => access_token
 	    end
 	end
   end

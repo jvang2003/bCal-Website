@@ -12,7 +12,7 @@ end
 # end
 
 When /I switch to tabular view/ do
-	click_button("Tabular View")
+	click_link("Tabular View")
 end 
 
 Then /I should see the calendar in tabular form/ do

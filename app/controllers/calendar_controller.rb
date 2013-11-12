@@ -15,7 +15,7 @@ class CalendarController < ApplicationController
   before_filter :check_auth, :only => [:auth]
 
   def create
-    cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"], :building => params["building"], :type => params["type"], :dept => params["dept"])
+    cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"], :building => params["building"], :usage => params["usage"], :dept => params["dept"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
     redirect_to show_cal_path cal.id, :view_type => "cal_view"

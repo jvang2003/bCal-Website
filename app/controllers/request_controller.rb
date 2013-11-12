@@ -23,7 +23,6 @@ class RequestController < ApplicationController
   end
 
   def show
-        print(Request.all)
   	@requests = Request.all
   	# @requests = Request.all(:user_id => @user_id) #TODO: ACTUALLY MAKE THIS USE THE USER ID!!!!
   end

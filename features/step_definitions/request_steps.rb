@@ -14,7 +14,6 @@ When /I filter by (.*)/ do |filter|
 end
 
 Then /I should see room "([^\"]*)" with status "([^\"]*)"/ do |name, status|
-	# save_and_open_page
 	el = page.all('.' + status.downcase, :visible => true)
 	el.should_not be_nil
 	el.first.native.text.should include status

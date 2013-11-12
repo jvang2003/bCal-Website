@@ -27,7 +27,6 @@ When /I try to read a calendar "(.*)"/ do |calendar| #done
 end
 
 When /I try to update a calendar "(.*)"/ do |calendar| #done
-    save_and_open_page
     find('a', :text => "Update #{calendar}").click
 end
 

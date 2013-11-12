@@ -15,7 +15,7 @@
 			%th Fee Required?
 			%th Disabled
 			%th Building
-			%th Type
+			%th Usage
 			%th Department
 			%th Update
 	%tbody
@@ -27,7 +27,7 @@
 				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
 				%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
 				%td{:class => "building"}= cal.building
-				%td{:class => "type"}= cal.type
+				%td{:class => "usage"}= cal.usage
 				%td{:class => "dept"}= cal.dept
 				%td
 					%a{:href => edit_cal_path(cal.id.to_s), :class => 'btn btn-info'}= 'Update ' + cal.name

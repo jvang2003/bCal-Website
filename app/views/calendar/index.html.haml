@@ -4,6 +4,8 @@
 %a{:href => show_requests_path, :class => 'btn btn-info btn-large'} View requests
 %a{:href => new_request_path, :class => 'btn btn-success btn-large create-cal'} Create request
 
+%p Filter calendars:
+
 %table{:class => 'table'}
 	%thead
 		%tr
@@ -12,6 +14,9 @@
 			%th Visibility
 			%th Fee Required?
 			%th Disabled
+			%th Building
+			%th Type
+			%th Department
 			%th Update
 	%tbody
 		- @calendars.each do |cal|
@@ -21,5 +26,8 @@
 				%td{:class => "visib"}= cal.visib
 				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
 				%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
+				%td{:class => "building"}= cal.building
+				%td{:class => "type"}= cal.type
+				%td{:class => "dept"}= cal.dept
 				%td
 					%a{:href => edit_cal_path(cal.id.to_s), :class => 'btn btn-info'}= 'Update ' + cal.name

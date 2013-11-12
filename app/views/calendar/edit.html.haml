@@ -23,6 +23,15 @@
       %li
         %label{:for => "disabled"} Disabled?
         = check_box_tag "disabled", true, @calendar == nil ? false : @calendar.disabled
+      %li
+        %label{:for => "building"} Building:
+        %input{:type => "text", :name => "building", :class => "text", :value => @calendar == nil ? "" : @calendar.building}
+      %li
+        %label{:for => "type"} Type:
+        %input{:type => "text", :name => "type", :class => "text", :value => @calendar == nil ? "" : @calendar.type}
+      %li
+        %label{:for => "dept"} Department:
+        %input{:type => "text", :name => "dept", :class => "text", :value => @calendar == nil ? "" : @calendar.dept}
 
     %input{:type => "submit", :value => "Send", :class => "button"}
 

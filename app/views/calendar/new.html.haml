@@ -24,6 +24,8 @@
         %label{:for => "disabled"} Disabled?
         = check_box_tag "disabled", true, params[:new] ? false : @calendar.disabled
 
+
+
     %input{:type => "submit", :value => "Send", :class => "button"}
 
 / %a{:href => 'calendar/destroy', :class => 'btn btn-danger'} Destroy this calendar

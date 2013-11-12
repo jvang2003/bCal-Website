@@ -18,6 +18,18 @@
 		Fee required ? :
 		= @calendar.fee_required
 
+	%li
+		Building :
+		= @calendar.building
+
+	%li 
+		Type :
+		= @calendar.type
+
+	%li
+		Department :
+		= @calendar.dept
+
 %a{:href => show_cal_path(@calendar.id, "tab_view"), :class => 'btn btn-small'} Tabular View
 %a{:href => show_cal_path(@calendar.id, "cal_view"), :class => 'btn btn-small'} Calendar View
 

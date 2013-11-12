@@ -3,7 +3,8 @@ require 'google/api_client'
 class Calendar < ActiveRecord::Base
   has_many :request
   
-  attr_accessible :name, :key, :visib, :fee_required, :disabled, :refresh_token, :access_token
+  attr_accessible :name, :key, :visib, :fee_required, 
+    :disabled, :refresh_token, :access_token, :building, :dept, :type
   attr_accessor :gcalendar, :client 
   after_initialize :init
   after_find :init

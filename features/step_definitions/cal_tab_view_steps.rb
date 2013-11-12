@@ -12,7 +12,6 @@ end
 # end
 
 When /I switch to tabular view/ do
-	click_link("Authenticate")
 	click_link("Tabular View")
 end 
 

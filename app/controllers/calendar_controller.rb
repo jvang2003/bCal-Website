@@ -85,7 +85,7 @@ class CalendarController < ApplicationController
     @calendar.fee_required=params["fee_required"]
     @calendar.disabled=params["disabled"]
     @calendar.building=params["building"]
-    @calendar.type=params["type"]
+    @calendar.usage=params["usage"]
     @calendar.dept=params["dept"]
     @calendar.save!
 

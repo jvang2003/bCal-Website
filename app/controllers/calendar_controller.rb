@@ -4,7 +4,23 @@ class CalendarController < ApplicationController
   end
 
   def index
+    @filter = params[:filter]
+    @keyword = params[:keyword]
+
     @calendars = Calendar.find(:all)
+  
+    if @filter
+      if @filter == 'Filter by Building'
+        @calendars = Calendar.where("building='#{@keyword}'")
+      elsif @filter == 'Filter by Usage'
+        @calendars = Calendar.where("usage='#{@keyword}'")
+      elsif @filter == 'Filter by Department'
+        @calendars = Calendar.where("dept='#{@keyword}'")
+      else
+        @calendars = Calendar.find(:all)
+      end
+    end
+
   end
 
   def edit
@@ -54,6 +70,7 @@ class CalendarController < ApplicationController
   end
 
   def show
+
     @view_type = params[:view_type]
     if @view_type == "cal_view" 
      @embed_url

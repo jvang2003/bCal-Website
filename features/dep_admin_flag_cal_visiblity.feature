@@ -7,7 +7,7 @@ Feature: department admin can flag calendars as public or private
 Background: calendars have been added
 
 	Given the following calendars exist:
-	| name     | key     | visib   | fee_required |
+	| name     | email     | visib   | fee_required |
 	| Room 1   | 1964    | Public  | false        |
 	| Room 2   | 2000    | Public  | false        |
 

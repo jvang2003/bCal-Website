@@ -27,7 +27,7 @@ class Event < ActiveRecord::Base
 	                       :headers => {'Content-Type' => 'application/json'})
 	  	else
 		  	res = client.execute(:api_method => gcal.events.insert,
-		  				   :parameters => {'calendarId' => request.calendar.key},
+		  				   :parameters => {'calendarId' => request.calendar.email},
 				  		   :body => JSON.dump(event),
 	                       :headers => {'Content-Type' => 'application/json'})
 	  	end

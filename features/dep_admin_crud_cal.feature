@@ -6,7 +6,7 @@ Feature: department admin can CRUD calendars
 
 Background: calendars have been added to the database
     Given the following calendars exist:
-    |name           |key |visib  | fee_required |disabled|
+    |name           |email |visib  | fee_required |disabled|
     |calendar1      |123 |public | true         |true    |
     |calendar2      |345 |private| false        |false   |
   

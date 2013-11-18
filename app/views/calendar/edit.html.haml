@@ -8,8 +8,8 @@
         %label{:for => "name"} Name:
         %input{:type => "text", :name => "name", :class => "text", :value => @calendar == nil ? "" : @calendar.name}
       %li
-        %label{:for => "key"} API key:
-        %input{:type => "text", :name => "key", :class => "text", :value => @calendar == nil ? "" : @calendar.access_token}
+        %label{:for => "email"} Calendar E-mail:
+        %input{:type => "text", :name => "email", :class => "text", :value => @calendar == nil ? "" : @calendar.access_token}
       %li
         %label{:for => "visib"} Visibility:
         %select{:name => "visib"}

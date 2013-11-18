@@ -7,7 +7,7 @@ Feature: department admin can flag calendar fees_required
 Background: calendars have been added
 
 	Given the following calendars exist:
-	| name     |     key     | visib   | fee_required |disabled|
+	| name     |     email     | visib   | fee_required |disabled|
 	| Room1    | 13123213213 | public  | false        |true    |
 	| Room2    | 12313123123 | public  | false        |false   |
 

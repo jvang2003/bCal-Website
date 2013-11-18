@@ -25,7 +25,7 @@
 	%thead
 		%tr
 			%th Name
-			%th API key
+			%th E-mail
 			%th Visibility
 			%th Fee Required?
 			%th Disabled
@@ -37,7 +37,7 @@
 		- @calendars.each do |cal|
 			%tr{:id => 'cal' + cal.id.to_s}
 				%td{:class => "name"}= link_to"#{cal.name}", show_cal_path(cal, "cal_view")
-				%td{:class => "key"}= cal.key
+				%td{:class => "email"}= cal.email
 				%td{:class => "visib"}= cal.visib
 				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
 				%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'

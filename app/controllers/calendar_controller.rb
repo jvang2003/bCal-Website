@@ -1,4 +1,8 @@
 class CalendarController < ApplicationController
+
+  before_filter :find_calendar, :only => [:show]
+  before_filter :check_auth, :only => [:auth]
+
   def new
     render :edit #same view as edit
   end
@@ -27,11 +31,15 @@ class CalendarController < ApplicationController
     @calendar = Calendar.find_by_id(params[:id])
   end
 
-  before_filter :find_calendar, :only => [:show]
-  before_filter :check_auth, :only => [:auth]
-
   def create
-    cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :email => params["email"], :fee_required => params["fee_required"], :disabled => params["disabled"], :building => params["building"], :usage => params["usage"], :dept => params["dept"])
+    cal = Calendar.create!(:name=>params["name"],
+      :visib => params["visib"], 
+      :email => params["email"], 
+      :fee_required => params["fee_required"], 
+      :disabled => params["disabled"], 
+      :building => params["building"], 
+      :usage => params["usage"], 
+      :dept => params["dept"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
     redirect_to show_cal_path cal.id
@@ -74,9 +82,8 @@ class CalendarController < ApplicationController
       @events = []
     else
       result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
-        :parameters => {:calendarId => @calendar.id})
+        :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
       @events = result.data.items
-      # @events = "nothing here yet without fully implemented athentication and authentication script".split
     end
   end
 

@@ -4,7 +4,7 @@ Feature: public user can view a calendar as tabular data
 	So that I can view the events in a compact manner
 
 Background: calendars have been added to the app
-	Given I have authenticated "real google calendar" from "bCalWebsiteTesting@gmail.com" with the code "code=4/PnHji7a-qODG2hDq_uJgn-mV6ngl.gnzr9tb_UXUZMqTmHjyTFGPm-ZrRhAI"
+	Given I have authenticated "real google calendar" from "bCalWebsiteTesting@gmail.com" with the access token "Idk if I should hardcode here"
     And I am viewing the calendar "real google calendar"
 
 Scenario: when I viewing a calendar, I should see it in its tabular view. 

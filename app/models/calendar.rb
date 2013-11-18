@@ -16,7 +16,7 @@ class Calendar < ActiveRecord::Base
 
 	    @client.authorization.client_id = '1048722423867.apps.googleusercontent.com'
 	    @client.authorization.client_secret = 'DgAjHWfmn-toHyUObGhecF-m'
-	    @client.authorization.redirect_uri = 'http://localhost:3000/oauth_redirect'
+	    @client.authorization.redirect_uri = Rails.env.production? ? 'http://b-cal.herokuapp.com': 'http://localhost:3000/oauth_redirect'
 	    
 	    @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
 

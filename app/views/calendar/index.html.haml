@@ -4,7 +4,22 @@
 %a{:href => show_requests_path, :class => 'btn btn-info btn-large'} View requests
 %a{:href => new_request_path, :class => 'btn btn-success btn-large create-cal'} Create request
 
-%p Filter calendars:
+/%p
+/%input{:class=>'text',:value=>@filter}
+
+/%a{:href => '/', :class => 'btn', :name =>'building'} Filter by Building
+/%a{:href => '/', :class => 'btn', :name =>'usage'} Filter by Usage
+/%a{:href => '/', :class => 'btn', :name => 'dept'} Filter by Department
+
+%p
+%form{:action=>'/'}
+	%input{:name=>'keyword',:type=>'text'}
+		%br
+			%input{:type=>'submit',:value=>'Filter by Building', :name=>'filter'}
+			%input{:type=>'submit',:value=>'Filter by Usage', :name=>'filter'}
+			%input{:type=>'submit',:value=>'Filter by Department', :name=>'filter'}
+			%input{:type=>'submit',:Value=>'Show All', :name=>'filter'}
+
 
 %table{:class => 'table'}
 	%thead
@@ -15,7 +30,7 @@
 			%th Fee Required?
 			%th Disabled
 			%th Building
-			%th Type
+			%th Usage
 			%th Department
 			%th Update
 	%tbody
@@ -27,7 +42,7 @@
 				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
 				%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
 				%td{:class => "building"}= cal.building
-				%td{:class => "type"}= cal.type
+				%td{:class => "usage"}= cal.usage
 				%td{:class => "dept"}= cal.dept
 				%td
 					%a{:href => edit_cal_path(cal.id.to_s), :class => 'btn btn-info'}= 'Update ' + cal.name

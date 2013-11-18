@@ -4,7 +4,23 @@ class CalendarController < ApplicationController
   end
 
   def index
+    @filter = params[:filter]
+    @keyword = params[:keyword]
+
     @calendars = Calendar.find(:all)
+  
+    if @filter
+      if @filter == 'Filter by Building'
+        @calendars = Calendar.where("building='#{@keyword}'")
+      elsif @filter == 'Filter by Usage'
+        @calendars = Calendar.where("usage='#{@keyword}'")
+      elsif @filter == 'Filter by Department'
+        @calendars = Calendar.where("dept='#{@keyword}'")
+      else
+        @calendars = Calendar.find(:all)
+      end
+    end
+
   end
 
   def edit
@@ -15,7 +31,7 @@ class CalendarController < ApplicationController
   before_filter :check_auth, :only => [:auth]
 
   def create
-    cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"], :building => params["building"], :type => params["type"], :dept => params["dept"])
+    cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :key => params["key"], :fee_required => params["fee_required"], :disabled => params["disabled"], :building => params["building"], :usage => params["usage"], :dept => params["dept"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
     redirect_to show_cal_path cal.id, :view_type => "cal_view"
@@ -54,6 +70,7 @@ class CalendarController < ApplicationController
   end
 
   def show
+
     @view_type = params[:view_type]
     if @view_type == "cal_view" 
      @embed_url
@@ -85,7 +102,7 @@ class CalendarController < ApplicationController
     @calendar.fee_required=params["fee_required"]
     @calendar.disabled=params["disabled"]
     @calendar.building=params["building"]
-    @calendar.type=params["type"]
+    @calendar.usage=params["usage"]
     @calendar.dept=params["dept"]
     @calendar.save!
 

@@ -13,12 +13,12 @@
 
 %p
 %form{:action=>'/'}
-	%input{:name=>'keyword',:type=>'text'}
+	%input{:name=>'keyword',:type=>'text',:id=>'keyword', :label=>'keyword'}
 		%br
-			%input{:type=>'submit',:value=>'Filter by Building', :name=>'filter'}
-			%input{:type=>'submit',:value=>'Filter by Usage', :name=>'filter'}
-			%input{:type=>'submit',:value=>'Filter by Department', :name=>'filter'}
-			%input{:type=>'submit',:Value=>'Show All', :name=>'filter'}
+			%input{:type=>'submit',:value=>'Filter by Building', :name=>'filter',:id=>'building'}
+			%input{:type=>'submit',:value=>'Filter by Usage', :name=>'filter',:id=>'usage'}
+			%input{:type=>'submit',:value=>'Filter by Department', :name=>'filter',:id=>'dept'}
+			%input{:type=>'submit',:Value=>'Show All', :name=>'filter',:id=>'show_all'}
 
 
 %table{:class => 'table'}

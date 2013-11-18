@@ -1,18 +1,15 @@
 Feature: public user can view a calendar as tabular data
 	As a 'Public User'
-	I want to be able to view a calender as tabular data
+	I want to be able to view a calender as tabular data (table of events)
 	So that I can view the events in a compact manner
 
 Background: calendars have been added to the app
-	Given the following calendars exist:
-    |name           |key |visib  | fee_required |disabled|
-    |testing        |323 |public | false        |true    |
+	Given I have authenticated "real google calendar" from "bCalWebsiteTesting@gmail.com" with the code "code=4/PnHji7a-qODG2hDq_uJgn-mV6ngl.gnzr9tb_UXUZMqTmHjyTFGPm-ZrRhAI"
+    # real google calendar already has already been created and has existing events
+    # in my scenario I check for those events even though I did not add them through this script
+    And I am viewing the calendar "real google calendar"
 
-    And I am viewing the calendar "testing"
-
-Scenario: when I click on tabular view, it switches to tabular view
-	# for now there is only tabular view but we are anticipating another
-	# option to view calendars so that's why there's a button to switch
-	# to tabular view
-	When I switch to tabular view
+Scenario: when I viewing a calendar, I should see it in its tabular view. 
 	Then I should see the calendar in tabular form
+	And I should see the event "Pastor Ed's Birthday" on "November 10"
+	And I should see the event "CS169 Team Dinner" on "November 11"

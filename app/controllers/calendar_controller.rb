@@ -34,7 +34,7 @@ class CalendarController < ApplicationController
     cal = Calendar.create!(:name=>params["name"],:visib => params["visib"], :email => params["email"], :fee_required => params["fee_required"], :disabled => params["disabled"], :building => params["building"], :usage => params["usage"], :dept => params["dept"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
-    redirect_to show_cal_path cal.id, :view_type => "cal_view"
+    redirect_to show_cal_path cal.id
   end
 
   def find_calendar
@@ -42,7 +42,7 @@ class CalendarController < ApplicationController
   end
 
   def auth
-    redirect_to show_cal_path params[:id], :view_type => "cal_view"
+    redirect_to show_cal_path params[:id] 
   end
 
   def oauth_redirect
@@ -70,18 +70,13 @@ class CalendarController < ApplicationController
   end
 
   def show
-
-    @view_type = params[:view_type]
-    if @view_type == "cal_view" 
-     @embed_url
-    elsif @view_type == "tab_view"
-      # result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
-      #   :parameters => {:calendarId => @calendar.id})
-      # @events = result.data.items
-      @events = "nothing here yet without fully implemented athentication and authentication script".split
-
+    if @calendar.access_token == nil
+      @events = []
     else
-      flash[:notice] = "invalid url .../#{@view_type} ; must be cal_view or tab_view"
+      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
+        :parameters => {:calendarId => @calendar.id})
+      @events = result.data.items
+      # @events = "nothing here yet without fully implemented athentication and authentication script".split
     end
   end
 

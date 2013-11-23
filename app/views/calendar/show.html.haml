@@ -7,15 +7,14 @@
 	/ When u uncomment the if push everything affected by the if in by an indentation
 	/ - if @dept_admin
 	%li
-		API key:
-		= @calendar.key
-		
+		E-mail :
+		= @calendar.email		
 	%li
-		Visibility:
+		Visibility :
 		= @calendar.visib
 		
 	%li
-		Fee required ? :
+		Fee Required ? :
 		= @calendar.fee_required
 
 	%li
@@ -30,31 +29,21 @@
 		Department :
 		= @calendar.dept
 
-%a{:href => show_cal_path(@calendar.id, "tab_view"), :class => 'btn btn-small'} Tabular View
-%a{:href => show_cal_path(@calendar.id, "cal_view"), :class => 'btn btn-small'} Calendar View
 
-- if @view_type == "cal_view"
-
-
-- elsif @view_type == "tab_view"
-	%table#events.table
-		%thead
-			%tr		
-				%th  Event
-				%th  Starting
-				%th  Ending
-				%th  Number of Attendees
-		%tbody
-			- @events.each do |e|
-				%tr
-					/ %td= e.summary
-					/ %td= e.start.dateTime.to_s
-					/ %td= e.end.dateTime.to_s
-					/ %td= e.attendees.size
-					%td= e.to_s
-					%td= e.to_s
-					%td= e.to_s
-					%td= e.to_s
+%table#events.table
+	%thead
+		%tr		
+			%th  Event
+			%th  Starting
+			%th  Ending
+			%th  Number of Attendees
+	%tbody
+		- @events.each do |e|
+			%tr
+				%td= e.summary
+				%td= e.start.dateTime.to_s
+				%td= e.end.dateTime.to_s
+				%td= e.attendees.size
 
 - if @calendar.access_token == nil
 	%a= link_to "Authenticate", controller: "calendar", action: "auth", id: @calendar.id

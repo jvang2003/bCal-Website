@@ -3,7 +3,7 @@ require 'google/api_client'
 class Calendar < ActiveRecord::Base
   has_many :request
   
-  attr_accessible :name, :key, :visib, :fee_required, 
+  attr_accessible :name, :email, :visib, :fee_required, 
     :disabled, :refresh_token, :access_token, :building, :dept, :usage
   attr_accessor :gcalendar, :client   
   after_initialize :init
@@ -16,7 +16,7 @@ class Calendar < ActiveRecord::Base
 
 	    @client.authorization.client_id = '1048722423867.apps.googleusercontent.com'
 	    @client.authorization.client_secret = 'DgAjHWfmn-toHyUObGhecF-m'
-	    @client.authorization.redirect_uri = Rails.env.production? ? 'http://b-cal.herokuapp.com': 'http://localhost:3000/oauth_redirect'
+	    @client.authorization.redirect_uri = Rails.env.production? ? 'http://b-cal.herokuapp.com/oauth_redirect': 'http://localhost:3000/oauth_redirect'
 	    
 	    @client.authorization.scope = 'https://www.googleapis.com/auth/calendar'
 

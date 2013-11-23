@@ -15,7 +15,7 @@ end
 When /I fill in the form for calendar with the following: (.*)/ do |calendar| #done
     attributes = calendar.split(%r{,\s*})
     fill_in(:name,:with => attributes[0] )
-    fill_in(:key,:with => attributes[1])
+    fill_in(:email, :with => attributes[1])
     select("Public", :from => "visib")
     check("Fee required?") unless attributes[3] == "no"
     check("Disabled?") unless attributes[4] == "no"
@@ -34,7 +34,7 @@ When /I change the values for calendar "(.*)" with the following: (.*)/ do |cale
     assert page.has_content?("Edit #{calendar}")
     cal = Calendar.find_by_name(calendar)
     attributes = details.split(%r{,\s*})
-    fill_in(:key, :with => attributes[0])
+    fill_in(:email, :with => attributes[0])
     if (attributes[1] == "Public")
         select("Public", :from => "visib")
     else

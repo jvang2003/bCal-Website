@@ -7,7 +7,7 @@ Feature: Any changes a user makes in our app will show up in Google Calendar
 Background: calendars have been added
 
 	Given the following calendars exist:
-	| name | key 				  |
+	| name | email 				  |
 	| Test | moowiz2020@gmail.com |
 
 	Given the following requests exist:

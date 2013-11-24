@@ -27,22 +27,40 @@ class RequestController < ApplicationController
   end
 
   def edit
-     @requests = Request.find(params[:id])
-     @request = @requests
-     @requests.status = params[:status] unless params[:status] == nil
-     calendar = Calendar.find_by_name("125 Cory") #need to change this
-     @requests.save!
-     if (params[:status] != nil) #updating the request status
+     @request = Request.find(params[:id])
+     prev_status = @request.status
+     @request.status = params[:status] unless params[:status] == nil
+     calendar = Calendar.find_by_name(@request.place)
+     @request.calendar = calendar if @request.calendar == nil
+     @request.save!
+    
+     #if (params[:status] != nil) #updating the request status
        #event = {'summary' => @request.details, 'location' => @request.place, 'start' => {'dateTime' => @request.time.to_datetime.rfc3339}, 'end' => {'dateTime' => @request.time.to_datetime.rfc3339}, 'attendees' => @request.people}
-       if (params[:status] == "approved" and calendar.access_token != nil)
-           event = {"summary" => "Details", "location" => "Anywhere", "start" => {"date" => "2013-11-25"}, "end" => {"date" => "2013-11-25"}, "attendees" => [{'email' => 'naingyeaung000@gmail.com'}]}
-           result = calendar.client.execute(:api_method => calendar.gcalendar.events.insert,
-        :parameters => {:calendarId => "primary"}, :body => JSON.dump(event), :headers => {'Content-Type' => 'application/json'})
-           #print("this is result" + result.data.id)
+     #  if (params[:status] == "approved" and calendar.access_token != nil)
+      #     print(@request.time)
+      #     event = {"summary" => @request.reason, "location" => @request.place, "start" => {"date" => "2013-11-26"}, "end" => {"date" => "2013-11-26"}, 'location' => @request.place}
+     #      result = calendar.client.execute(:api_method => calendar.gcalendar.events.insert,
+     #   :parameters => {:calendarId => calendar.email}, :body => JSON.dump(event), :headers => {'Content-Type' => 'application/json'})
+     #      #print("the result is nil" + result.data)
+     #  end
+     #  if (params[:status] == "denied" and calendar.access_token != nil and prev_status == "approved")
+     #      event = {"summary" => @request.reason, "location" => @request.place, "start" => {"date" => "2013-11-26"}, "end" => {"date" => "2013-11-26"}, 'location' => @request.place}
+           #result = calendar.client.execute(:api_method => calendar.gcalendar.events.delete, :parameters => {:calendarID => calendar.id, :eventId => @event.id})
+      # end
+       #flash[:notice] = "Request Status has been updated."
+       #redirect_to show_requests_path
+     #end
+     if (params[:status])
+       if (prev_status != "approved" and @request.status == "approved" and calendar.access_token != nil)
+         @event = Event.new
+         @request.event = @event
+         @request.event.update_gcal
+       elsif (params[:status] and (@request.status == "rejected" or @request.status == "pending") and calendar.access_token != nil)
+         @request.event.delete_event
+         @request.event.destroy
        end
        flash[:notice] = "Request Status has been updated."
        redirect_to show_requests_path
-     end
-
+    end
   end
 end

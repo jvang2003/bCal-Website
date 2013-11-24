@@ -13,6 +13,7 @@ BCalIntegration::Application.routes.draw do
 
   get "/request/show", :to => "request#show", :as => "show_requests"
   get "/request/create", :to => "request#new", :as => "new_request"
+  get "/request/edit", :to => "request#edit", :as => "edit_requests"
   
   root :to => 'calendar#index', :as => "calendars"
   resources :request

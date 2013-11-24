@@ -12,11 +12,17 @@
 			%th Reason
 			%th Time
 			%th Status
+			%th Change Status
 	%tbody
 		- @requests.each do |req|
-			%tr{:id => 'req' + req.id.to_s, :class => req.status.downcase + ' req'}
-				%td{:class => "place"}= req.place
-				%td{:class => "people"}= req.people
-				%td{:class => "reason"}= req.reason
-				%td{:class => "time"}= req.time
-				%td{:class => "status"}= req.status
+			- if req.status != nil
+				%tr{:id =>  'req' + req.id.to_s, :class => req.status.downcase + ' req'}
+					%td{:class => "place"}= req.place
+					%td{:class => "people"}= req.people
+					%td{:class => "reason"}= req.reason
+					%td{:class => "time"}= req.time
+					%td{:class => "status"}= req.status
+					%td{:class => "update_status"}
+						%a{:href => edit_request_path(req.id.to_s), :class => 'btn btn-info'}= 'Update Status of this request'
+
+				

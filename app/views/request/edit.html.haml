@@ -1,0 +1,9 @@
+= form_tag edit_request_path(@requests.id),:method =>:get do
+  = field_set_tag do
+    = label_tag :place_tag,'Place'
+    = label_tag :place, @requests.place
+    = label_tag :status_tag, 'Status'
+    = select_tag :status, options_for_select([['Approved', 'approved'], ['Rejected', 'rejected'], ['Pending', 'pending']], @requests.status)
+
+  = submit_tag "Update Status",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}
+

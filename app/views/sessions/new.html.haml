@@ -6,13 +6,13 @@
   .span6.offset3
     = form_for(:session, url: sessions_path) do |f|
 
-      = f.label :email
-      = f.text_field :email
+      = f.label :calnet_id
+      = f.text_field :calnet_id
 
-      = f.label :password
-      = f.password_field :password
+      / = f.label :password
+      / = f.password_field :password
 
       = f.submit "Sign in", class: "btn btn-large btn-primary"
 
     %p New user?
-    = link_to "Sign up now!", signup_path
+    = link_to "Sign up now!", sign_up_path

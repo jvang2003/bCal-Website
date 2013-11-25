@@ -1,15 +1,8 @@
 class User < ActiveRecord::Base
-  has_secure_password
-
-  attr_accessible :name, :password_digest, :role, :email, :password, :password_confirmation
+  attr_accessible :name, :calnet_id, :role
 
   validates :name, presence: true
-  validates :email, presence: true
-  validates :role, presence: true
-  validates :password_digest, length: { minimum: 6 }
-  before_save { self.email = email.downcase }
-  before_create :create_remember_token
-
+  validates :calnet_id, presence: true
 
   def is_admin?
     return role > 0
@@ -19,6 +12,13 @@ class User < ActiveRecord::Base
     return role == val
   end
 
+  def User.valid_roles
+    {
+      "Guest" => 0,
+      "Admin" => 1,
+      "App Admin" => 2,
+    }
+  end
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

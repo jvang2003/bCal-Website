@@ -8,9 +8,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      puts "success"
       flash[:success] = "You are now logged in"
-      redirect_back_or root_path
+      redirect_back_or calendars_path
     else
+      puts "failure"
+      puts @user.errors.full_messages
       render 'new'
     end
   end

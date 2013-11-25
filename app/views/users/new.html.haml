@@ -1,21 +1,22 @@
--provide :title, "Sign Up"
+-provide :title, "Create User"
 %h1
-  = "Sign Up"
+  = "Create User"
 
 .row
   .span6.offset3
     = form_for(@user) do |f|
+      = render 'shared/error_messages'
 
       = f.label :name
       = f.text_field :name
 
-      = f.label :email
-      = f.text_field :email
+      = f.label :calnet_id
+      = f.text_field :calnet_id
 
-      = f.label :password
-      = f.password_field :password
+      = f.label :role
+      %select{:name => "user[role]"}
+        - User.valid_roles.each do |name, number|
+          %option{:value => number}
+            =name
 
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
-
-      = f.submit "Sign Up", class: "btn btn-large btn-primary"
+      = f.submit "Create User"

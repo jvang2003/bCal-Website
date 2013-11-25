@@ -3,10 +3,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by_calnet_id(params[:session][:calnet_id])
+    if user
       sign_in user
-      redirect_to params[:redirect_link]
+      redirect_back_or calendars_path
     else
       flash.now[:error] = "Invalid email/password combination"
       render "new"

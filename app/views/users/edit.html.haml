@@ -15,7 +15,7 @@
 
       = f.label :role
       %select{:name => "user[role]"}
-        - User.valid_roles.each do |name, number|
+        - User.VALID_ROLES.each do |name, number|
           %option{:value => number, :selected => @user.role == number}
             =name
 

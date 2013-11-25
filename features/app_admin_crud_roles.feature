@@ -7,8 +7,8 @@ Feature: App admin can CRUD users to roles
 Background: roles have been added to the database
     Given the following roles exist:
     |calnet_id    | role              | name     |
-    |bob          | dept_admin        | whatever |
-    |alice        | staff             | whatever |
+    |bob          | 2                 | whatever |
+    |alice        | 1                 | whatever |
   
     And I am logged in as an app admin
     And I am on the homepage
@@ -19,10 +19,14 @@ Scenario: able to add new user
     Then I should see "mallory" in the list of roles
     
 Scenario: able to delete user
-    When I try to delete user "bob"
+    When I view the users
+    And I try to delete user "bob"
     Then I should not see "bob" in the list of roles
 
 Scenario: able to edit user
-    When I try to change "alice" to "dept_admin"
-    Then I should see "alice" with role "dept_admin" 
+    When I try to change calnet_id of "alice" to "alicia"
+    And I view the users
+    Then I should see "alicia" in the list of roles
+    And I should not see "alice" in the list of roles
+
 

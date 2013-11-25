@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your request has been <%= @request.status %></h1>
+    <p>
+      Your request details: <br/>
+room : <b><%= @request.place %></b><br/>
+Number of people: <b><%= @request.people %></b><br/>
+Details : <b><%= @request.details %></b><br/>
+Date and Time: <b><%= @request.time %></b><br/>
+    </p>
+    <% if @request.status.eql?"approved" %>
+    <p>You can use the reserved room on the specified date</p>
+    <p>If you want to cancel your request please let us know </p>
+    <p>Thank you and enjoy the rest of your day!</p>
+    <% end %>
+    <% if @request.status.eql?"rejected" %>
+    <p> We are sorry that we can't accomodate your room request right now </p>
+    <p> Please contact us if you have any question </p>
+    <p> We hope that you have a wonderful day </p>
+    <% end %>
+  </body>
+</html>

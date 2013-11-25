@@ -2,6 +2,7 @@ Given /I am logged in as an app admin/ do
 	visit("/sign_in")
 	fill_in :session_calnet_id, :with => "bob"
 	click_button 'Sign in'
+	save_and_open_page
 end
 
 Given /the following roles exist/ do |roles_table| #done
@@ -19,6 +20,7 @@ When /I try to add a new user/ do
 end
 
 When /I fill in (.*)/ do |calnet_id|
+	save_and_open_page
 	fill_in 'Calnet', :with => calnet_id
 	fill_in 'Name', :with => "whatever"
 	click_button "Create User"

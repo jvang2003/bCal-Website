@@ -18,6 +18,21 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    if params[:role]
+      @users = User.where :role => params[:role]
+    else
+      @users = User.all
+    end
+  end
+
+  def destroy
+    @user = User.find params[:id]
+    @user.destroy
+
+    redirect_to users_path
+  end
+
   private
 
     def user_params

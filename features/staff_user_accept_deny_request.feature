@@ -1,6 +1,6 @@
 Feature: Staff User should be able to view/edit/approve/deny any reservations
-    As a 'Staff User' 
-    I want to be able to view/edit/approve/deny any reservations 
+    As a 'Staff User'
+    I want to be able to view/edit/approve/deny any reservations
     So that I have final say over what happens on a calendar.
 
 Background: requests have been added
@@ -10,11 +10,11 @@ Background: requests have been added
 	| Room 1   | 4       | We're having a partay  | Pending  |
 	| Room 2   | 42      | Office hours           | Pending  |
 	| Room 3   | 5       | Serious business       | Pending  |
-        
-        Given the following calendars exist:
-        |name           |email |visib  | fee_required |disabled|
-        |Room 1         |123   |public | true         |true    |
-        |calendar2      |345   |private| false        |false   |
+
+    Given the following calendars exist:
+    |name           |email |visib  | fee_required |disabled|
+    |Room 1         |123   |public | true         |true    |
+    |calendar2      |345   |private| false        |false   |
 
 	And I am on the homepage
 

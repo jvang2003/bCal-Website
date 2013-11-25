@@ -44,6 +44,5 @@
 				%td= e.start.dateTime.to_s
 				%td= e.end.dateTime.to_s
 				%td= e.attendees.size
-
 - if @calendar.access_token == nil
 	%a= link_to "Authenticate", controller: "calendar", action: "auth", id: @calendar.id

@@ -10,6 +10,11 @@ Background: requests have been added
 	| Room 1   | 4       | We're having a partay  | Pending  |
 	| Room 2   | 42      | Office hours           | Pending  |
 	| Room 3   | 5       | Serious business       | Pending  |
+        
+        Given the following calendars exist:
+        |name           |email |visib  | fee_required |disabled|
+        |Room 1         |123   |public | true         |true    |
+        |calendar2      |345   |private| false        |false   |
 
 	And I am on the homepage
 

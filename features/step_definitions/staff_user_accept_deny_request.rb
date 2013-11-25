@@ -8,23 +8,23 @@ end
 
 When /^I approve a request for "(.*)"$/ do |room|
     click_link("View requests")
-    click_link(room)
-    click("Approve")
-    click("Save")
+    first('.update_status').click_link("Update Status of this request")
+    select("Approved", :from => "status")
+    click_button("Update Status")
 end
 
 When /^I deny a request for "(.*)"$/ do |room|
     click_link("View requests")
-    click_link(room)
-    click("Deny")
-    click("Save")
+    first('.update_status').click_link("Update Status of this request")
+    select("Rejected", :from => "status")
+    click_button("Update Status")
 end
 
 When /^I edit a request for "(.*)" assuming it's accepted previously$/ do |room|
-    click_link("View requests")
-    click_link(room)
-    click("Deny")
-    click("Save")
+    step "I approve a request for \"Room 1\""
+    first('.update_status').click_link("Update Status of this request")
+    select("Rejected", :from => "status")
+    click_button("Update Status")
 end
 
 Then /^I should see all the requests$/ do
@@ -34,7 +34,7 @@ Then /^I should see all the requests$/ do
 end
 
 Then /^I should see the request approved for "(.*)"$/ do |room|
-  click_link(room)
+  first('.update_status').click_link("Update Status of this request")
   if page.respond_to? :should
     page.should have_content("Approved")
   else
@@ -43,20 +43,15 @@ Then /^I should see the request approved for "(.*)"$/ do |room|
 end
 
 Then /^I should see the request denied for "(.*)"$/ do |room|
-    click_link(room)
-    if page.respond_to? :should
-      page.should have_content("Denied")
-    else
-      assert page.has_content?("Denied")
-    end
+   first('.update_status').click_link("Update Status of this request")
+   if page.respond_to? :should
+     page.should have_content("Rejected")
+   else
+     assert page.has_content?("Rejected")
+   end
 end
 
 Then /^I should see the request edited for "(.*)"$/ do |room|
-    click_link(room)
-    if page.respond_to? :should
-      page.should have_content("Approved")
-    else
-      assert page.has_content?("Approved")
-    end
+   step "I should see the request denied for \"Room 1\""
 end
 

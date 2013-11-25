@@ -32,6 +32,22 @@ class UsersController < ApplicationController
 
     redirect_to users_path
   end
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    id=params[:id]
+    @user=User.find(id)
+
+    @user.name=params["user"]["name"]
+    @user.calnet_id=params["user"]["calnet_id"]
+    @user.role=params["user"]["role"]
+    @user.save!
+
+    flash[:notice]="User has been successfully updated"
+    redirect_to '/'
+  end
 
   private
 
@@ -40,6 +56,6 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      redirect_to sign_in_url, notice: "Please sign in." unless signed_in?
     end
 end

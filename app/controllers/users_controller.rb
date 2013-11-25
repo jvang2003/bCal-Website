@@ -18,12 +18,12 @@ class UsersController < ApplicationController
   end
 
   def index
-    if params[:role]
+    if params[:role] and params[:role].length > 0
       @users = User.where :role => params[:role]
+      @selected = params[:role]
     else
-      @users = User.find :all
+      @users = User.all
     end
-    puts @users
   end
 
   def destroy

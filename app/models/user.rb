@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
       "App Admin" => 2,
     }
   end
+
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

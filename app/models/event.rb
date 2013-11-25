@@ -8,23 +8,21 @@ class Event < ActiveRecord::Base
 		  'summary' => request.reason,
 		  'start' => {
 		    "dateTime" => convert_to_google_time_format(request.time)
-                    #"dateTime" => "2013-11-29T18:30:00"
+                    #"dateTime" => "2013-11-29T18:30:00z"
 		  },
                   "end" => {
                     "dateTime" => convert_to_google_time_format(request.time)
-                    #"dateTime" => "2013-11-29T18:30:00"
-                  }
-                  #"attendees" => [
-                  #  {
-                  #      'email' => 'abc@gmail.com'
-                  #  }
-                  #]
+                    #"dateTime" => "2013-11-29T19:30:00z"
+                  },
+                  "attendees" => create_attendees(request.people)
 	}
   end
 
   def convert_to_google_time_format(datetime)
-     split_time = datetime.time.to_s.split(" ")
-     return split_time[0] + "T" + split_time[1] + "z"
+     split_datetime = datetime.time.to_s.split(" ")
+     result_time = split_datetime[1] + "z"
+     print(split_datetime[0] + "T" + result_time)
+     return split_datetime[0] + "T" + result_time
   end
   def update_gcal
   	#TODO make this handle errors in updating to the api
@@ -50,9 +48,17 @@ class Event < ActiveRecord::Base
 	  	self.google_cal_id = parsed["id"]
 	end
   end
-  def delete_event
-      client = request.calendar.client
-      gcal = request.calendar.gcalendar
-      res = client.execute(:api_method => gcal.events.delete, :parameters => {:calendarId => request.calendar.email, :eventId => self.google_cal_id})
+  def delete_event 
+      res = request.calendar.client.execute(:api_method => request.calendar.gcalendar.events.delete, :parameters => {:calendarId => request.calendar.email, :eventId => self.google_cal_id})
+  end
+
+  def create_attendees(size)
+      result = []
+      i = 0
+      while (size != nil and i < size)
+          result.push({:email => i.to_s + "@gmail.com"})
+          i = i + 1
+      end
+      return result
   end
 end

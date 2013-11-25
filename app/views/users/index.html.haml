@@ -1,6 +1,6 @@
 %p
   =form_tag users_path, :method => 'get' do
-    %select{:name => "user[role]"}
+    %select{:name => "role"}
       %option{:value => "all"}= "All"
       - User.valid_roles.each do |name, number|
         %option{:value => number}

@@ -9,8 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       puts "success"
-      flash[:success] = "You are now logged in"
-      redirect_back_or calendars_path
+      redirect_back_or users_path
     else
       puts "failure"
       puts @user.errors.full_messages
@@ -22,8 +21,9 @@ class UsersController < ApplicationController
     if params[:role]
       @users = User.where :role => params[:role]
     else
-      @users = User.all
+      @users = User.find :all
     end
+    puts @users
   end
 
   def destroy

@@ -2,6 +2,7 @@ Given /I am logged in as an app admin/ do
 	visit("/sign_in")
 	fill_in :session_calnet_id, :with => "bob"
 	click_button 'Sign in'
+	save_and_open_page
 end
 
 Given /the following roles exist/ do |roles_table| #done

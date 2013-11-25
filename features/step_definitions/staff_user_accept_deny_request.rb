@@ -1,5 +1,5 @@
 Given /^I am logged in as staff user "(.*?)"$/ do |user_id|
-    User.create!(:name => 'staff_user', :password => 'testing')
+    User.create!(:name => 'Staff User', :calnet_id => 'testing', :role => 1)
 end
 
 When /^I view all the requests$/ do

@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
     {
       "Guest" => 0,
       "Admin" => 1,
-      "App Admin" => 2,
+      "Dept Admin" => 2,
+      "App Admin" => 3,
     }
   end
 

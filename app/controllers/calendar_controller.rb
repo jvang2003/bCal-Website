@@ -2,7 +2,6 @@ class CalendarController < ApplicationController
 
   before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:auth]
-  before_filter :needs_admin, :only => [:create]
 
   def new
     render :edit #same view as edit

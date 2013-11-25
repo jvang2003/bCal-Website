@@ -1,15 +1,15 @@
 
-Given /(?:|I) am logged in as a dep(?:t|artment)? admin(?:strator)?$/ do  
-	User.create!(:name => 'dept_admin_user', :password => 'testing')
+Given /(?:|I) am logged in as a dep(?:t|artment)? admin(?:strator)?$/ do
+	User.create!(:name => 'DeptAdmin User', :calnet_id => 'testing', :role => 2)
 	# login('dept_admin_user', 'testing') TODO: IMPLEMENT USER AUTHENTICATION
 end
 
 =begin
 Given /the following calendars exist/ do |calendars_table|
 	calendars_table.hashes.each do |calendar|
-		Calendar.create(calendar)	
+		Calendar.create(calendar)
 	end
-end 
+end
 =end
 
 When /I make the calendar (no )?fee(?:s)? required/ do |no_fee_required|

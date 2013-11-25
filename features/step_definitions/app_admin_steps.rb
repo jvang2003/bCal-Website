@@ -18,7 +18,7 @@ When /I try to add a new user/ do
 	visit("/sign_up")
 end
 
-When /I fill in (.*)/ do |calnet_id|
+When /I fill in "(.*)"/ do |calnet_id|
 	fill_in 'Calnet', :with => calnet_id
 	fill_in 'Name', :with => "whatever"
 	click_button "Create User"

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update]
+  before_filter :signed_in_user, only: [:new, :index, :edit, :update]
+  before_filter :is_app_admin?, only: [:new, :index, :edit, :update]
 
   def new
     @user = User.new
@@ -8,11 +9,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      puts "success"
       redirect_back_or users_path
     else
-      puts "failure"
-      puts @user.errors.full_messages
       render 'new'
     end
   end
@@ -40,6 +38,6 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      redirect_to(sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in.") unless signed_in?
     end
 end

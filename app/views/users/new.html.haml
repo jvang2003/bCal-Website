@@ -14,9 +14,6 @@
       = f.text_field :calnet_id
 
       = f.label :role
-      %select{:name => "user[role]"}
-        - User.valid_roles.each do |name, number|
-          %option{:value => number}
-            =name
+      =select_tag "user[role]", options_for_select(User.VALID_ROLES.to_a, @selected)
 
       = f.submit "Create User"

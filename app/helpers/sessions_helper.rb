@@ -26,8 +26,18 @@ module SessionsHelper
   end
 
   def redirect_back_or(default)
-    redirect_to(session[:return_to] || default)
-    session.delete(:return_to)
+    redirect_to params[:return_to] || default, :params => params
+  end
+
+  def is_admin?
+    current_user.role > User.VALID_ROLES["Guest"]
+  end
+
+  def is_app_admin?
+    if current_user.role < User.VALID_ROLES["App Admin"]
+      flash[:error] = "You must be an app admin to access this page"
+      redirect_to calendars_path
+    end
   end
 
 end

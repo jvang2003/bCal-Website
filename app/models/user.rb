@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
     return role == val
   end
 
-  def User.valid_roles
+  def User.VALID_ROLES
     {
       "Guest" => 0,
       "Admin" => 1,

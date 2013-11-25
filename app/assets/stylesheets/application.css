@@ -12,3 +12,7 @@
  *= require_tree .
  */
 /*.create-cal {float: right;}*/
+
+.navbar-right {
+    float: right!important;
+}

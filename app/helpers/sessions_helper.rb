@@ -30,14 +30,13 @@ module SessionsHelper
   end
 
   def is_admin?
-    current_user.role > User.VALID_ROLES["Guest"]
+    signed_in? and current_user.role > User.VALID_ROLES["Guest"]
   end
 
   def is_app_admin?
-    if current_user.role < User.VALID_ROLES["App Admin"]
+    if signed_in? and current_user.role < User.VALID_ROLES["App Admin"]
       flash[:error] = "You must be an app admin to access this page"
       redirect_to calendars_path
     end
   end
-
 end

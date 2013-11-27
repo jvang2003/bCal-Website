@@ -54,6 +54,17 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      redirect_to sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in." unless signed_in?
+      redirect_to sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in." unless signed_in? or is_same_controller_and_action?(request.original_url, sign_up_path)
+    end
+
+    def is_same_controller_and_action?(url1, url2)
+      hash_url1 = Rails.application.routes.recognize_path(url1)
+      hash_url2 = Rails.application.routes.recognize_path(url2)
+
+      [:controller, :action].each do |key|
+        return false if hash_url1[key] != hash_url2[key]
+      end
+
+      return true
     end
 end

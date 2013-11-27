@@ -4,7 +4,8 @@ Feature: Staff User should be able to view/edit/approve/deny any reservations
     So that I have final say over what happens on a calendar.
 
 Background: requests have been added
-        Given I am logged in as staff user "user1"
+    Given I am logged in as staff user "user1"
+    
 	Given the following requests exist:
 	| place    | people  | reason                 | status   |
 	| Room 1   | 4       | We're having a partay  | Pending  |

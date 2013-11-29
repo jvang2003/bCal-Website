@@ -17,6 +17,7 @@
     = stylesheet_link_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css"
 
 
+
   %body
     .navbar.navbar-fluid-top
       .navbar-inner
@@ -27,20 +28,28 @@
             %span.icon-bar
           %a.brand(href="#") B-Cal Integration
           .container.nav-collapse
-            %ul.nav
+            %ul.nav.navbar-nav
               %li= link_to "Home", calendars_path
               %li= link_to "About", "/about"
+            %ul.nav.navbar-nav.navbar-right
+              %li.dropdown{:id => "fat-menu"}
+                %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown"}
+                  Account
+                  %b.caret
+                  %ul.dropdown-menu
+                    -if signed_in?
+                      %li= link_to "Profile", current_user
+                      %li= link_to "Settings", edit_user_path(current_user)
+                      %li.divider
+                      %li
+                        = link_to "Sign out", sign_out_path, method: "delete"
+                    -else
+                      %li= link_to "Sign In", sign_in_path
+                      %li= link_to "Sign Up", sign_up_path
 
     .container-fluid
 
       .row-fluid
-        / .span3
-        /   .well.sidebar-nav
-        /     %ul.nav.nav-list
-        /       %li.nav-header Sidebar
-        /       %li= link_to "Link 1", "/path1"
-        /       %li= link_to "Link 2", "/path2"
-        /       %li= link_to "Link 3", "/path3"
-        .span9
+        .span12
           = bootstrap_flash
           = yield

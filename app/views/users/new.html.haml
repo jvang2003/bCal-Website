@@ -1,0 +1,19 @@
+-provide :title, "Create User"
+%h1
+  = "Create User"
+
+.row
+  .span6.offset3
+    = form_for(@user) do |f|
+      = render 'shared/error_messages'
+
+      = f.label :name
+      = f.text_field :name
+
+      = f.label :calnet_id
+      = f.text_field :calnet_id
+
+      = f.label :role
+      =select_tag "user[role]", options_for_select(User.VALID_ROLES.to_a, @selected)
+
+      = f.submit "Create User"

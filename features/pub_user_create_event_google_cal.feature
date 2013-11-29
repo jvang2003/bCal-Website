@@ -7,8 +7,8 @@ Feature: Any changes a user makes in our app will show up in Google Calendar
 Background: calendars have been added
 
 	Given the following calendars exist:
-	| name | email 				  |
-	| Test | moowiz2020@gmail.com |
+	| name | email 				          |
+	| Test | bCalWebsiteTesting@gmail.com |
 
 	Given the following requests exist:
 	| reason                 | status   | details        | time  	 			|
@@ -16,6 +16,7 @@ Background: calendars have been added
 
 	Given I am logged in as public user "1"
 	And I am on the homepage
+	And I authenticate the calendar "Test" the refresh token "1/HOP_Fhq1XuuNWEc_DkDw0M7F8KG3I8YpFnXKGnjlbjs"
 
 Scenario: a created event should show up on my google calendar
 	When I create an event with request "1" and a calendar id "1"

@@ -1,5 +1,8 @@
 Given /^I am logged in as public user "(.*?)"$/ do |user_id|
-    User.create!(:name => 'public_user', :password => 'testing')
+    User.create!(:name => 'test', :calnet_id => 'test', :role => 0)
+    visit("/sign_in")
+    fill_in :session_calnet_id, :with => "test"
+    click_button 'Sign in'
 end
 
 When /^I try to submit a request for reserving a room$/ do

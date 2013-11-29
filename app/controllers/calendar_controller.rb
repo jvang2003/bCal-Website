@@ -12,7 +12,7 @@ class CalendarController < ApplicationController
     @keyword = params[:keyword]
 
     @calendars = Calendar.find(:all)
-  
+
     if @filter
       if @filter == 'Filter by Building'
         @calendars = Calendar.where("building='#{@keyword}'")
@@ -33,12 +33,12 @@ class CalendarController < ApplicationController
 
   def create
     cal = Calendar.create!(:name=>params["name"],
-      :visib => params["visib"], 
-      :email => params["email"], 
-      :fee_required => params["fee_required"], 
-      :disabled => params["disabled"], 
-      :building => params["building"], 
-      :usage => params["usage"], 
+      :visib => params["visib"],
+      :email => params["email"],
+      :fee_required => params["fee_required"],
+      :disabled => params["disabled"],
+      :building => params["building"],
+      :usage => params["usage"],
       :dept => params["dept"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
@@ -50,7 +50,7 @@ class CalendarController < ApplicationController
   end
 
   def auth
-    redirect_to show_cal_path params[:id] 
+    redirect_to show_cal_path params[:id]
   end
 
   def oauth_redirect
@@ -81,7 +81,7 @@ class CalendarController < ApplicationController
     if @calendar.access_token == nil
       @events = []
     else
-      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list, 
+      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list,
         :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
       @events = result.data.items
     end

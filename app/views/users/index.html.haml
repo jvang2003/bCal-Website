@@ -1,0 +1,22 @@
+%p
+  =form_tag users_path, :method => 'get' do
+    =select_tag "role", options_for_select(User.VALID_ROLES.to_a, @selected), :prompt => "Choose what to filter on"
+    =submit_tag "Filter"
+
+
+%table.table
+  %thead
+    %tr
+      %th Calnet ID
+      %th Name
+      %th Role
+  %tbody
+    - @users.each do |user|
+      %tr{:id => 'user' + user.id.to_s}
+        %td.name= user.calnet_id
+        %td.name= user.name
+        %td.role= user.role
+        %td
+          = link_to 'Edit', edit_user_path(user), :class => ['btn', 'btn-info']
+        %td
+          = link_to 'Delete', user, :method => 'delete', :class => ['btn', 'btn-delete'], :id => "delete_" + user.id.to_s

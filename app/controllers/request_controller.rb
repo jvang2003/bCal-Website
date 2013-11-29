@@ -12,11 +12,7 @@ class RequestController < ApplicationController
     to_pass[:course_related] = params[:course_related]
     to_pass[:accept_different_room] = params[:accept_different_room]
     to_pass[:department] = params[:department]
-<<<<<<< HEAD
     to_pass[:time] = DateTime.new(date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8")
-=======
-    to_pass[:time] = DateTime.new(params["date"]["(1i)"].to_i,params["date"]["(2i)"].to_i,params["date"]["(3i)"].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8")
->>>>>>> 1d7d3a6a0050d13f4580f52b1ce76683d6eba692
     to_pass[:email]=params[:email]
     to_pass[:status] = "pending"
     

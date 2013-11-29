@@ -1,4 +1,4 @@
-And /I am viewing the calendar "(.*)"/ do |calendar_name|
+And /I am viewing(?: the)? calendar "(.*)"/ do |calendar_name|
 	visit ("/")	
 	click_on(calendar_name)
 end

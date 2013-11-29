@@ -14,7 +14,6 @@ Background: a calendar with events has been added and authorized
 
 Scenario: when I am viewing a calendar, I can choose to export it to CSV
 	When I am viewing calendar "real google cal"
-	And I export it to CSV to location "/tmp/real_google_cal.csv"
-	And I view the file "/tmp/real_google_cal.csv"
-	Then I should see the event "Pastor Ed's Birthday"
-	And I should see the event "CS169 Team Dinner"
+	And I export it to csv
+	Then I should see in the CSV the event "Pastor Ed's Birthday"
+	And I should see in the csv the event "CS169 Team Dinner"

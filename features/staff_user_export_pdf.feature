@@ -14,7 +14,6 @@ Background: a calendar with events has been added and authorized
 
 Scenario: when I am viewing a calendar, I can choose to export it to PDF
 	When I am viewing calendar "real google cal"
-	And I export it to PDF to location "/tmp/real_google_cal.pdf"
-	And I view the file "/tmp/real_google_cal.pdf"
+	And I export it to PDF
 	Then I should see the event "Pastor Ed's Birthday"
 	And I should see the event "CS169 Team Dinner"

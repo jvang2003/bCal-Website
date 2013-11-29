@@ -3,6 +3,7 @@ class RequestController < ApplicationController
   end
 
   def create
+    date=params["date"].split("/")
     to_pass = {}
     to_pass[:people] = params[:people]
     to_pass[:details] = params[:details]
@@ -11,7 +12,8 @@ class RequestController < ApplicationController
     to_pass[:course_related] = params[:course_related]
     to_pass[:accept_different_room] = params[:accept_different_room]
     to_pass[:department] = params[:department]
-    to_pass[:time] = DateTime.new(params["date"]["(1i)"].to_i,params["date"]["(2i)"].to_i,params["date"]["(3i)"].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8")
+    to_pass[:time] = DateTime.new(date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8")
+    to_pass[:email]=params[:email]
     to_pass[:status] = "pending"
     
     Request.create! to_pass
@@ -34,6 +36,7 @@ class RequestController < ApplicationController
      @request.calendar = calendar if @request.calendar == nil
      @request.save!
      if (params[:status])
+       RequestMailer.status_changed(@request).deliver
        if (prev_status != "approved" and @request.status == "approved" and calendar.access_token != nil)
          @event = Event.new
          @request.event = @event

@@ -44,7 +44,6 @@ group :production do
 end
 
 gem 'jquery-rails'
-
 gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'haml-rails'

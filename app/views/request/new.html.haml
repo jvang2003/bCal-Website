@@ -7,9 +7,11 @@
     = label_tag :department, 'Department'
     = text_field_tag :department,nil,:placeholder=> "Civil Engineering",:required => true
     = label_tag :date,'Date'
-    = date_select :date ,""
-    = label_tag :time,'Time'
+    = text_field_tag :date ,nil,:required => true
+    = label_tag :time,'Start Time'
     = time_select :time,""
+    = label_tag :finish_time,'End Time'
+    = time_select :finish_time,""
     = label_tag :place,'Place'
     = text_field_tag :place,nil,:placeholder=> "615 Davis Hall",:required =>true
     = label_tag :reason,'Reason for request'
@@ -21,7 +23,6 @@
     %label{:for => "accept_different_room"} If current room is unavailable, will you accept different room? (Tick if yes)
     = check_box_tag "accept_different_room", true, params[:new]
   = submit_tag "Submit Request",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}
-
 
 
 

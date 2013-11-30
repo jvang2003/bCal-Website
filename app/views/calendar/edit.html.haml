@@ -1,40 +1,8 @@
 %h1 
-  = @calendar == nil ? "Create a new calendar" : "Edit " + @calendar.name
+  = "Edit " + @calendar.name
 / %form{ :action => params[:new] ? "create" : "../update/#{params[:id]}", :method => "post"}
-= form_tag((@calendar == nil ? "create" : update_cal_path(@calendar.id)), :method => (@calendar == nil ? "post" : "put")) do
-  %fieldset
-    %ol
-      %li
-        %label{:for => "name"} Name:
-        %input{:type => "text", :name => "name", :class => "text", :value => @calendar == nil ? "" : @calendar.name}
-      %li
-        %label{:for => "email"} Calendar E-mail:
-        %input{:type => "text", :name => "email", :class => "text", :value => @calendar == nil ? "" : @calendar.access_token}
-      %li
-        %label{:for => "visib"} Visibility:
-        %select{:name => "visib"}
-          %option{:value => "Public", :selected => @calendar == nil ? false : @calendar.visib == 'Public'} Public
-          %option{:value => "Private", :selected => @calendar == nil ? false : @calendar.visib == 'Private'} Private
-          / %option{:value => "Public"} Public
-          / %option{:value => "Private"} Private
-      %li
-        %label{:for => "fee_required"} Fee required?
-        = check_box_tag "fee_required", true, @calendar == nil ? false : @calendar.fee_required
-      %li
-        %label{:for => "disabled"} Disabled?
-        = check_box_tag "disabled", true, @calendar == nil ? false : @calendar.disabled
-      %li
-        %label{:for => "building"} Building:
-        %input{:type => "text", :name => "building", :class => "text", :value => @calendar == nil ? "" : @calendar.building}
-      %li
-        %label{:for => "usage"} Usage:
-        %input{:type => "text", :name => "usage", :class => "text", :value => @calendar == nil ? "" : @calendar.usage}
-      %li
-        %label{:for => "dept"} Department:
-        %input{:type => "text", :name => "dept", :class => "text", :value => @calendar == nil ? "" : @calendar.dept}
+= form_tag(update_cal_path(@calendar.id), :method => 'put') do
+  = render :partial => 'calendar_form', :locals => {:cal => @calendar} 
+  = submit_tag 'Update Calendar', :class => 'button'
 
-    %input{:type => "submit", :value => "Send", :class => "button"}
-
-/ %a{:href => 'calendar/destroy', :class => 'btn btn-danger'} Destroy this calendar
--if @calendar != nil
-  = link_to 'Destroy this calendar',@calendar.id.to_s, :method => :delete, :confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"
+= link_to 'Destroy this calendar', @calendar.id.to_s, :method => :delete, :confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"

@@ -1,0 +1,28 @@
+%fieldset
+  %ol
+    %li
+      %label{:for => "name"} Name:
+      %input{:type => "text", :name => "name", :class => "text", :value => cal.name}
+    %li
+      %label{:for => "email"} Calendar E-mail:
+      %input{:type => "text", :name => "email", :class => "text", :value => cal.access_token}
+    %li
+      %label{:for => "visib"} Visibility:
+      %select{:name => "visib"}
+        %option{:value => "Public", :selected => cal.visib == 'Public'} Public
+        %option{:value => "Private", :selected => cal.visib == 'Private'} Private
+    %li
+      %label{:for => "fee_required"} Fee required?
+      = check_box_tag "fee_required", true, cal.fee_required
+    %li
+      %label{:for => "disabled"} Disabled?
+      = check_box_tag "disabled", true, cal.disabled
+    %li
+      %label{:for => "building"} Building:
+      %input{:type => "text", :name => "building", :class => "text", :value => cal.building}
+    %li
+      %label{:for => "usage"} Usage:
+      %input{:type => "text", :name => "usage", :class => "text", :value => cal.usage}
+    %li
+      %label{:for => "dept"} Department:
+      %input{:type => "text", :name => "dept", :class => "text", :value => cal.dept}

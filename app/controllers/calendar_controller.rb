@@ -4,7 +4,7 @@ class CalendarController < ApplicationController
   before_filter :check_auth, :only => [:auth]
 
   def new
-    render :edit #same view as edit
+    #render :edit #same view as edit
   end
 
   def index

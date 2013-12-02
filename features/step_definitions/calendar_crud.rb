@@ -19,7 +19,7 @@ When /I fill in the form for calendar with the following: (.*)/ do |calendar| #d
     select("Public", :from => "visib")
     check("Fee required?") unless attributes[3] == "no"
     check("Disabled?") unless attributes[4] == "no"
-    click_button("Send")
+    click_button("Create Calendar")
 end
 
 When /I try to read a calendar "(.*)"/ do |calendar| #done
@@ -31,7 +31,7 @@ When /I try to update a calendar "(.*)"/ do |calendar| #done
 end
 
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done
-    assert page.has_content?("Edit #{calendar}")
+    assert page.has_content?("Update #{calendar}")
     cal = Calendar.find_by_name(calendar)
     attributes = details.split(%r{,\s*})
     fill_in(:email, :with => attributes[0])
@@ -41,7 +41,7 @@ When /I change the values for calendar "(.*)" with the following: (.*)/ do |cale
         select("Private", :from => "visib")
     end
     check("Fee required?") unless attributes[2] == "no"
-    click_button("Send")
+    click_button("Update Calendar")
 end
 
 Then /I should see the calendar "(.*)" in the department_admin page/ do |calendar| #done
@@ -86,7 +86,7 @@ Then /the form filled for calendar "(.*)"/ do |calendar|
 end
 
 When /I (?:delete|destroy|remove) calendar "([^\"]*)"$/ do |calendar_name|
-  click_link("Destroy this calendar")
+  click_link("DELETE CALENDAR")
 end
 
 Then /I should be seeing the calendar "([^\"]*)" in the department admin page$/ do |calendar_name|

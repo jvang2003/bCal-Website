@@ -18,7 +18,7 @@ When /I make the calendar (no )?fee(?:s)? required/ do |no_fee_required|
 	else
 		check("fee_required")
 	end
-	click_button("Send") #This is assuming we are on the edit page
+	click_button("Update Calendar") #This is assuming we are on the edit page
 end
 
 When /I (dis|en)able the calendar/ do |choice|
@@ -27,7 +27,7 @@ When /I (dis|en)able the calendar/ do |choice|
 	else
 		uncheck("disabled")
 	end
-	click_button("Send")
+	click_button("Update Calendar")
 end
 
 When /I make the visibility of the calendar (public|private)/ do |privacy|
@@ -37,7 +37,7 @@ When /I make the visibility of the calendar (public|private)/ do |privacy|
 	else
 		select('Public', :from => 'visib')
 	end
-	click_button("Send")
+	click_button("Update Calendar")
 end
 
 Then /calendar "([^\"]*)" should (not )?require a fee/ do |calendar_name, no_fee|

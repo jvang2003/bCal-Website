@@ -19,3 +19,7 @@ end
 And /I export (?:it|page|calendar) to (?i:PDF)/ do
 	click_on("Export to PDF")
 end
+
+When /I am on the index page/ do
+	visit("/")
+end

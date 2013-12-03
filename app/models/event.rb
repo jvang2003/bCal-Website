@@ -46,10 +46,12 @@ class Event < ActiveRecord::Base
 	  	#puts res.data
 	  	parsed = JSON.parse(res.body)
 	  	self.google_cal_id = parsed["id"]
-	end
+  	end
   end
-  def delete_event 
-      res = request.calendar.client.execute(:api_method => request.calendar.gcalendar.events.delete, :parameters => {:calendarId => request.calendar.email, :eventId => self.google_cal_id})
+
+  def delete_event
+      res = request.calendar.client.execute(:api_method => request.calendar.gcalendar.events.delete,
+        :parameters => {:calendarId => request.calendar.email, :eventId => self.google_cal_id})
   end
 
   def create_attendees(size)

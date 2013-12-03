@@ -1,13 +1,10 @@
 Given /^I am logged in as public user "(.*?)"$/ do |user_id|
     User.create!(:name => 'test', :calnet_id => 'test', :role => 0)
-    visit("/sign_in")
-    fill_in :session_calnet_id, :with => "test"
-    click_button 'Sign in'
+    login 'test'
 end
 
 When /^I try to submit a request for reserving a room$/ do
-    click_link("Create request")
-    #visit("/request/new")
+    click_link "request_create"
 end
 
 Then /^I will be able to fill in (.*)$/ do |event_details|

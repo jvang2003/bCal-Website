@@ -1,7 +1,7 @@
 Feature: Any user can show the history of all event requests they made
 
 	As a 'Public User'
-	I want to be able to see my reservations and status 
+	I want to be able to see my reservations and status
 	So that I can track my reservation history.
 
 Background: requests have been added
@@ -13,6 +13,7 @@ Background: requests have been added
 	| Room 3   | 5       | Serious business       | Rejected |
 
 	And I am on the homepage
+	And I am logged in as public user "public_user"
 
 Scenario: show all history
 	When I view my request history
@@ -30,7 +31,7 @@ Scenario: show pending
 	And I filter by Pending
 	Then I should see room "Room 2" with status "Pending"
 
-Scenario: show rejected 
+Scenario: show rejected
 	When I view my request history
 	And I filter by Rejected
 	Then I should see room "Room 3" with status "Rejected"

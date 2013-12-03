@@ -1,12 +1,10 @@
-class RequestController < ApplicationController
-  def self.can_view? user=nil
-    user ||= current_user
-    user.role >= 0
+class RequestsController < ApplicationController
+  def self.can_view? user
+    user && user.role >= 0
   end
 
-  def self.can_crud user=nil
-    user ||= current_user
-    user.role >= 1
+  def self.can_crud? user
+    user && user.role >= 0
   end
 
   def new
@@ -14,17 +12,14 @@ class RequestController < ApplicationController
 
   def create
     date=params["date"].split("/")
+
     to_pass = {}
-    to_pass[:people] = params[:people]
-    to_pass[:details] = params[:details]
-    to_pass[:reason] = params[:reason]
-    to_pass[:place] = params[:place]
-    to_pass[:course_related] = params[:course_related]
-    to_pass[:accept_different_room] = params[:accept_different_room]
-    to_pass[:department] = params[:department]
-    to_pass[:time] = DateTime.new(date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8")
-    to_pass[:email]=params[:email]
-    to_pass[:status] = "pending"
+    %w(people details reason place course_related accept_different_room department email).each do |attr|
+      to_pass[attr] = params[attr]
+    end
+
+    to_pass[:time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8"
+    to_pass[:status] = :pending
 
     Request.create! to_pass
     RequestMailer.request_successful(params).deliver
@@ -33,9 +28,9 @@ class RequestController < ApplicationController
     redirect_to calendars_path
   end
 
-  def show
-  	@requests = Request.all
-  	# @requests = Request.all(:user_id => @user_id) #TODO: ACTUALLY MAKE THIS USE THE USER ID!!!!
+  def index
+    @requests = Request.all
+    # @requests = Request.all(:user_id => @user_id) #TODO: ACTUALLY MAKE THIS USE THE USER ID!!!!
   end
 
   def edit
@@ -52,11 +47,13 @@ class RequestController < ApplicationController
          @request.event = @event
          @request.event.update_gcal
        elsif (params[:status] and (@request.status == "rejected" or @request.status == "pending") and calendar.access_token != nil)
-         @request.event.delete_event
-         @request.event.destroy
+         if @request.event
+           @request.event.delete_event
+           @request.event.destroy
+         end
        end
        flash[:notice] = "Request Status has been updated."
-       redirect_to show_requests_path
+       redirect_to requests_path
     end
   end
 end

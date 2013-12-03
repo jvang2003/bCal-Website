@@ -1,0 +1,28 @@
+%p
+  =form_tag users_path, :method => 'get' do
+    =select_tag "role", options_for_select(User.VALID_ROLES.to_a, @selected), :prompt => "Choose what to filter on"
+    =submit_tag "Filter", :class => 'btn'
+
+
+%table.table
+  %thead
+    %tr
+      %th Calnet ID
+      %th Name
+      %th Role
+  %tbody
+    - @users.each do |user|
+      %tr{:id => 'user' + user.id.to_s}
+        %td.name= user.calnet_id
+        %td.name= user.name
+        %td.role= user.role
+        - btn_classes = "btn #{"disabled" unless is_higher_admin_b?(user)}"
+        - edit_hash = {:class => btn_classes + ' btn-info', :id => "edit_#{user.id}"}
+        - delete_hash = {:class => btn_classes + ' btn-danger', :id => "delete_#{user.id}", :method => 'delete'}
+        - if not is_higher_admin_b? user
+          - edit_hash[:onClick] = delete_hash[:onClick] = "return false;"
+          - delete_hash.delete(:method)
+        %td
+          = link_to 'Edit', is_higher_admin_b?(user) ? edit_user_path(user) : '#', edit_hash
+        %td
+          = link_to 'Delete', is_higher_admin_b?(user) ? user : '#', delete_hash

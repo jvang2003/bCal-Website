@@ -1,14 +1,12 @@
-class UserController < ApplicationController
-  include UserHelper
+class UsersController < ApplicationController
+  include UsersHelper
 
-  def self.can_view? user=nil
-    user ||= current_user
-    user.role >= 2
+  def self.can_view? user
+    user && user.role >= 2
   end
 
-  def self.can_crud? user=nil
-    user ||= current_user
-    user.role >= 2
+  def self.can_crud? user
+    user && user.role >= 2
   end
 
   before_filter :is_higher_admin?, only: [:edit, :update, :destroy]

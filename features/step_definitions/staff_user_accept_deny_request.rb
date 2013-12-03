@@ -1,26 +1,20 @@
 Given /^I am logged in as staff user "(.*?)"$/ do |user_id|
     User.create!(:name => 'Staff User', :calnet_id => 'testing', :role => 1)
+    login 'testing'
 end
 
 When /^I view all the requests$/ do
-    click_link("View requests")
+    click_link "request_index"
 end
 
-When /^I approve a request for "(.*)"$/ do |room|
-    click_link("View requests")
-    first('.update_status').click_link("Update Status of this request")
-    select("Approved", :from => "status")
-    click_button("Update Status")
+When /^I (approve|deny) a request for "(.*)"$/ do |approve, room|
+    click_link "request_index"
+    first('.update_status').click_link "Update Status of this request"
+    select (approve == "approve" ? "Approved" : "Rejected"), :from => "status"
+    click_button "Update Status"
 end
 
-When /^I deny a request for "(.*)"$/ do |room|
-    click_link("View requests")
-    first('.update_status').click_link("Update Status of this request")
-    select("Rejected", :from => "status")
-    click_button("Update Status")
-end
-
-When /^I edit a request for "(.*)" assuming it's accepted previously$/ do |room|
+When /^I edit a request for "(.*)" assuming it was accepted previously$/ do |room|
     step "I approve a request for \"Room 1\""
     first('.update_status').click_link("Update Status of this request")
     select("Rejected", :from => "status")

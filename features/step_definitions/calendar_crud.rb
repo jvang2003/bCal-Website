@@ -1,4 +1,4 @@
-Given /the following calendars exist/ do |calendars_table| #done
+Given /the following calendars exist/ do |calendars_table|
     calendars_table.hashes.each do |calendar|
         Calendar.create!(calendar)
     end
@@ -9,25 +9,25 @@ Given /I am on the homepage/ do
 end
 
 When /I try to create a calendar "(.*)"/ do |calendar| #done
-    click_link("Create new calendar") #will visit path_to('/calendars/new')
+    click_link "calendar_create"
 end
 
 When /I fill in the form for calendar with the following: (.*)/ do |calendar| #done
-    attributes = calendar.split(%r{,\s*})
-    fill_in(:name,:with => attributes[0] )
-    fill_in(:email, :with => attributes[1])
-    select("Public", :from => "visib")
+    attributes = calendar.split %r{,\s*}
+    fill_in :name,:with => attributes[0]
+    fill_in :email, :with => attributes[1]
+    select "Public", :from => "visib"
     check("Fee required?") unless attributes[3] == "no"
     check("Disabled?") unless attributes[4] == "no"
-    click_button("Create Calendar")
+    click_button "Create Calendar"
 end
 
-When /I try to read a calendar "(.*)"/ do |calendar| #done
-    click_link(calendar)
+When /I try to read a calendar "(.*)"/ do |calendar|
+    click_link calendar
 end
 
-When /I try to update a calendar "(.*)"/ do |calendar| #done
-    find('a', :text => "Update #{calendar}").click
+When /I try to update a calendar "(.*)"/ do |calendar|
+    find_by_id("update_" + Calendar.find_by_name(calendar).id.to_s).click
 end
 
 When /I change the values for calendar "(.*)" with the following: (.*)/ do |calendar, details| #done
@@ -86,14 +86,14 @@ Then /the form filled for calendar "(.*)"/ do |calendar|
 end
 
 When /I (?:delete|destroy|remove) calendar "([^\"]*)"$/ do |calendar_name|
-  click_link("DELETE CALENDAR")
+  click_link "DELETE CALENDAR"
 end
 
 Then /I should be seeing the calendar "([^\"]*)" in the department admin page$/ do |calendar_name|
   if page.respond_to? :should
-	page.should have_content(calendar_name)
+  	page.should have_content(calendar_name)
   else
-	assert page.has_content?(calendar_name)
+  	assert page.has_content?(calendar_name)
   end
 end
 

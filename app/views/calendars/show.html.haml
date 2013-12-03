@@ -8,11 +8,11 @@
 	/ - if @dept_admin
 	%li
 		E-mail :
-		= @calendar.email		
+		= @calendar.email
 	%li
 		Visibility :
 		= @calendar.visib
-		
+
 	%li
 		Fee Required ? :
 		= @calendar.fee_required
@@ -21,7 +21,7 @@
 		Building :
 		= @calendar.building
 
-	%li 
+	%li
 		Usage :
 		= @calendar.usage
 
@@ -32,7 +32,7 @@
 
 %table#events.table
 	%thead
-		%tr		
+		%tr
 			%th  Event
 			%th  Starting
 			%th  Ending
@@ -41,8 +41,8 @@
 		- @events.each do |e|
 			%tr
 				%td= e.summary
-				%td= e.start.dateTime.to_s
-				%td= e.end.dateTime.to_s
+				%td= e.start.nil? ? "" : e.start.date_time.to_s
+				%td= e.end.nil? ? "" : e.end.date_time.to_s
 				%td= e.attendees.size
 - if @calendar.access_token == nil
-	%a= link_to "Authenticate", controller: "calendar", action: "auth", id: @calendar.id
+	%a= link_to "Authenticate", oauth_path(@calendar.id)

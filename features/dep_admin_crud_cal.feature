@@ -1,7 +1,7 @@
 Feature: department admin can CRUD calendars
 
 	As a 'Dept Admin'
-	I want to CRUD calendars (name, google keys, etc) 
+	I want to CRUD calendars (name, google keys, etc)
 	So that I can manage our calendars.
 
 Background: calendars have been added to the database
@@ -9,9 +9,10 @@ Background: calendars have been added to the database
     |name           |email |visib  | fee_required |disabled|
     |calendar1      |123 |public | true         |true    |
     |calendar2      |345 |private| false        |false   |
-  
+
     And I am on the homepage
-    
+    And I am logged in as a department admin
+
 Scenario: able to create calendar
     When I try to create a calendar "calendar3"
     And I fill in the form for calendar with the following: calendar3,789,public,yes
@@ -35,6 +36,6 @@ Scenario: able to destroy a calendar
     When I try to update a calendar "calendar1"
     When I delete calendar "calendar1"
     Then I should not see calendar "calendar1"
-    
-   
+
+
 

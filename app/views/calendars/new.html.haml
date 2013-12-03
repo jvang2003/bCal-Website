@@ -1,0 +1,5 @@
+%h1
+  = "Create a new calendar"
+= form_tag calendars_path, :method => :post do
+  = render :partial => 'calendar_form', :locals => {:cal => Calendar.new}
+  = submit_tag 'Create Calendar', :class => 'btn btn-primary btn-large'

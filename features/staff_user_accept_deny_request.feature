@@ -5,7 +5,7 @@ Feature: Staff User should be able to view/edit/approve/deny any reservations
 
 Background: requests have been added
     Given I am logged in as staff user "user1"
-    
+
 	Given the following requests exist:
 	| place    | people  | reason                 | status   |
 	| Room 1   | 4       | We're having a partay  | Pending  |
@@ -32,5 +32,5 @@ Scenario: deny requests
         Then I should see the request denied for "Room 1"
 
 Scenario: edit requests
-        When I edit a request for "Room 1" assuming it's accepted previously
+        When I edit a request for "Room 1" assuming it was accepted previously
         Then I should see the request edited for "Room 1"

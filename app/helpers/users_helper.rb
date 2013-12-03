@@ -1,4 +1,4 @@
-module UserHelper
+module UsersHelper
   def valid_create_roles_for user
     index = 0
     arr = User.VALID_ROLES.to_a

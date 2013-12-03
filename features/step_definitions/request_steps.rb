@@ -1,12 +1,12 @@
 Given /the following requests exist/ do |requests_table| #done
     requests_table.hashes.each do |request|
-    	request[:time] = Time.now 
+    	request[:time] = Time.now
         Request.create!(request)
     end
 end
 
-When /I view my request history/ do 
-	click_link("View requests")
+When /I view my request history/ do
+	click_link "request_index"
 end
 
 When /I filter by (.*)/ do |filter|

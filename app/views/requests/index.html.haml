@@ -23,6 +23,6 @@
 					%td{:class => "time"}= req.time
 					%td{:class => "status"}= req.status
 					%td{:class => "update_status"}
-						%a{:href => edit_request_path(req.id.to_s), :class => 'btn btn-info'}= 'Update Status of this request'
+						%a.btn.btn-info{:href => edit_request_path(req.id)}= 'Update Status of this request'
 
-				
+

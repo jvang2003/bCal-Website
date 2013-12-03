@@ -1,0 +1,8 @@
+%h1
+  = "Update " + @calendar.name
+/ %form{ :action => params[:new] ? "create" : "../update/#{params[:id]}", :method => "post"}
+= form_tag(calendar_path(@calendar.id), :method => 'put') do
+  = render :partial => 'calendar_form', :locals => {:cal => @calendar}
+  = submit_tag 'Update Calendar', :class => 'btn btn-primary btn-large'
+
+= link_to 'DELETE CALENDAR', calendar_path(@calendar), :method => :delete, :confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"

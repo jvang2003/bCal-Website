@@ -19,13 +19,13 @@
 					- field_name ||= header.downcase
 					- case field_name
 						- when "name"
-							%th.name= link_to "#{cal.name}", show_cal_path(cal)
+							%th.name= link_to "#{cal.name}", calendar_path(cal)
 						- when "fee_required"
 							%td.fee_required= cal.fee_required ? 'Yes':'No'
 						- when "disabled"
 							%td.disabled= cal.disabled ? 'Yes' : 'No'
 						- when "dept"
 							%td
-								%a.dept.btn.btn-info{:href => edit_cal_path(cal.id.to_s)}= 'Update'
+								%a.dept.btn.btn-info{:href => edit_calendar_path(cal.id.to_s), :id => "update_" + cal.id.to_s}= 'Update'
 						- else
 							%th{:class => field_name}= cal.send(field_name)

@@ -1,4 +1,4 @@
-= form_tag "/request",:method =>:post do
+= form_tag requests_path, :method =>:post do
   = field_set_tag do
     = label_tag :people,'Number of people'
     = number_field_tag :people,0,:min =>0,:required =>true

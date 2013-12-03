@@ -1,7 +1,7 @@
 
 Given /(?:|I) am logged in as a dep(?:t|artment)? admin(?:strator)?$/ do
 	User.create!(:name => 'DeptAdmin User', :calnet_id => 'testing', :role => 2)
-	# login('dept_admin_user', 'testing') TODO: IMPLEMENT USER AUTHENTICATION
+	login 'testing'
 end
 
 =begin

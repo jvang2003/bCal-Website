@@ -1,16 +1,13 @@
-class CalendarController < ApplicationController
-
+class CalendarsController < ApplicationController
   before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:auth]
 
-  def self.can_view? user=nil
-    user ||= current_user
-    user.role >= 0
+  def self.can_view? user
+    true
   end
 
-  def self.can_crud? user=nil
-    user ||= current_user
-    user.role >= 1
+  def self.can_crud? user
+    user && user.role >= 1
   end
 
   def new
@@ -20,7 +17,6 @@ class CalendarController < ApplicationController
   def index
     @filter = params[:filter]
     @keyword = params[:keyword]
-
 
     if @filter && @keyword
       if not Calendar.column_names.include? @filter
@@ -50,7 +46,7 @@ class CalendarController < ApplicationController
       :dept => params["dept"])
     flash[:notice]="Calendar has been successfully created"
     flash.keep
-    redirect_to show_cal_path cal.id
+    redirect_to calendar_path cal.id
   end
 
   def find_calendar
@@ -58,7 +54,7 @@ class CalendarController < ApplicationController
   end
 
   def auth
-    redirect_to show_cal_path params[:id]
+    redirect_to calendar_path params[:id]
   end
 
   def oauth_redirect
@@ -91,15 +87,16 @@ class CalendarController < ApplicationController
     else
       result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list,
         :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
-      @events = result.data.items
+      @events = result.data.items.to_a
     end
   end
 
   def destroy
     @calendar=Calendar.find(params[:id])
     @calendar.destroy
+
     flash[:notice]="Calendar has been deleted"
-    redirect_to '/'
+    redirect_to calendars_path
   end
 
   def update

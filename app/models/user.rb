@@ -4,14 +4,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :calnet_id, presence: true
 
-  def is_admin?
-    return role > 0
-  end
-
-  def is_role? val
-    return role == val
-  end
-
   def User.VALID_ROLES
     {
       "Guest" => 0,

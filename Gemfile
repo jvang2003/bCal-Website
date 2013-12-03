@@ -14,8 +14,9 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails'
-  gem 'cucumber-rails'
   gem 'simplecov'
+  gem 'pdfkit'
+  gem "wkhtmltopdf", "~> 0.1.2"
 end
 
 group :test do
@@ -36,6 +37,8 @@ end
 
 group :production do
   gem 'pg'
+  gem 'pdfkit'
+  gem "wkhtmltopdf", "~> 0.1.2"
 end
 
 gem 'jquery-rails'

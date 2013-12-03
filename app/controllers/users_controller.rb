@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:new, :index, :edit, :update]
-  before_filter :is_app_admin?, only: [:new, :index, :edit, :update]
+  before_filter :is_dept_admin?, only: [:new, :index, :edit, :update]
 
   def new
     @user = User.new

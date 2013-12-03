@@ -11,10 +11,7 @@
 
       %input{:type=>"hidden", :name => "return_to", :value => params[:return_to]}
 
-      / = f.label :password
-      / = f.password_field :password
-
-      = f.submit "Sign in", class: "btn btn-large btn-primary"
+      = f.submit "Sign in", class: "btn btn-large btn-primary", id: "submit_button"
 
     %p New user?
     = link_to "Sign up now!", sign_up_path

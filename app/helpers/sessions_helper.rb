@@ -1,3 +1,15 @@
+String.class_eval do
+  def to_slug
+    value = self.mb_chars.normalize(:kd).gsub(/[^\x00-\x7F]/n, '').to_s
+    value.gsub!(/[']+/, '')
+    value.gsub!(/\W+/, ' ')
+    value.strip!
+    value.downcase!
+    value.gsub!(' ', '_')
+    value
+  end
+end
+
 module SessionsHelper
 
   def sign_in(user)
@@ -33,10 +45,14 @@ module SessionsHelper
     signed_in? and current_user.role > User.VALID_ROLES["Guest"]
   end
 
-  def is_app_admin?
-    if signed_in? and current_user.role < User.VALID_ROLES["App Admin"]
-      flash[:error] = "You must be an app admin to access this page"
-      redirect_to calendars_path
+  ["App Admin", "Dept Admin"].each do |name|
+    slugified = name.to_slug
+    define_method "is_#{slugified}?" do
+      if signed_in? and current_user.role < User.VALID_ROLES[name]
+        flash[:error] = "You must be an \"#{name}\" to access this page"
+        redirect_to calendars_path
+      end
     end
   end
 end
+

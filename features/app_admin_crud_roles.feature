@@ -5,12 +5,12 @@ Feature: App admin can CRUD users to roles
     So that authorizations are easy to manage.
 
 Background: roles have been added to the database
-    Given the following roles exist:
+    Given the following users exist:
     |calnet_id    | role              | name     |
-    |bob          | 3                 | whatever |
-    |alice        | 1                 | whatever |
+    |bob          | App Admin         | whatever |
+    |alice        | Admin             | whatever |
 
-    And I am logged in as an app admin
+    And I am logged in as an "App Admin"
     And I am on the homepage
 
 Scenario: able to add new user

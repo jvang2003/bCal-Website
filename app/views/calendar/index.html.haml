@@ -1,14 +1,9 @@
 /%p
 /%input{:class=>'text',:value=>@filter}
 
-%p
-%form{:action=>calendars_path}
-	%input{:name=>'keyword',:type=>'text',:id=>'keyword', :label=>'keyword', :value=>params[:keyword] ? params[:keyword] : ""}
-		%br
-			%input{:type=>'submit',:value=>'Filter by Building', :name=>'filter',:id=>'building'}
-			%input{:type=>'submit',:value=>'Filter by Usage', :name=>'filter',:id=>'usage'}
-			%input{:type=>'submit',:value=>'Filter by Department', :name=>'filter',:id=>'dept'}
-			%input{:type=>'submit',:Value=>'Show All', :name=>'filter',:id=>'show_all'}
+=form_tag calendars_path, :method => :get
+=select_tag 'filter', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']])
+=text_field_tag 'keyword', params[:keyword] || "", :placeholder => "Enter Keyword Here"
 
 
 %table{:class => 'table'}
@@ -24,13 +19,13 @@
 					- field_name ||= header.downcase
 					- case field_name
 						- when "name"
-							%th{:class => :name}= link_to "#{cal.name}", show_cal_path(cal)
+							%th.name= link_to "#{cal.name}", show_cal_path(cal)
 						- when "fee_required"
-							%td{:class => field_name}= cal.fee_required ? 'Yes':'No'
+							%td.fee_required= cal.fee_required ? 'Yes':'No'
 						- when "disabled"
-							%td{:class => field_name}= cal.disabled ? 'Yes' : 'No'
+							%td.disabled= cal.disabled ? 'Yes' : 'No'
 						- when "dept"
 							%td
-								%a{:href => edit_cal_path(cal.id.to_s), :class => 'btn btn-info'}= 'Update'
+								%a.dept.btn.btn-info{:href => edit_cal_path(cal.id.to_s)}= 'Update'
 						- else
 							%th{:class => field_name}= cal.send(field_name)

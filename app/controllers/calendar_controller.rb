@@ -21,19 +21,16 @@ class CalendarController < ApplicationController
     @filter = params[:filter]
     @keyword = params[:keyword]
 
-    @calendars = Calendar.find(:all)
 
-    if @filter
-      if @filter == 'Filter by Building'
-        @calendars = Calendar.where("building='#{@keyword}'")
-      elsif @filter == 'Filter by Usage'
-        @calendars = Calendar.where("usage='#{@keyword}'")
-      elsif @filter == 'Filter by Department'
-        @calendars = Calendar.where("dept='#{@keyword}'")
-      else
-        @calendars = Calendar.find(:all)
-        params[:keyword] = nil
+    if @filter && @keyword
+      if not Calendar.column_names.include? @filter
+        flash[:errors] = "You must search by a valid attribute"
+        return
       end
+      @calendars = Calendar.where "#{@keyword} = ?", @keyword
+    else
+      @calendars = Calendar.all
+      params[:keyword] = nil
     end
 
   end

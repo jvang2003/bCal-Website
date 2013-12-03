@@ -1,11 +1,13 @@
 class UserController < ApplicationController
   include UserHelper
 
-  def self.can_view user
+  def self.can_view? user=nil
+    user ||= current_user
     user.role >= 2
   end
 
-  def self.can_crud user
+  def self.can_crud? user=nil
+    user ||= current_user
     user.role >= 2
   end
 

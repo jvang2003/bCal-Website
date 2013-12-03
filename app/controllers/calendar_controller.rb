@@ -3,11 +3,13 @@ class CalendarController < ApplicationController
   before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:auth]
 
-  def self.can_view user
+  def self.can_view? user=nil
+    user ||= current_user
     user.role >= 0
   end
 
-  def self.can_crud user
+  def self.can_crud? user=nil
+    user ||= current_user
     user.role >= 1
   end
 

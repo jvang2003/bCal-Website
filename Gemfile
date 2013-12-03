@@ -15,16 +15,11 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'cucumber-rails'
-  gem 'database_cleaner'
-  gem 'capybara'
-  gem 'launchy'
-  gem 'rspec-rails'
   gem 'simplecov'
 end
 
 group :test do
   gem 'cucumber-rails'
-  gem 'capybara-mechanize' #not using right now, but might need for authorization scripts in tests
 end
 
 # Gems used only for assets and not required

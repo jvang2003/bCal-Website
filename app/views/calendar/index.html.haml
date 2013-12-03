@@ -1,12 +1,8 @@
 /%p
 /%input{:class=>'text',:value=>@filter}
 
-/%a{:href => '/', :class => 'btn', :name =>'building'} Filter by Building
-/%a{:href => '/', :class => 'btn', :name =>'usage'} Filter by Usage
-/%a{:href => '/', :class => 'btn', :name => 'dept'} Filter by Department
-
 %p
-%form{:action=>'/'}
+%form{:action=>calendars_path}
 	%input{:name=>'keyword',:type=>'text',:id=>'keyword', :label=>'keyword'}
 		%br
 			%input{:type=>'submit',:value=>'Filter by Building', :name=>'filter',:id=>'building'}

@@ -3,7 +3,7 @@
 
 %p
 %form{:action=>calendars_path}
-	%input{:name=>'keyword',:type=>'text',:id=>'keyword', :label=>'keyword'}
+	%input{:name=>'keyword',:type=>'text',:id=>'keyword', :label=>'keyword', :value=>params[:keyword] ? params[:keyword] : ""}
 		%br
 			%input{:type=>'submit',:value=>'Filter by Building', :name=>'filter',:id=>'building'}
 			%input{:type=>'submit',:value=>'Filter by Usage', :name=>'filter',:id=>'usage'}

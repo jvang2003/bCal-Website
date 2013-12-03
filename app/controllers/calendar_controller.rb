@@ -22,6 +22,7 @@ class CalendarController < ApplicationController
         @calendars = Calendar.where("dept='#{@keyword}'")
       else
         @calendars = Calendar.find(:all)
+        params[:keyword] = nil
       end
     end
 

@@ -1,6 +1,6 @@
 BCalIntegration::Application.routes.draw do
   resources :events
-  resources :users
+  resources :user
   resources :sessions, only: [:new, :create, :destroy]
   match '/sign_up',  to: 'users#new',            via: 'get', :as => "sign_up"
   match '/sign_in',  to: 'sessions#new',         via: 'get'
@@ -16,9 +16,9 @@ BCalIntegration::Application.routes.draw do
 
   get "calendar/auth/:id", :to => "calendar#auth"
 
-  get "/request/show", :to => "request#show", :as => "show_requests"
-  get "/request/create", :to => "request#new", :as => "new_request"
-  get "/request/edit", :to => "request#edit", :as => "edit_requests"
+  # get "/request/show", :to => "request#show", :as => "show_requests"
+  # get "/request/create", :to => "request#new", :as => "new_request"
+  # get "/request/edit", :to => "request#edit", :as => "edit_requests"
 
   root :to => 'calendar#index', :as => "calendars"
   resources :request

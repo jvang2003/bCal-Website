@@ -1,5 +1,5 @@
 %p
-  =form_tag users_path, :method => 'get' do
+  =form_tag user_index_path, :method => 'get' do
     =select_tag "role", options_for_select(User.VALID_ROLES.to_a, @selected), :prompt => "Choose what to filter on"
     =submit_tag "Filter"
 
@@ -16,7 +16,8 @@
         %td.name= user.calnet_id
         %td.name= user.name
         %td.role= user.role
+        - btn_classes = ['btn'] + (is_higher_admin_b?(user) ? []: ['disabled'])
         %td
-          = link_to 'Edit', edit_user_path(user), :class => ['btn', 'btn-info']
+          = link_to 'Edit', edit_user_path(user), :class => btn_classes + ['btn-info']
         %td
-          = link_to 'Delete', user, :method => 'delete', :class => ['btn', 'btn-delete'], :id => "delete_" + user.id.to_s
+          = link_to 'Delete', user, :method => 'delete', :class => btn_classes + ['btn-delete'], :id => "delete_" + user.id.to_s

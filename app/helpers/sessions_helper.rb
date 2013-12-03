@@ -41,18 +41,5 @@ module SessionsHelper
     redirect_to params[:return_to] || default, :params => params
   end
 
-  def is_admin?
-    signed_in? and current_user.role > User.VALID_ROLES["Guest"]
-  end
-
-  ["App Admin", "Dept Admin"].each do |name|
-    slugified = name.to_slug
-    define_method "is_#{slugified}?" do
-      if signed_in? and current_user.role < User.VALID_ROLES[name]
-        flash[:error] = "You must be an \"#{name}\" to access this page"
-        redirect_to calendars_path
-      end
-    end
-  end
 end
 

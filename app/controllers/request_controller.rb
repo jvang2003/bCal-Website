@@ -1,4 +1,12 @@
 class RequestController < ApplicationController
+  def self.can_view user
+    user.role >= 0
+  end
+
+  def self.can_crud user
+    user.role >= 1
+  end
+
   def new
   end
 
@@ -15,7 +23,7 @@ class RequestController < ApplicationController
     to_pass[:time] = DateTime.new(date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8")
     to_pass[:email]=params[:email]
     to_pass[:status] = "pending"
-    
+
     Request.create! to_pass
     RequestMailer.request_successful(params).deliver
 

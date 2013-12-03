@@ -20,3 +20,9 @@ When /I create a user with calnet "(.*?)" name "(.*?)" role "([0-9]+)"/ do |caln
     find("option[value=\"#{role.to_i}\"]").click
     click_button "Create User"
 end
+
+When /I try to change calnet_id of "(.*)" to "(.*)"/ do |old, edited|
+    visit(edit_user_path :id => User.find_by_calnet_id(old).id.to_s)
+    fill_in 'Calnet', :with => edited
+    click_button "Edit User"
+end

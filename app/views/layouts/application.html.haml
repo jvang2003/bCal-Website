@@ -26,12 +26,19 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand(href="#") B-Cal Integration
+          %a.brand(href=calendars_path) B-Cal Integration
           .container.nav-collapse
             %ul.nav.navbar-nav
-              %li= link_to "Home", calendars_path
-              %li= link_to "About", "/about"
+              -[CalendarController,RequestController,UserController].each do |controller|
+                - name = controller.controller_name.classify.downcase
+                - if controller.can_view current_user
+                  %li= link_to name.titlecase.pluralize, url_for(:controller => name, :action => :index)
+              / - if current_user.role >= User.VALID_ROLES["Dept Admin"]
+              /   %li= link_to "Users", users_path
+              / %li= link_to "Calendars", calendars_path
+              / %li= link_to "Requests", request_index_path
             %ul.nav.navbar-nav.navbar-right
+              %li= link_to "About", "/about"
               %li.dropdown{:id => "fat-menu"}
                 %a.dropdown-toggle{:href => "#", "data-toggle" => "dropdown"}
                   Account

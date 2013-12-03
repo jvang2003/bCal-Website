@@ -1,6 +1,15 @@
-class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:new, :index, :edit, :update]
-  before_filter :is_dept_admin?, only: [:new, :index, :edit, :update]
+class UserController < ApplicationController
+  include UserHelper
+
+  def self.can_view user
+    user.role >= 2
+  end
+
+  def self.can_crud user
+    user.role >= 2
+  end
+
+  before_filter :is_higher_admin?, only: [:edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -25,22 +34,22 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find params[:id]
+    @user ||= User.find params[:id]
     @user.destroy
 
     redirect_to users_path
   end
+
   def edit
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 
   def update
-    id=params[:id]
-    @user=User.find(id)
+    @user ||= User.find(params[:id])
 
-    @user.name=params["user"]["name"]
-    @user.calnet_id=params["user"]["calnet_id"]
-    @user.role=params["user"]["role"]
+    @user.name = params["user"]["name"]
+    @user.calnet_id = params["user"]["calnet_id"]
+    @user.role = params["user"]["role"]
     @user.save!
 
     flash[:notice]="User has been successfully updated"
@@ -51,10 +60,6 @@ class UsersController < ApplicationController
 
     def user_params
       params[:user] # TODO: FIX BIG SECURITY HOLE
-    end
-
-    def signed_in_user
-      redirect_to sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in." unless signed_in? or is_same_controller_and_action?(request.original_url, sign_up_path)
     end
 
     def is_same_controller_and_action?(url1, url2)

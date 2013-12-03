@@ -14,6 +14,6 @@
       = f.text_field :calnet_id
 
       = f.label :role
-      =select_tag "user[role]", options_for_select(User.VALID_ROLES.to_a, @selected)
+      = select_tag "user[role]", options_for_select(valid_create_roles_for(current_user), @selected)
 
       = f.submit "Create User"

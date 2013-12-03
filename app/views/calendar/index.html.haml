@@ -16,27 +16,25 @@
 
 
 %table{:class => 'table'}
+	- fields = [["Name", nil], ["Email",nil] , ["Visibility", "visib"], ["Fee Required?", "fee_required"], ["Disabled", nil], ["Building", nil], ["Usage", nil], ["", "dept"]]
 	%thead
 		%tr
-			%th Name
-			%th E-mail
-			%th Visibility
-			%th Fee Required?
-			%th Disabled
-			%th Building
-			%th Usage
-			%th Department
-			%th Update
+			- fields.each do |header, ignored|
+				%th= header
 	%tbody
 		- @calendars.each do |cal|
 			%tr{:id => 'cal' + cal.id.to_s}
-				%td{:class => "name"}= link_to"#{cal.name}", show_cal_path(cal)
-				%td{:class => "email"}= cal.email
-				%td{:class => "visib"}= cal.visib
-				%td{:class => "fee_required"}= cal.fee_required ? 'Yes':'No'
-				%td{:class => "disabled"}= cal.disabled ? 'Yes' : 'No'
-				%td{:class => "building"}= cal.building
-				%td{:class => "usage"}= cal.usage
-				%td{:class => "dept"}= cal.dept
-				%td
-					%a{:href => edit_cal_path(cal.id.to_s), :class => 'btn btn-info'}= 'Update ' + cal.name
+				- fields.each do |header, field_name|
+					- field_name ||= header.downcase
+					- case field_name
+						- when "name"
+							%th{:class => :name}= link_to "#{cal.name}", show_cal_path(cal)
+						- when "fee_required"
+							%td{:class => field_name}= cal.fee_required ? 'Yes':'No'
+						- when "disabled"
+							%td{:class => field_name}= cal.disabled ? 'Yes' : 'No'
+						- when "dept"
+							%td
+								%a{:href => edit_cal_path(cal.id.to_s), :class => 'btn btn-info'}= 'Update'
+						- else
+							%th{:class => field_name}= cal.send(field_name)

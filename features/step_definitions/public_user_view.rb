@@ -3,7 +3,7 @@ When /^I try to search by (.*) with "(.*)"/ do |attr, value|
 	# type in value in attr search box
 	fill_in "keyword", :with => value
 	# click filter button to filter
-  find("option[value=\"#{attr}\"]").click
+  find(%{option[value="#{attr}"]}).click
 end
 
 Then /I should see calendar "([^\"]*)"/ do |calendar_name|

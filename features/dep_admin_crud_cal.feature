@@ -6,9 +6,9 @@ Feature: department admin can CRUD calendars
 
 Background: calendars have been added to the database
     Given the following calendars exist:
-    |name           |email |visib  | fee_required |disabled|
-    |calendar1      |123 |public | true         |true    |
-    |calendar2      |345 |private| false        |false   |
+    |name           |email |visibility  | fee_required |disabled|
+    |calendar1      |123   |public      | true         |true    |
+    |calendar2      |345   |private     | false        |false   |
 
     And I am on the homepage
     And I am logged in as a department admin

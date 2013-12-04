@@ -7,10 +7,10 @@ Feature: Pubilc user can select a calendar by its attributes
 Background: calendars have been added to the database
 
 	Given the following calendars exist:
-	|name           |email |visib  | fee_required |disabled |building  |usage       |dept     |
-    |calendar1      |123   |public | true         |true     |Cory      |department  |Civil E  |
-    |calendar2      |345   |public | false        |false    |Soda      |personal    |EECS     |
-    |calendar3      |678   |public | false        |false    |Soda      |personal    |Civil E  |
+	|name           |email |visibility  | fee_required |disabled |building  |usage       |department     |
+    |calendar1      |123   |public      | true         |true     |Cory      |department  |Civil E        |
+    |calendar2      |345   |public      | false        |false    |Soda      |personal    |EECS           |
+    |calendar3      |678   |public      | false        |false    |Soda      |personal    |Civil E        |
 
     #And I am logged in as a public user
 
@@ -27,7 +27,7 @@ Scenario: able to filter calendars by usage
 	Then I should see calendar "calendar3"
 
 Scenario: able to search calendars by dept
-	When I try to search by dept with "Civil E"
+	When I try to search by department with "Civil E"
 	Then I should see calendar "calendar1"
 	Then I should not see calendar "calendar2"
 	Then I should see calendar "calendar3"

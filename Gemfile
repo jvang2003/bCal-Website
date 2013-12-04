@@ -50,6 +50,7 @@ gem 'haml-rails'
 gem 'google-api-client'
 gem 'quiet_assets', :group => :development
 gem 'thin'
+gem 'bootstrap_forms'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

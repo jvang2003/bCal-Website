@@ -13,9 +13,9 @@ Background: requests have been added
 	| Room 3   | 5       | Serious business       | Pending  |
 
     Given the following calendars exist:
-    |name           |email |visib  | fee_required |disabled|
-    |Room 1         |123   |public | true         |true    |
-    |calendar2      |345   |private| false        |false   |
+    |name           |email |visibility  | fee_required |disabled|
+    |Room 1         |123   |public      | true         |true    |
+    |calendar2      |345   |private     | false        |false   |
 
 	And I am on the homepage
 

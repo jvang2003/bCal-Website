@@ -6,10 +6,10 @@ Feature: Department Admin should be able to block out time slots per calendar
 Background: calendars have been added to the database
 
 	Given the following calendars exist:
-	|name           |email |visib  | fee_required |disabled |building  |usage       |dept     |
-    |calendar1      |123   |public | true         |true     |Cory      |department  |Civil E  |
-    |calendar2      |345   |public | false        |false    |Soda      |personal    |EECS     |
-    |calendar3      |678   |public | false        |false    |Soda      |personal    |Civil E  |
+	|name           |email |visibility  | fee_required |disabled |building  |usage       |department     |
+    |calendar1      |123   |public      | true         |true     |Cory      |department  |Civil E        |
+    |calendar2      |345   |public      | false        |false    |Soda      |personal    |EECS           |
+    |calendar3      |678   |public      | false        |false    |Soda      |personal    |Civil E        |
 
 	Given I am logged in as a department admin
         And I am on the homepage

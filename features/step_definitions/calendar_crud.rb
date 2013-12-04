@@ -16,7 +16,7 @@ When /I fill in the form for calendar with the following: (.*)/ do |calendar| #d
     attributes = calendar.split %r{,\s*}
     fill_in :name,:with => attributes[0]
     fill_in :email, :with => attributes[1]
-    select "Public", :from => "visib"
+    select "Public", :from => "visibility"
     check("Fee required?") unless attributes[3] == "no"
     check("Disabled?") unless attributes[4] == "no"
     click_button "Create Calendar"
@@ -36,9 +36,9 @@ When /I change the values for calendar "(.*)" with the following: (.*)/ do |cale
     attributes = details.split(%r{,\s*})
     fill_in(:email, :with => attributes[0])
     if (attributes[1] == "Public")
-        select("Public", :from => "visib")
+        select("Public", :from => "visibility")
     else
-        select("Private", :from => "visib")
+        select("Private", :from => "visibility")
     end
     check("Fee required?") unless attributes[2] == "no"
     click_button("Update Calendar")
@@ -98,6 +98,7 @@ Then /I should be seeing the calendar "([^\"]*)" in the department admin page$/ 
 end
 
 Then /I should not see calendar "([^\"]*)"/ do |calendar_name|
+  save_and_open_page
   if page.respond_to? :should
     page.should have_no_content(calendar_name)
   else

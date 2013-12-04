@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_back_or users_path
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -50,10 +50,12 @@ class UsersController < ApplicationController
     @user.name = params["user"]["name"]
     @user.calnet_id = params["user"]["calnet_id"]
     @user.role = params["user"]["role"]
-    @user.save!
-
-    flash[:notice]="User has been successfully updated"
-    redirect_to '/'
+    if @user.save
+      flash[:notice]="User has been successfully updated"
+      redirect_to users_path
+    else
+      render :edit
+    end
   end
 
   private

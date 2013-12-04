@@ -14,28 +14,29 @@ end
 
 When /I make the calendar (no )?fee(?:s)? required/ do |no_fee_required|
 	if no_fee_required
-		uncheck("fee_required")
+		uncheck("calendar_fee_required")
 	else
-		check("fee_required")
+		check("calendar_fee_required")
 	end
 	click_button("Update Calendar") #This is assuming we are on the edit page
 end
 
 When /I (dis|en)able the calendar/ do |choice|
 	if choice == "dis" #is this supposed to be bool or string??
-		check("disabled")
+		check("calendar_disabled")
 	else
-		uncheck("disabled")
+		uncheck("calendar_disabled")
 	end
 	click_button("Update Calendar")
 end
 
 When /I make the visibility of the calendar (public|private)/ do |privacy|
+	save_and_open_page
 	if privacy == "private"
 		# find("option", :text => "Private").click
-		select('Private', :from => 'visib')
+		select('Private', :from => 'calendar_visibility')
 	else
-		select('Public', :from => 'visib')
+		select('Public', :from => 'calendar_visibility')
 	end
 	click_button("Update Calendar")
 end
@@ -62,7 +63,7 @@ end
 
 # check visibility of calendar as admin, otherwise you shouldn't be able to follow link
 Then /the visibility of calendar "([^\"]*)" should be (public|private)/ do |calendar_name, privacy|
-	el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id.to_s).find('.visib')
+	el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id.to_s).find('.visibility')
 	if privacy == "private"
 		el.text.should == "Private"
 	else

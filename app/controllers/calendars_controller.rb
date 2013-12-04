@@ -12,6 +12,21 @@ class CalendarsController < ApplicationController
 
   def new
     #render :edit #same view as edit
+    @calendar = Calendar.new
+    @method = :post
+    @title = "Create Calendar"
+    new_or_edit && return
+  end
+
+  def edit
+    @calendar = Calendar.find_by_id(params[:id])
+    @method = :put
+    @title = "Update Calendar"
+    new_or_edit && return
+  end
+
+  def new_or_edit
+    render :form
   end
 
   def index
@@ -31,19 +46,14 @@ class CalendarsController < ApplicationController
 
   end
 
-  def edit
-    @calendar = Calendar.find_by_id(params[:id])
-  end
-
   def create
-    cal = Calendar.create!(:name=>params["name"],
-      :visib => params["visib"],
-      :email => params["email"],
-      :fee_required => params["fee_required"],
-      :disabled => params["disabled"],
-      :building => params["building"],
-      :usage => params["usage"],
-      :dept => params["dept"])
+    to_pass = {}
+    %w(name visibility email fee_required disabled building usage department).each do |attr|
+      to_pass[attr] = params[attr]
+    end
+
+    cal = Calendar.create! to_pass
+
     flash[:notice]="Calendar has been successfully created"
     flash.keep
     redirect_to calendar_path cal.id
@@ -100,20 +110,16 @@ class CalendarsController < ApplicationController
   end
 
   def update
-    id=params[:id]
-    @calendar=Calendar.find_by_id(id)
+    puts params
 
-    @calendar.name=params["name"]
-    @calendar.visib=params["visib"]
-    @calendar.email=params["email"]
-    @calendar.fee_required=params["fee_required"]
-    @calendar.disabled=params["disabled"]
-    @calendar.building=params["building"]
-    @calendar.usage=params["usage"]
-    @calendar.dept=params["dept"]
-    @calendar.save!
+    @calendar=Calendar.find_by_id(params[:id])
+    @calendar.update_attributes params[:calendar]
 
-    flash[:notice]="Calendar has been successfully updated"
-    redirect_to '/'
+    if @calendar.save
+      flash[:notice]="Calendar has been successfully updated"
+      redirect_to calendars_path
+    else
+      render :update
+    end
   end
 end

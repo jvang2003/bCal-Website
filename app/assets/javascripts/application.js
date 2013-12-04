@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require twitter/bootstrap/bootstrap-dropdown
 //= require_tree .
+
+
+window.setTimeout(function($) {
+    jQuery('ul.nav li.dropdown').hover(function() {
+      jQuery(this).find('.dropdown-menu').stop(true, true).delay(10).fadeIn(200)
+    }, function() {
+      jQuery(this).find('.dropdown-menu').stop(true, true).delay(10).fadeOut(200);
+    });
+}, 100);

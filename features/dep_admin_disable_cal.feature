@@ -6,9 +6,9 @@ Feature: department admin can disable calendars
 
 Background: calendars have been added to the database
 	Given the following calendars exist:
-	| name     | email         | visib   | fee_required | disabled |
-	| Room 1   | 13123213213 | Public  | false        | false    |
-	| Room 2   | 12313123123 | Public  | false        | false    |
+	| name     | email         | visibility   | fee_required | disabled |
+	| Room 1   | 13123213213   | Public       | false        | false    |
+	| Room 2   | 12313123123   | Public       | false        | false    |
 
 	Given I am logged in as a department admin
 	And I am on the homepage

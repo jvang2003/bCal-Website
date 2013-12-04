@@ -1,3 +1,9 @@
+class Hash
+  def pick(*values)
+    select { |k,v| values.include?(k) }
+  end
+end
+
 module UsersHelper
   def valid_create_roles_for user
     index = 0

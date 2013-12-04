@@ -6,6 +6,10 @@ end
 
 module UsersHelper
   def valid_create_roles_for user
+    if user == nil
+      return User.VALID_ROLES.to_a[0, 1]
+    end
+
     index = 0
     arr = User.VALID_ROLES.to_a
     while arr[index][1] <= user.role

@@ -16,3 +16,5 @@ def login username
     fill_in "Calnet", :with => username
     click_button "submit_button"
 end
+
+

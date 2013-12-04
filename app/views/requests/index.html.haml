@@ -1,28 +1,15 @@
-%select{:id => 'filter'}
-	%option{:value => "All"} All
-	%option{:value => "Pending"} Pending
-	%option{:value => "Approved"} Approved
-	%option{:value => "Rejected"} Rejected
+/ %select{:id => 'filter'}
+/ 	%option{:value => "All"} All
+/ 	%option{:value => "Pending"} Pending
+/ 	%option{:value => "Approved"} Approved
+/ 	%option{:value => "Rejected"} Rejected
 
-%table{:class => 'table'}
-	%thead
-		%tr
-			%th Place
-			%th # People
-			%th Reason
-			%th Time
-			%th Status
-			%th Change Status
-	%tbody
-		- @requests.each do |req|
-			- if req.status != nil
-				%tr{:id =>  'req' + req.id.to_s, :class => req.status.downcase + ' req'}
-					%td{:class => "place"}= req.place
-					%td{:class => "people"}= req.people
-					%td{:class => "reason"}= req.reason
-					%td{:class => "time"}= req.time
-					%td{:class => "status"}= req.status
-					%td{:class => "update_status"}
-						%a.btn.btn-info{:href => edit_request_path(req.id)}= 'Update Status of this request'
+= bootstrap_form_tag requests_path, :method => :get, :class => 'form-inline' do
+	= bootstrap_select_tag 'filter', options_for_select(%w(All Pending Approved Rejected).map { |e| [e,e] }, params[:filter] || "All"), :onChange => "this.form.submit();"
 
+
+= table_for @requests, :html => {:class => 'table table-striped table-bordered watable'} do
+	- columns :place, :people, :reason, :time, :status
+	- column :title => "Change Status" do |req|
+		%a.btn.btn-info{:href => edit_request_path(req.id)} Update
 

@@ -1,9 +1,3 @@
-class Hash
-  def pick(*values)
-    select { |k,v| values.include?(k) }
-  end
-end
-
 module UsersHelper
   def valid_create_roles_for user
     return User.VALID_ROLES.to_a[0, 1] unless user

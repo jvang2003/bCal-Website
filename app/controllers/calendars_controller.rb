@@ -38,7 +38,8 @@ class CalendarsController < ApplicationController
         flash[:errors] = "You must search by a valid attribute"
         return
       end
-      @calendars = Calendar.where "#{@keyword} = ?", @keyword
+
+      @calendars = Calendar.where "#{@filter} = ?", @keyword
     else
       @calendars = Calendar.all
       params[:keyword] = nil
@@ -97,7 +98,7 @@ class CalendarsController < ApplicationController
     else
       result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list,
         :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
-      @events = result.data.items.to_a
+      @events = result.data.items
     end
   end
 
@@ -110,8 +111,6 @@ class CalendarsController < ApplicationController
   end
 
   def update
-    puts params
-
     @calendar=Calendar.find_by_id(params[:id])
     @calendar.update_attributes params[:calendar]
 

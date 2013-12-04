@@ -1,12 +1,12 @@
 /%p
 /%input{:class=>'text',:value=>@filter}
 
-=form_tag calendars_path, :method => :get
-=select_tag 'filter', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']])
-=text_field_tag 'keyword', params[:keyword] || "", :placeholder => "Enter Keyword Here"
+=form_tag calendars_path, :method => :get do
+	=select_tag 'filter', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']])
+	=text_field_tag 'keyword', params[:keyword] || "", :placeholder => "Enter Keyword Here"
 
 
-%table{:class => 'table'}
+%table.table.table-striped.table-bordered
 	- fields = [["Name", nil], ["Email",nil] , ["Visibility", nil], ["Fee Required?", "fee_required"], ["Disabled", nil], ["Building", nil], ["Usage", nil], ["", "department"]]
 	%thead
 		%tr

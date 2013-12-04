@@ -1,10 +1,9 @@
-%p
-  =form_tag users_path, :method => 'get' do
-    =select_tag "role", options_for_select(User.VALID_ROLES.to_a, @selected), :prompt => "Choose what to filter on"
-    =submit_tag "Filter", :class => 'btn'
+=form_tag users_path, :method => 'get' do
+  =select_tag "role", options_for_select(User.VALID_ROLES.to_a, @selected), :prompt => "Choose what to filter on"
+  =submit_tag "Filter", :class => 'btn'
 
 
-%table.table
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %th Calnet ID

@@ -16,7 +16,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'pdfkit'
-  gem "wkhtmltopdf", "~> 0.1.2"
+  # gem "wkhtmltopdf", "~> 0.1.2"
 end
 
 group :test do

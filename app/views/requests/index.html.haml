@@ -1,16 +1,4 @@
-/ %select{:id => 'filter'}
-/ 	%option{:value => "All"} All
-/ 	%option{:value => "Pending"} Pending
-/ 	%option{:value => "Approved"} Approved
-/ 	%option{:value => "Rejected"} Rejected
-
 = bootstrap_form_tag requests_path, :method => :get, :class => 'form-inline' do
 	= bootstrap_select_tag 'filter', options_for_select(%w(All Pending Approved Rejected).map { |e| [e,e] }, params[:filter] || "All"), :onChange => "this.form.submit();"
 
-
-= table_for @requests, :html => {:class => 'table table-striped table-bordered watable'} do
-	- %w(place people reason time status).each do |name|
-		- column name, :html => {:td => {:class => name}}
-	- column :title => "Change Status" do |req|
-		%a.btn.btn-info.update-status{:href => edit_request_path(req.id)} Update
-
+= simple_table_for @requests, with: RequestTable

@@ -16,12 +16,11 @@ Background: calendars have been added to the database
 Scenario: able to create calendar
     When I try to create a calendar "calendar3"
     And I fill in the form for calendar with the following: calendar3,789,public,yes
-    Then I should be seeing the calendar "calendar3" in the department admin page
+    Then I should see the calendar "calendar3" in the department admin page
 
 Scenario: able to read calendar
     When I try to read a calendar "calendar2"
-    Then I should see the calendar "calendar2" with the values for the following: calendar2,345,private,fee_required_checked, disabled_checked
-
+    Then I should see the calendar "calendar2" with the values for the following: calendar2,345,private,fee_required_unchecked, disabled_unchecked
 
 Scenario: able to see calendar prepopulated when editing
     When I try to update a calendar "calendar1"
@@ -29,8 +28,8 @@ Scenario: able to see calendar prepopulated when editing
 
 Scenario: able to see the updated changes after editing
     When I try to update a calendar "calendar1"
-    And I change the values for calendar "calendar1" with the following: 103,Public,yes
-    Then I should see the calendar "calendar1" with the values for the following: calendar1,103,Public, fee_required_checked
+    And I change the values for calendar "calendar1" with the following: 103,Public,no
+    Then I should see the calendar "calendar1" with the values for the following: calendar1,103,Public, fee_required_unchecked, disabled_checked
 
 Scenario: able to destroy a calendar
     When I try to update a calendar "calendar1"

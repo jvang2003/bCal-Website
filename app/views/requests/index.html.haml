@@ -9,7 +9,8 @@
 
 
 = table_for @requests, :html => {:class => 'table table-striped table-bordered watable'} do
-	- columns :place, :people, :reason, :time, :status
+	- %w(place people reason time status).each do |name|
+		- column name, :html => {:td => {:class => name}}
 	- column :title => "Change Status" do |req|
-		%a.btn.btn-info{:href => edit_request_path(req.id)} Update
+		%a.btn.btn-info.update-status{:href => edit_request_path(req.id)} Update
 

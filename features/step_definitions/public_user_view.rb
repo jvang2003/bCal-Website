@@ -1,9 +1,16 @@
-When /^I try to search by (.*) with "(.*)"/ do |attr, value|
-	visit("/")
+When /^I try to search by "(.*?)" with "(.*?)"/ do |attr, value|
+  visit calendars_path
+
 	# type in value in attr search box
-	fill_in "keyword", :with => value
+  select attr, :from => :filter_select
+  fill_in "keyword", :with => value
+
 	# click filter button to filter
-  find(%{option[value="#{attr}"]}).click
+  puts find('#filter_submit').inspect
+  # find('#filter_submit').click
+  # click_on "Filter"
+  click_button 'filter_submit'
+  puts current_path
 end
 
 Then /I should see calendar "([^\"]*)"/ do |calendar_name|

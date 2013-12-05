@@ -1,9 +1,6 @@
 %h1
   = "Update " + @calendar.name
 
-= render :partial => :calendar_form, :locals => {:title => "Update Calendar", :method => :put}
-= bootstrap_form_for @calendar, :method => :put do
-    = render :partial => :calendar_form, :locals => {:calendar => @calendar}
-    = submit_tag 'Update Calendar', :class => 'btn btn-primary btn-large'
+= render 'calendar_form'
 
 = link_to 'DELETE CALENDAR', calendar_path(@calendar), :method => :delete, :confirm => "Are you sure you want to destroy this calendar?", :class => "btn btn-danger"

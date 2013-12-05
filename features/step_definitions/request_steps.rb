@@ -13,10 +13,26 @@ When /I filter by (.*)/ do |filter|
 	find("option[value='#{filter}']").click
 end
 
+def find_row name
+    rows = page.all('tbody > tr')
+    rows.should_not be_nil
+    found = false
+    rows.each do |row|
+        if not found
+            data = row.all('td')
+            if data.first.text == name
+                found = data
+            end
+        end
+    end
+
+    found.should_not be false
+    return found
+end
+
 Then /I should see room "([^\"]*)" with status "([^\"]*)"/ do |name, status|
-	el = page.all('.' + status.downcase, :visible => true)
-	el.should_not be_nil
-	el.first.native.text.should include status
+    row = find_row name
+    row.to_a[row.length - 2].text.should == status
 end
 
 Then /I should not see room "([^\"]*)"/ do |name|

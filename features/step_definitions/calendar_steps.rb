@@ -31,7 +31,6 @@ When /I (dis|en)able the calendar/ do |choice|
 end
 
 When /I make the visibility of the calendar (public|private)/ do |privacy|
-	save_and_open_page
 	if privacy == "private"
 		# find("option", :text => "Private").click
 		select('Private', :from => 'calendar_visibility')

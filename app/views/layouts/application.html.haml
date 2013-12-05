@@ -22,7 +22,7 @@
       .navbar-inner
         .container-fluid
           %a.btn.btn-navbar(data-target="#bcal-navbar-collapse" data-toggle="collapse" type="button")
-            %span.sr-only= "Toggle navigation"
+            %span.sr-only Toggle navigation
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
@@ -32,7 +32,7 @@
               -[CalendarsController,RequestsController,UsersController].each do |controller|
                 - name = controller.controller_name.classify.downcase
                 - if controller.can_crud? current_user
-                  %li.dropdown
+                  %li.dropdown{:id => name + "_dropdown"}
                     %a.dropdown-toggle{"data-toggle" => :dropdown, :href => '#'}
                       = name.titleize.pluralize
                       %span.caret

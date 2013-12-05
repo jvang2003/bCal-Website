@@ -7,16 +7,20 @@ When /^I view all the requests$/ do
     click_link "request_index"
 end
 
-When /^I (approve|deny) a request for "(.*)"$/ do |approve, room|
+When /^I (approve|deny) a request for "(.*?)"$/ do |approve, room|
     click_link "request_index"
-    first('.update_status').click_link "Update Status of this request"
+
+    row = find_row room
+    row[row.length - 1].click_link "Update"
     select (approve == "approve" ? "Approved" : "Rejected"), :from => "status"
     click_button "Update Status"
 end
 
 When /^I edit a request for "(.*)" assuming it was accepted previously$/ do |room|
     step "I approve a request for \"Room 1\""
-    first('.update_status').click_link("Update Status of this request")
+
+    row = find_row room
+    row[row.length - 1].click_link "Update"
     select("Rejected", :from => "status")
     click_button("Update Status")
 end

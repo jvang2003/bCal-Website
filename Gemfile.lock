@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ZenTest (4.9.5)
     actionmailer (3.2.14)
       actionpack (= 3.2.14)
       mail (~> 2.5.4)
@@ -35,6 +36,8 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
+    autotest-rails (4.2.1)
+      ZenTest (~> 4.5)
     bootstrap_forms (4.0.1)
     builder (3.0.4)
     capybara (2.1.0)
@@ -210,6 +213,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ZenTest
+  autotest-rails
   bootstrap_forms
   capybara
   coffee-rails (~> 3.2.1)

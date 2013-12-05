@@ -12,22 +12,21 @@ Background: calendars have been added to the database
     |calendar2      |345   |public      | false        |false    |Soda      |personal    |EECS           |
     |calendar3      |678   |public      | false        |false    |Soda      |personal    |Civil E        |
 
-    #And I am logged in as a public user
 
 Scenario: able to filter calendars by building
-	When I try to search by building with "Cory"
+	When I try to search by "Building" with "Cory"
 	Then I should see calendar "calendar1"
 	Then I should not see calendar "calendar2"
 	Then I should not see calendar "calendar3"
 
 Scenario: able to filter calendars by usage
-	When I try to search by usage with "personal"
+	When I try to search by "Usage" with "personal"
 	Then I should not see calendar "calendar1"
 	Then I should see calendar "calendar2"
 	Then I should see calendar "calendar3"
 
 Scenario: able to search calendars by dept
-	When I try to search by department with "Civil E"
+	When I try to search by "Department" with "Civil E"
 	Then I should see calendar "calendar1"
 	Then I should not see calendar "calendar2"
 	Then I should see calendar "calendar3"

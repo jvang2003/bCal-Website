@@ -2,12 +2,13 @@
 /%input{:class=>'text',:value=>@filter}
 
 =form_tag calendars_path, :method => :get do
-	=select_tag 'filter', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']])
-	=text_field_tag 'keyword', params[:keyword] || "", :placeholder => "Enter Keyword Here"
+	= select_tag 'filter_select', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']])
+	= text_field_tag 'keyword', (params[:keyword] || ""), :placeholder => "Enter Keyword Here"
+	= submit_tag "Filter", :class => 'btn', :id => "filter_submit"
 
 
 %table.table.table-striped.table-bordered
-	- fields = [["Name", nil], ["Email",nil] , ["Visibility", nil], ["Fee Required?", "fee_required"], ["Disabled", nil], ["Building", nil], ["Usage", nil], ["", "department"]]
+	- fields = [["Name", nil], ["Email",nil] , ["Visibility", nil], ["Fee Required", "fee_required"], ["Disabled", nil], ["Building", nil], ["Usage", nil], ["", "department"]]
 	%thead
 		%tr
 			- fields.each do |header, ignored|
@@ -19,13 +20,13 @@
 					- field_name ||= header.downcase
 					- case field_name
 						- when "name"
-							%th.name= link_to "#{cal.name}", calendar_path(cal)
+							%td.name= link_to "#{cal.name}", calendar_path(cal)
 						- when "fee_required"
-							%td.fee_required= cal.fee_required ? 'Yes':'No'
+							%td.fee_required= cal.fee_required ? 'Yes' : 'No'
 						- when "disabled"
 							%td.disabled= cal.disabled ? 'Yes' : 'No'
 						- when "department"
 							%td
 								%a.dept.btn.btn-info{:href => edit_calendar_path(cal.id.to_s), :id => "update_" + cal.id.to_s}= 'Update'
 						- else
-							%th{:class => field_name}= cal.send(field_name)
+							%td{:class => field_name}= cal.send(field_name)

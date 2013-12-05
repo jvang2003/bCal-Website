@@ -12,14 +12,37 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap/bootstrap-dropdown
+//= require twitter/bootstrap
 //= require_tree .
 
 
-window.setTimeout(function($) {
+jQuery(function() {
+    var fadeTime = 200;
+    var fadeDelay = 50;
+    var fadingOut = {};
     jQuery('ul.nav li.dropdown').hover(function() {
-      jQuery(this).find('.dropdown-menu').stop(true, true).delay(10).fadeIn(200)
+        var $this = jQuery(this);
+        var menu = $this.find('.dropdown-menu');
+        $this.find('.dropdown-toggle').dropdown('toggle');
+        if (fadingOut[$this.attr('id')]) {
+            menu.stop(true, true);
+        }
+        else {
+            if (menu.is(":visible")) {
+                menu.hide();
+            }
+        }
+        menu.fadeIn(fadeTime);
     }, function() {
-      jQuery(this).find('.dropdown-menu').stop(true, true).delay(10).fadeOut(200);
+        var $this = jQuery(this);
+        var menu = $this.find('.dropdown-menu');
+        $this.find('.dropdown-toggle').dropdown('toggle');
+        fadingOut[$this.attr('id')] = true;
+        menu.stop(true, true).delay(fadeDelay).fadeOut(fadeTime/3, function () {
+            fadingOut[$this.attr('id')] = false;
+        });
+    });
+    jQuery('ul.nav li.dropdown .dropdown-toggle').click(function (event) {
+        $(this).parent().addClass('open');
     });
 }, 100);

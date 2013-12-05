@@ -1,3 +1,6 @@
+require 'helpers.rb'
+include TableHelpers
+
 class CalendarTable < TableCloth::Base
   # Define columns with the #column method
   include TableCloth::Extensions::Actions
@@ -16,12 +19,5 @@ class CalendarTable < TableCloth::Base
 
   column :building, :usage
 
-  actions do
-    action do |calendar|
-      link_to "Update", edit_calendar_path(calendar), :class => 'btn btn-info update-status'
-    end
-    action do |calendar|
-      link_to "Delete", calendar_path(calendar), :class => 'btn btn-danger update-status', :method => :delete
-    end
-  end
+  update_delete_actions
 end

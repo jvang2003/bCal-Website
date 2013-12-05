@@ -6,3 +6,5 @@ TableCloth::Configuration.configure do |config|
   config.th.class =''
   config.td.class =''
 end
+
+Rails.logger.level = 0 # at any time

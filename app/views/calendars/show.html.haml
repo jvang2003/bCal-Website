@@ -1,31 +1,31 @@
 %h1 #{@calendar.name}
-%ul
-	%li
+%ul.list-group
+	%li.list-group-item
 		Name:
 		= @calendar.name
 	/ I imagine all the data below this is rendered for admin only
 	/ When u uncomment the if push everything affected by the if in by an indentation
 	/ - if @dept_admin
-	%li
+	%li.list-group-item
 		E-mail :
 		= @calendar.email
-	%li
+	%li.list-group-item
 		Visibility :
 		= @calendar.visibility
 
-	%li
+	%li.list-group-item
 		Fee Required ? :
 		= @calendar.fee_required
 
-	%li
+	%li.list-group-item
 		Building :
 		= @calendar.building
 
-	%li
+	%li.list-group-item
 		Usage :
 		= @calendar.usage
 
-	%li
+	%li.list-group-item
 		Department :
 		= @calendar.department
 

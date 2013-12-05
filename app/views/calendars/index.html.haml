@@ -1,9 +1,10 @@
-/%p
-/%input{:class=>'text',:value=>@filter}
-
-=form_tag calendars_path, :method => :get do
-	= select_tag 'filter_select', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']])
-	= text_field_tag 'keyword', (params[:keyword] || ""), :placeholder => "Enter Keyword Here"
-	= submit_tag "Filter", :class => 'btn', :id => "filter_submit"
+= form_tag calendars_path, :method => :get, :class => "form-inline form-header" do
+	.form-group
+		= select_tag 'filter_select', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']]), :class => 'form-control'
+	.form-group
+		= text_field_tag 'keyword', (params[:keyword] || ""), :placeholder => "Enter Keyword Here", :class => 'form-control'
+	.form-group
+		= button_tag(:type => :submit, :class => 'btn btn-default form-control', :id => 'filter_submit') do
+			Submit
 
 = simple_table_for @calendars, with: CalendarTable

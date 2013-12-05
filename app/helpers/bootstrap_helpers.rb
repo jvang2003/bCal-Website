@@ -1,4 +1,4 @@
-module ApplicationHelper
+module BootstrapFlashHelper
   ALERT_TYPES = [:error, :info, :success, :warning]
 
   def bootstrap_flash

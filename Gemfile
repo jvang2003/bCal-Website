@@ -45,15 +45,13 @@ group :production do
 end
 
 gem 'jquery-rails'
-gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass-rails'
 gem 'haml'
 gem 'haml-rails'
 
 gem 'google-api-client'
 gem 'quiet_assets', :group => :development
 gem 'thin'
-gem 'bootstrap_forms'
-gem 'table_for_collection'
 gem 'table_cloth'
 
 # To use Jbuilder templates for JSON

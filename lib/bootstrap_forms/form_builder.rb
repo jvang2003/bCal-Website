@@ -3,6 +3,11 @@ module BootstrapForms
     require_relative 'helpers/wrappers'
     include BootstrapForms::Helpers::Wrappers
 
+    def initialize(object_name, object, template, options, block=nil)
+      @horizontal = options.delete(:horizontal)
+      super
+    end
+
     delegate :content_tag, :hidden_field_tag, :check_box_tag, :radio_button_tag, :button_tag, :link_to, :to => :@template
 
     def error_messages
@@ -62,17 +67,26 @@ module BootstrapForms
           end
         end
 
+
         # Add options hash to argument array if its empty
         raw_args << options if raw_args.length == 0
 
+        if raw_args[-1].include? :class
+          raw_args[-1][:class] += ' form-control'
+        else
+          raw_args[-1][:class] = 'form-control'
+        end
+
         @name = name
         @field_options = field_options(options)
+        @is_field = method_name != "text_area"
         @args = options
 
         form_group_div do
           label_field + input_div do
             options.merge!(@field_options.merge(required_attribute))
             input_append = (options[:append] || options[:prepend] || options[:append_button]) ? true : nil
+            puts raw_args
             extras(input_append) { super(name, *raw_args) }
           end
         end

@@ -2,13 +2,23 @@ module BootstrapForms
   module Helpers
     module FormHelper
       def bootstrap_form_for(record, options = {}, &block)
+        puts "hows it going"
         options[:builder] ||= BootstrapForms.default_form_builder
 
+        horizontal = !! options.delete(:horizontal)
         form_options = options.deep_dup
         options[:summary_errors] = true unless form_options.has_key?(:summary_errors)
         form_options.delete(:summary_errors)
 
+        if horizontal
+          form_options[:html] ||= {}
+          apply_form_for_options!(record, form_options)
+          form_options[:html][:class] += ' form-horizontal col-md-6'
+          form_options[:horizontal] = true
+        end
+
         form_for(record, form_options) do |f|
+          puts "hihihihi #{f}"
           if f.object.respond_to?(:errors) and options[:summary_errors]
             f.error_messages.html_safe + capture(f, &block).html_safe
           else

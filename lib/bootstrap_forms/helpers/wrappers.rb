@@ -13,7 +13,7 @@ module BootstrapForms
         end
 
         klasses = []
-        klasses << 'control-group' unless @field_options[:form_group] == false
+        klasses << 'form-group' unless @field_options[:form_group] == false
         klasses << 'error' if @field_options[:error]
         klasses << 'success' if @field_options[:success]
         klasses << 'warning' if @field_options[:warning]
@@ -42,7 +42,7 @@ module BootstrapForms
 
       def human_attribute_name
         object_name = @object_name.to_s.dup
-        
+
         # Copied from https://github.com/rails/rails/blob/fb24f419051aec00790a8e6fb5785eeb6f503f4a/actionpack/lib/action_view/helpers/tags/label.rb#L38
         object_name.gsub!(/\[(.*)_attributes\]\[\d\]/, '.\1')
         method = @name.to_s
@@ -53,34 +53,32 @@ module BootstrapForms
 
         i18n_default ||= ""
         result = I18n.t("#{object_name}.#{method}", :default => i18n_default, :scope => "helpers.label").presence
-        
+
         result ||= if object && object.class.respond_to?(:human_attribute_name)
           object.class.human_attribute_name(method)
         end
-        
+
         result ||= method.humanize
-        
-        result
       end
 
       def input_div(&block)
-        content_options = {}
-        content_options[:class] = 'controls'
-        if @field_options[:form_group] == false
-          @field_options.delete :form_group
-          write_input_div(&block)
-        else
-          content_tag(:div, :class => 'controls') do
-            write_input_div(&block)
+        inner = write_input_div(&block)
+
+        if @is_field
+          content_tag(:div, :class => 'col-sm-4 pull-right') do
+            inner
           end
+        else
+          inner
         end
       end
 
       def write_input_div(&block)
         if @field_options[:append] || @field_options[:prepend] || @field_options[:append_button]
-          klass = []
+          klass = ['form-control']
           klass << 'input-prepend' if @field_options[:prepend]
           klass << 'input-append' if @field_options[:append] || @field_options[:append_button]
+          klass << @field_options[:prepend_class] if @field_options[:prepend_class] && @field_options[:prepend]
           html = content_tag(:div, :class => klass, &block)
           html << extras(false, &block) if @field_options[:help_inline] || @field_options[:help_block] || @field_options[:error] || @field_options[:success] || @field_options[:warning]
           html
@@ -94,7 +92,7 @@ module BootstrapForms
           return ''.html_safe
         else
           label_options = {}
-          label_options[:class] = 'control-label' unless @field_options[:form_group] == false
+          label_options[:class] = 'form-label' unless @field_options[:form_group] == false
           if respond_to?(:object)
              label(@name, block_given? ? block : @field_options[:label], label_options)
            else

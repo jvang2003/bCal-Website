@@ -1,4 +1,4 @@
-= bootstrap_form_for @calendar do |f|
+= bootstrap_form_for @calendar, :horizontal => true do |f|
   = f.text_field :name
   = f.email_field :email
   = f.select :visibility, [["Public", "Public"], ["Private", "Private"]]

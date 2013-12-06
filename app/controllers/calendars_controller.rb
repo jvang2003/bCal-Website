@@ -109,7 +109,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv {render :text => calendar_to_csv(@events)}
+      format.csv {render :text => events_to_csv(@events)}
     end
   end
 

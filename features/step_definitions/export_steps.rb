@@ -1,23 +1,31 @@
 # search for value in a CSV file
-Then /I should see in the (?i:CSV) the event "(.*)"/ do |event|
+Then /I should see in the (?i:CSV) the items: (.*)/ do |items|
+	# make sure data sent as CSV
+	page.response_headers["Content-Type"].should match /csv/
+
 	# parse view into rows and then values
 	rows = page.body.split("\n")
-	rows.length.should > 1
+	rows.length.should > 0
 	csv = rows.map {|row| row.split(",")}
 
-	# find the event in the name column
-	name_index = csv[0].index("Name")
+	# find the item in the name or event column
 	name_col = []
-	csv[1..-1].each {|row| name_col << row[name_index]}
-	name_col.should.include event
+	csv[1..-1].each {|row| name_col << row[0]}
+
+	items.split(",").each do |item|
+		name_col.should include item.strip
+	end
 end
 
 And /I export (?:it|page|calendar) to (?i:CSV)/ do
-	click_on("Download Events as CSV")
-end
+	if page.has_link?("Download Events as CSV")
+		click_on("Download Events as CSV")
+	elsif page.has_link?("Download List of All Calendars as CSV")
+		click_on("Download List of All Calendars as CSV")
+	else
+		throw "No CSV download link found"
+	end
 
-And /I export (?:it|page|calendar) to (?i:PDF)/ do
-	click_on("Export to PDF")
 end
 
 When /I am on the index page/ do

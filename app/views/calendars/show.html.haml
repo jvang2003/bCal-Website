@@ -31,7 +31,8 @@
 
 - if @calendar.access_token == nil
 	= "Calendar not yet authenticated with Google Calendars"
-	%a= link_to "Authenticate", oauth_path(@calendar.id)
+	%br
+	%a= link_to "Click to Authenticate", oauth_path(@calendar.id)
 - else
 	%a= link_to "Download Events as CSV", calendar_path(@calendar.id) + ".csv"
 

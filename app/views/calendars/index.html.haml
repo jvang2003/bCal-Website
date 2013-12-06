@@ -1,6 +1,6 @@
 = form_tag calendars_path, :method => :get, :class => "form-inline form-header" do
 	.form-group
-		= select_tag 'filter_select', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']]), :class => 'form-control'
+		= select_tag 'filter', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']]), :class => 'form-control'
 	.form-group
 		= text_field_tag 'keyword', (params[:keyword] || ""), :placeholder => "Enter Keyword Here", :class => 'form-control'
 	.form-group

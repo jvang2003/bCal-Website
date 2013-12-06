@@ -13,7 +13,7 @@ Then /I should see in the (?i:CSV) the event "(.*)"/ do |event|
 end
 
 And /I export (?:it|page|calendar) to (?i:CSV)/ do
-	click_on("Export to CSV")
+	click_on("Download Events as CSV")
 end
 
 And /I export (?:it|page|calendar) to (?i:PDF)/ do

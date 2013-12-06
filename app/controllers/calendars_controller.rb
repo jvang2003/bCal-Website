@@ -25,7 +25,7 @@ class CalendarsController < ApplicationController
   def index
     @filter = params[:filter]
     @keyword = params[:keyword]
-
+    
     if @filter && @keyword
       if not Calendar.column_names.include? @filter
         flash[:errors] = "You must search by a valid attribute"

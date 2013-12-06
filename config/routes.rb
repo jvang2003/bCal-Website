@@ -8,8 +8,8 @@ BCalIntegration::Application.routes.draw do
 
   resources :calendars
 
-  get "calendar/auth/:id", :to => "calendars#auth"
-  get "oauth_redirect", :to => "calendars#oauth_redirect", :as => :oauth
+  get "calendar/:id/auth", :to => "calendars#auth", :as => :oauth
+  get "oauth_redirect", :to => "calendars#oauth_redirect"
 
   resources :requests, :except => [:destroy]
 

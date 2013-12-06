@@ -94,6 +94,11 @@ class CalendarsController < ApplicationController
         :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
       @events = result.data.items
     end
+
+    respond_to do |format|
+      format.html
+      format.csv
+    end
   end
 
   def destroy

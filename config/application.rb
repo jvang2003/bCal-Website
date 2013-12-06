@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'csv'
 
 # not sure why I have to manually include this
 require File.expand_path('../../lib/bootstrap_forms', __FILE__)

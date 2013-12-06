@@ -1,5 +1,5 @@
 # search for value in a CSV file
-Then /I should see in the (?i:CSV) the items: (.*)/ do |items|
+Then /I should see in the (?i:CSV) the (?:events|calendars|names): (.*)/ do |items|
 	# make sure data sent as CSV
 	page.response_headers["Content-Type"].should match /csv/
 

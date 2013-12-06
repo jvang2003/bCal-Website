@@ -74,6 +74,11 @@ class CalendarsController < ApplicationController
     if calendar.access_token != nil
       logger.warn "Assigning to a calendar which already has an access token"
     end
+    # catch access denied bad-path
+    if params[:code] == nil
+      flash[:notice] = "Could not authenticate: access denied to Google Calendars"
+      redirect_to calendar_path(session[:old_cal_id]) and return
+    end
 
     calendar.oauth_redirect params[:code]
     calendar.save

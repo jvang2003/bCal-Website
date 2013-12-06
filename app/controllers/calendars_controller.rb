@@ -1,3 +1,5 @@
+include CalendarsHelper
+
 class CalendarsController < ApplicationController
   before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:auth]
@@ -25,7 +27,7 @@ class CalendarsController < ApplicationController
   def index
     @filter = params[:filter]
     @keyword = params[:keyword]
-    
+
     if @filter && @keyword
       if not Calendar.column_names.include? @filter
         flash[:errors] = "You must search by a valid attribute"
@@ -36,6 +38,11 @@ class CalendarsController < ApplicationController
     else
       @calendars = Calendar.all
       params[:keyword] = nil
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv {render  :text => calendars_to_csv(@calendars)}
     end
 
   end
@@ -97,7 +104,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv {render :text => to_csv(@events)}
+      format.csv {render :text => calendar_to_csv(@events)}
     end
   end
 
@@ -118,15 +125,6 @@ class CalendarsController < ApplicationController
       redirect_to calendars_path
     else
       render :update
-    end
-  end
-
-  def to_csv events
-    CSV.generate do |csv|
-      csv << ["Event", "Starting", "Ending", "Number of Attendees"] # add column names first
-      events.each do |e|
-        csv << [e.summary, e.start.nil? ? "" : e.start.date_time.to_s, e.end.nil? ? "" : e.end.date_time.to_s, e.attendees.size] 
-      end
     end
   end
 

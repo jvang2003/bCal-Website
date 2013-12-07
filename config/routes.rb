@@ -15,6 +15,6 @@ BCalIntegration::Application.routes.draw do
 
   root :to => 'calendars#index'
 
-  match 'about' => 'calendars#index'
+  get 'about', :to => "static#about"
 
 end

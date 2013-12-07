@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
 
     to_pass = {}
     %w(people details reason place course_related accept_different_room department email).each do |attr|
-      to_pass[attr] = params[attr]
+      to_pass[attr] = params[:request][attr]
     end
 
     to_pass[:time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8"

@@ -30,5 +30,5 @@
     = label_tag :status_tag, 'Status'
     = select_tag :status, options_for_select([['Approved', 'approved'], ['Rejected', 'rejected'], ['Pending', 'pending']], @request.status)
     %br
-  = submit_tag "Update Status",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}
+  = submit_tag "Update Status",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}, :id => 'update'
 

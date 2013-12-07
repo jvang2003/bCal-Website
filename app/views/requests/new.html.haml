@@ -13,6 +13,7 @@
   = f.text_area :details, :rows => 5, :required => true
   = f.check_box :course_related, {}, true, params[:new]
   = f.check_box :accept_different_room, {}, true, params[:new]
+  = submit_tag "Submit Request",:class =>"btn btn-inverse btn-success",:data => {:confirm => "Ready to submit?"}
 
 / = form_tag requests_path, :method =>:post do
 /   = field_set_tag do

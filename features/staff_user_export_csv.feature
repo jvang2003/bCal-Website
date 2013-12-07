@@ -16,11 +16,9 @@ Background: two calendars with events has been added and authorized
 Scenario: I can choose to export the index of calendars to CSV
 	When I am on the index page
 	And I export it to CSV
-	Then I should see the calendar "real google cal"
-	And I should see the calendar "second calendar"
+	Then I should see in the CSV the calendars: real google cal, second calendar
 
 Scenario: I can choose to export an individual calendar to CSV
 	When I am viewing calendar "real google cal"
 	And I export it to CSV
-	Then I should see the event "Pastor Ed's Birthday"
-	And I should see the event "CS169 Team Dinner"
+	Then I should see in the CSV the events: Pastor Ed's Birthday, CS169 Team Dinner

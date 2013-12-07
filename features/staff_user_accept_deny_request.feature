@@ -7,10 +7,10 @@ Background: requests have been added
     Given I am logged in as staff user "user1"
 
 	Given the following requests exist:
-	| place    | people  | reason                 | status   |
-	| Room 1   | 4       | We're having a partay  | Pending  |
-	| Room 2   | 42      | Office hours           | Pending  |
-	| Room 3   | 5       | Serious business       | Pending  |
+	| place    | people  | reason                 | status   | email |
+	| Room 1   | 4       | We're having a partay  | Pending  | asdf  |
+	| Room 2   | 42      | Office hours           | Pending  | asdf  |
+	| Room 3   | 5       | Serious business       | Pending  | asdf  |
 
     Given the following calendars exist:
     |name           |email |visibility  | fee_required |disabled|

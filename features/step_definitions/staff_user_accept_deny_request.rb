@@ -32,7 +32,6 @@ Then /^I should see all the requests$/ do
 end
 
 Then /^I should see the request approved for "(.*)"$/ do |room|
-  first('.update_status').click_link("Update Status of this request")
   if page.respond_to? :should
     page.should have_content("Approved")
   else
@@ -41,7 +40,6 @@ Then /^I should see the request approved for "(.*)"$/ do |room|
 end
 
 Then /^I should see the request denied for "(.*)"$/ do |room|
-   first('.update_status').click_link("Update Status of this request")
    if page.respond_to? :should
      page.should have_content("Rejected")
    else

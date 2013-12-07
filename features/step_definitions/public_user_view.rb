@@ -1,8 +1,8 @@
-When /^I try to search by "(.*?)" with "(.*?)"/ do |attr, value|
+When /^I try to search by "(.*?)" with "(.*?)"/ do |attri, value|
   visit calendars_path
 
 	# type in value in attr search box
-  select attr, :from => :filter_select
+  select attri, :from => :filter
   fill_in "keyword", :with => value
 
 	# click filter button to filter

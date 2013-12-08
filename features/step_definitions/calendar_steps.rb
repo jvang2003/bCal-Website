@@ -51,8 +51,16 @@ end
 
 
 Then /calendar "([^\"]*)" should (not )?be disabled/ do |calendar_name, enabled|
-	el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id.to_s).find('.disabled')
-        print(enabled)
+	# el = find('#' + 'cal' + Calendar.where(:name => calendar_name).first.id.to_s).find('.disabled')
+ #        print(enabled)
+ 	index = -1
+ 	page.find('thead > tr').all('th').each do |e|
+ 		index += 1
+ 		if e.text.downcase == 'disabled'
+ 			break
+ 		end
+ 	end	
+ 	el = find_row(calendar_name).to_a[index]
 	if enabled
 		el.text.should == "No"
 	else

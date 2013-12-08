@@ -76,11 +76,12 @@ Then /I should see the calendar "(.*?)" with the values for the following: (.*)$
     attr_pos = -1
     index = 0
 
+    title_attr = attribute.split('_')
+    title_attr.pop # I love hacks. Tried slicing, it didn't work
+    title_attr = title_attr.map { |e| e.capitalize }.join(' ')
+
     header_row.all('th').each do |item|
-      title_attr = attribute.split('_')
-      title_attr.pop # I love hacks. Tried slicing, it didn't work
-      title_attr = title_attr.map { |e| e.capitalize }.join(' ')
-      if item.text == title_attr
+      if item.text.downcase == title_attr.downcase
         attr_pos = index
       end
       index += 1

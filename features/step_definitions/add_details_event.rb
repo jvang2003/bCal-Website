@@ -9,13 +9,14 @@ end
 
 Then /^I will be able to fill in (.*)$/ do |event_details|
     attributes = event_details.split(%r{,\s})
-    fill_in(:people,:with => attributes[0])
-    fill_in(:email,:with => attributes[1] )
-    fill_in(:department,:with => attributes[2])
-    fill_in("place", :with => attributes[3])
-    fill_in("reason", :with => attributes[4])
-    fill_in("details", :with => attributes[5])
-    check("course_related") unless attributes[6] == "no"
-    check("accept different room") unless attributes[7] == "no"
+    fill_in(:request_people,:with => attributes[0])
+    fill_in(:request_email,:with => attributes[1] )
+    fill_in(:request_department,:with => attributes[2])
+    fill_in("request_place", :with => attributes[3])
+    fill_in("request_reason", :with => attributes[4])
+    fill_in("request_details", :with => attributes[5])
+    fill_in("date", :with => "12/13/13")
+    check("request_course_related") unless attributes[6] == "no"
+    check("request_accept different room") unless attributes[7] == "no"
     click_button("Submit Request")
 end

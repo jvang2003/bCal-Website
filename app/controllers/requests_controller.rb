@@ -23,6 +23,7 @@ class RequestsController < ApplicationController
     to_pass[:status] = :pending
 
     Request.create! to_pass
+    params[:email] = params[:request][:email]
     RequestMailer.request_successful(params).deliver
 
     flash[:notice]="Request has been submitted"

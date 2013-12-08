@@ -10,7 +10,6 @@ When /^I try to search by "(.*?)" with "(.*?)"/ do |attri, value|
   # find('#filter_submit').click
   # click_on "Filter"
   click_button 'filter_submit'
-  puts current_path
 end
 
 Then /I should see calendar "([^\"]*)"/ do |calendar_name|

@@ -2,7 +2,6 @@ module BootstrapForms
   module Helpers
     module FormHelper
       def bootstrap_form_for(record, options = {}, &block)
-        puts "hows it going"
         options[:builder] ||= BootstrapForms.default_form_builder
 
         horizontal = !! options.delete(:horizontal)
@@ -18,7 +17,6 @@ module BootstrapForms
         end
 
         form_for(record, form_options) do |f|
-          puts "hihihihi #{f}"
           if f.object.respond_to?(:errors) and options[:summary_errors]
             f.error_messages.html_safe + capture(f, &block).html_safe
           else

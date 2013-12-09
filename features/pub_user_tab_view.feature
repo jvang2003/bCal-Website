@@ -3,7 +3,7 @@ Feature: public user can view a calendar as tabular data
 	I want to be able to view a calender as tabular data (table of events)
 	So that I can view the events in a compact manner
 
-Background: a calendar have been added to the app
+Background: a calendar has been added to the app
 	Given that the following calendars exist:
 	| name            |     email                    | visibility   | fee_required |disabled|
 	| real google cal | bCalWebsiteTesting@gmail.com | public       | false        |true    |

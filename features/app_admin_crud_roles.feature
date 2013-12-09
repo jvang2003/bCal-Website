@@ -6,9 +6,9 @@ Feature: App admin can CRUD users to roles
 
 Background: roles have been added to the database
     Given the following users exist:
-    |calnet_id    | role              | name     |
-    |bob          | App Admin         | whatever |
-    |alice        | Admin             | whatever |
+    |calnet_id    | role              | name     | email                    |
+    |bob          | App Admin         | whatever | DontEmailMe1@noemail.com |
+    |alice        | Admin             | whatever | DontEmailMe1@noemai2.com |
 
     And I am logged in as an "App Admin"
     And I am on the homepage

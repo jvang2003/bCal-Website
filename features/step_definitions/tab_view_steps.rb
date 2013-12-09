@@ -5,7 +5,7 @@ end
 
 Then /I should see the calendar in tabular form/ do
 	# elements are the column names that represent attributes of events
-	page.should have_content("Name")
+	page.should have_content("Event")
 	page.should have_content("Number of Attendees")
 	page.should have_content("Starting")
 	page.should have_content("Ending")

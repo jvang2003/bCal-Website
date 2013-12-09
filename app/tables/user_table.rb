@@ -5,7 +5,9 @@ class UserTable < TableCloth::Base
 
   column :calnet_id
   column :name
-  column :role
+  column :role do |user|
+    User.VALID_ROLES.key(user.role)
+  end
 
   common_actions
 end

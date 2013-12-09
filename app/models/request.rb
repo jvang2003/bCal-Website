@@ -1,7 +1,7 @@
 require 'google/api_client'
 
 class Request < ActiveRecord::Base
-  attr_accessible :details, :people, :reason, :place, :time, :status, :course_related, :accept_different_room, :department, :time, :finish_time,:email
+  attr_accessible :details, :people, :reason, :place, :start_time, :status, :course_related, :accept_different_room, :department, :finish_time, :email
   attr_accessor :google_format_time
 
   belongs_to :user

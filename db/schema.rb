@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209061451) do
+ActiveRecord::Schema.define(:version => 20131209082120) do
 
   create_table "blocked_times", :force => true do |t|
     t.datetime "start_time"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20131209061451) do
     t.text     "reason"
     t.text     "details"
     t.string   "place"
-    t.datetime "time"
+    t.datetime "start_time"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.boolean  "approved"

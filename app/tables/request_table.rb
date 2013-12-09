@@ -4,7 +4,7 @@ class RequestTable < TableCloth::Base
   # To include actions on this table, uncomment this line
   include TableCloth::Extensions::Actions
 
-  column :place, :people, :reason, :time, :finish_time, :status
+  column :place, :people, :reason, :start_time, :finish_time, :status
 
   RequestTable::CSS_MAPPING = {
     :approved => "success",
@@ -13,7 +13,7 @@ class RequestTable < TableCloth::Base
   }
 
   column :status do |request|
-    content_tag :span, request.status, :class => 'big-label label label-' + RequestTable::CSS_MAPPING[request.status.to_sym]
+    content_tag :span, request.status, :class => 'big-label label label-' + RequestTable::CSS_MAPPING[request.status.downcase.to_sym]
   end
 
 

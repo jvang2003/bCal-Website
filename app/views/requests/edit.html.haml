@@ -6,11 +6,11 @@
   = label_tag :date
   = text_field_tag :date , nil, :required => true
   = label_tag :time, 'Start Time'
-  = time_select :time, ""
+  = time_select :start_time, ""
   = label_tag :finish_time, 'End Time'
   = time_select :finish_time, ""
   = f.text_area :reason, :rows => 5
   = f.text_area :details, :rows => 5
   = f.check_box :course_related
   = f.check_box :accept_different_room
-  = submit_tag "Update Request", :class =>"btn btn-inverse btn-success"
+  = submit_tag "Update Request", :class => "btn btn-inverse btn-success"

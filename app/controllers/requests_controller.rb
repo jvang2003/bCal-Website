@@ -20,7 +20,7 @@ class RequestsController < ApplicationController
       to_pass[attr] = params[:request][attr]
     end
 
-    to_pass[:time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0
+    to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["(4i)"].to_i,params["start_time"]["(5i)"].to_i, 0
     to_pass[:finish_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["finish_time"]["(4i)"].to_i,params["finish_time"]["(5i)"].to_i, 0
 
     to_pass[:status] = :pending

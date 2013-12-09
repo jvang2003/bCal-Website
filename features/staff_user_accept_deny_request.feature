@@ -20,16 +20,16 @@ Background: requests have been added
 	And I am on the homepage
 
 Scenario: view all requests
-        When I view all the requests
-        Then I should see all the requests
+    When I view all the requests
+    Then I should see all the requests
 
 Scenario: approve requests
-        When I approve a request for "Room 1"
-        Then I should see the request approved for "Room 1"
+    When I approve a request for "Room 1"
+    Then I should see the request approved for "Room 1"
 
 Scenario: deny requests
-        When I deny a request for "Room 1"
-        Then I should see the request denied for "Room 1"
+    When I deny a request for "Room 1"
+    Then I should see the request denied for "Room 1"
 
 Scenario: edit requests
         When I edit a request for "Room 1" assuming it was accepted previously

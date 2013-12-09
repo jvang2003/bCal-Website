@@ -1,6 +1,7 @@
 Given /the following requests exist/ do |requests_table| #done
     requests_table.hashes.each do |request|
-    	request[:time] = Time.now
+    	request[:start_time] = Time.now
+        request[:finish_time] = Time.now
         Request.create!(request)
     end
 end

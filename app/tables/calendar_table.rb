@@ -19,5 +19,5 @@ class CalendarTable < TableCloth::Base
 
   column :building, :usage
 
-  update_delete_actions
+  common_actions
 end

@@ -2,6 +2,7 @@ require 'google/api_client'
 
 class Calendar < ActiveRecord::Base
   has_many :request
+  has_many :blocked_times
 
   attr_accessible :name, :email, :visibility, :fee_required,
     :disabled, :refresh_token, :access_token, :building, :department, :usage, :owner

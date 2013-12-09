@@ -1,7 +1,6 @@
 include CalendarsHelper
 
 class CalendarsController < ApplicationController
-  before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:auth]
   skip_before_filter :require_login, :only => :index
 
@@ -62,8 +61,40 @@ class CalendarsController < ApplicationController
     redirect_to calendar_path cal.id
   end
 
-  def find_calendar
-    @calendar = Calendar.find(params[:id])
+  def show
+    @calendar ||= Calendar.find params[:id]
+    if @calendar.access_token == nil
+      @events = []
+    else
+      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list,
+        :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
+      @events = result.data.items
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv {render :text => events_to_csv(@events)}
+    end
+  end
+
+  def destroy
+    @calendar=Calendar.find(params[:id])
+    @calendar.destroy
+
+    flash[:notice]="Calendar has been deleted"
+    redirect_to calendars_path
+  end
+
+  def update
+    @calendar=Calendar.find_by_id(params[:id])
+    @calendar.update_attributes params[:calendar]
+
+    if @calendar.save
+      flash[:notice]="Calendar has been successfully updated"
+      redirect_to calendars_path
+    else
+      render :update
+    end
   end
 
   def auth
@@ -99,39 +130,5 @@ class CalendarsController < ApplicationController
     end
   end
 
-  def show
-    if @calendar.access_token == nil
-      @events = []
-    else
-      result = @calendar.client.execute(:api_method => @calendar.gcalendar.events.list,
-        :parameters => {:calendarId => @calendar.email, :orderBy => "updated"})
-      @events = result.data.items
-    end
-
-    respond_to do |format|
-      format.html
-      format.csv {render :text => events_to_csv(@events)}
-    end
-  end
-
-  def destroy
-    @calendar=Calendar.find(params[:id])
-    @calendar.destroy
-
-    flash[:notice]="Calendar has been deleted"
-    redirect_to calendars_path
-  end
-
-  def update
-    @calendar=Calendar.find_by_id(params[:id])
-    @calendar.update_attributes params[:calendar]
-
-    if @calendar.save
-      flash[:notice]="Calendar has been successfully updated"
-      redirect_to calendars_path
-    else
-      render :update
-    end
-  end
 
 end

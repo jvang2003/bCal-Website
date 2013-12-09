@@ -1,4 +1,5 @@
 = bootstrap_form_for @request do |f|
+  = render 'shared/error_messages'
   = f.number_field :people, :min => 0, :label => "Number of Attendees", :required => true
   = f.email_field :email, :placeholder => "youremail@example.com", :required => true
   = f.text_field :department, :placeholder => "Civil Engineering", :required => true

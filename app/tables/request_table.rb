@@ -17,7 +17,7 @@ class RequestTable < TableCloth::Base
   end
 
 
-  update_delete_actions do
+  common_actions do
     actions do
       action do |request|
         link_to "Approve", edit_request_path(request, :status => :approved), :class => 'btn btn-success', :id => "approve_#{request.id}"

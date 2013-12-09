@@ -24,7 +24,6 @@ jQuery(function() {
     jQuery('ul.nav li.dropdown').hover(function() {
         var $this = jQuery(this);
         var menu = $this.find('.dropdown-menu');
-        $this.find('.dropdown-toggle').dropdown('toggle');
         if (fadingOut[$this.attr('id')]) {
             menu.stop(true, true);
         }
@@ -37,13 +36,9 @@ jQuery(function() {
     }, function() {
         var $this = jQuery(this);
         var menu = $this.find('.dropdown-menu');
-        $this.find('.dropdown-toggle').dropdown('toggle');
         fadingOut[$this.attr('id')] = true;
         menu.stop(true, true).delay(fadeDelay).fadeOut(fadeTime/3, function () {
             fadingOut[$this.attr('id')] = false;
         });
-    });
-    jQuery('ul.nav li.dropdown .dropdown-toggle').click(function (event) {
-        $(this).parent().addClass('open');
     });
 });

@@ -53,6 +53,7 @@ gem 'google-api-client'
 gem 'quiet_assets', :group => :development
 gem 'thin'
 gem 'table_cloth'
+gem 'chosen-rails'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

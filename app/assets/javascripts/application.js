@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require chosen-jquery
 //= require_tree .
 
 
@@ -45,4 +46,4 @@ jQuery(function() {
     jQuery('ul.nav li.dropdown .dropdown-toggle').click(function (event) {
         $(this).parent().addClass('open');
     });
-}, 100);
+});

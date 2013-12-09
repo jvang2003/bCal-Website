@@ -10,10 +10,15 @@
  *
  *= require_self
  *= require twitter/bootstrap
+ *= require chosen
  *= require_tree .
  */
 /*.create-cal {float: right;}*/
 
 .form-header {
     margin-bottom: 20px;
+}
+
+.big-label {
+    font-size: 100%!important;
 }

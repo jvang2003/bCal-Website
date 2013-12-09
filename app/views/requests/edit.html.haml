@@ -1,34 +1,16 @@
-%h3
-  = "Update Status"
-%br
-= form_tag edit_request_path(@request.id),:method =>:get do
-  = field_set_tag do
-    = label_tag :place_tag,'Place'
-    = label_tag :place, @request.place
-    %br
-    = label_tag :people_tag,'Number of People'
-    = label_tag :people, @request.people
-    %br
-    = label_tag :reason_tag,'Reason for Request'
-    = label_tag :reason, @request.reason
-    %br
-    = label_tag :time_tag,'Time'
-    = label_tag :place, @request.time
-    %br
-    = label_tag :course_related_tag, 'Course Related?'
-    - if @request.course_related
-      = label_tag :course_related, 'Yes'
-    - else
-      = label_tag :course_related, 'No'
-    %br
-    = label_tag :course_related_tag, 'Accept Different Room?'
-    - if @request.accept_different_room
-      = label_tag :accept_different_room, 'Yes'
-    - else
-      = label_tag :accept_different_room, 'No'
-    %br
-    = label_tag :status_tag, 'Status'
-    = select_tag :status, options_for_select([['Approved', 'approved'], ['Rejected', 'rejected'], ['Pending', 'pending']], @request.status)
-    %br
-  = submit_tag "Update Status",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}, :id => 'update'
-
+= bootstrap_form_for @request do |f|
+  = f.error_messages
+  = f.text_field :place
+  = f.text_field :department
+  = f.number_field :people
+  = label_tag :date
+  = text_field_tag :date , nil, :required => true
+  = label_tag :time, 'Start Time'
+  = time_select :time, ""
+  = label_tag :finish_time, 'End Time'
+  = time_select :finish_time, ""
+  = f.text_area :reason, :rows => 5
+  = f.text_area :details, :rows => 5
+  = f.check_box :course_related
+  = f.check_box :accept_different_room
+  = submit_tag "Update Request", :class =>"btn btn-inverse btn-success"

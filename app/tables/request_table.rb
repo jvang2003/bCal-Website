@@ -4,7 +4,7 @@ class RequestTable < TableCloth::Base
   # To include actions on this table, uncomment this line
   include TableCloth::Extensions::Actions
 
-  column :place, :people, :reason, :time, :status
+  column :place, :people, :reason, :time, :finish_time, :status
 
   RequestTable::CSS_MAPPING = {
     :approved => "success",

@@ -1,5 +1,5 @@
 = bootstrap_form_for @request do |f|
-  = render 'shared/error_messages'
+  = f.error_messages
   = f.number_field :people, :min => 0, :label => "Number of Attendees", :required => true
   = f.email_field :email, :placeholder => "youremail@example.com", :required => true
   = f.text_field :department, :placeholder => "Civil Engineering", :required => true
@@ -10,38 +10,8 @@
   = label_tag :finish_time,'End Time'
   = time_select :finish_time,""
   = f.select :place, Calendar.all.collect { |cal| [cal.name, cal.id] }, :include_blank => true
-  / = f.text_field :place, :placeholder => "615 Davis Hall", :required => true
   = f.text_area :reason, :rows => 5, :required => true
   = f.text_area :details, :rows => 5, :required => true
   = f.check_box :course_related, {}, true, params[:new]
   = f.check_box :accept_different_room, {}, true, params[:new]
-  = submit_tag "Submit Request",:class =>"btn btn-inverse btn-success",:data => {:confirm => "Ready to submit?"}
-
-/ = form_tag requests_path, :method =>:post do
-/   = field_set_tag do
-/     = label_tag :people,'Number of people'
-/     = number_field_tag :people,0,:min =>0,:required =>true
-/     = label_tag :email,'Your Email'
-/     = email_field_tag :email,nil
-/     = label_tag :department, 'Department'
-/     = text_field_tag :department,nil
-/     = label_tag :date,'Date'
-/     = text_field_tag :date ,nil,:required => true
-/     = label_tag :time,'Start Time'
-/     = time_select :time,""
-/     = label_tag :finish_time,'End Time'
-/     = time_select :finish_time,""
-/     = label_tag :place,'Place'
-/     = text_field_tag :place,nil
-/     = label_tag :reason,'Reason for request'
-/     = text_area_tag :reason,nil,:rows => 5,:required =>true
-/     = label_tag :details,'Details of your event'
-/     = text_area_tag :details,nil,:rows => 5,:required =>true
-/     %label{:for => "course_related"} Is it course related? (Tick if yes)
-/     = check_box_tag "course_related", true, params[:new]
-/     %label{:for => "accept_different_room"} If current room is unavailable, will you accept different room? (Tick if yes)
-/     = check_box_tag "accept_different_room", true, params[:new]
-/   = submit_tag "Submit Request",:class =>"btn btn-inverse",:data => {:confirm => "Ready to submit?"}
-
-
-
+  = submit_tag "Submit Request", :class =>"btn btn-inverse btn-success", :data => {:confirm => "Ready to submit?"}

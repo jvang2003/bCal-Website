@@ -1,5 +1,3 @@
-= link_to "Download List of All Calendars as CSV", calendars_path + ".csv"
-%hr
 = form_tag calendars_path, :method => :get, :class => "form-inline form-header" do
 	.form-group
 		= select_tag 'filter', options_for_select([['Building', 'building'], ['Usage', 'usage'], ['Department', 'department']]), :class => 'form-control'
@@ -9,3 +7,5 @@
 		= button_tag(:type => :submit, :class => 'btn btn-default form-control', :id => 'filter_submit') do
 			Submit
 = simple_table_for @calendars, with: CalendarTable
+%hr
+= link_to "Download List of All Calendars as CSV", calendars_path + ".csv"

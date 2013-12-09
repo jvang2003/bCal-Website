@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     false
   end
   include SessionsHelper
+
   private
     def require_login
       unless current_user

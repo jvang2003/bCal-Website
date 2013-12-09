@@ -3,9 +3,9 @@
   = "Create User"
 
 = bootstrap_form_for(@user) do |f|
-  = render 'shared/error_messages'
+  = f.error_messages
   = f.text_field :name
   = f.text_field :calnet_id
   = f.email_field :email
-  = select_tag "user[role]", options_for_select(valid_create_roles_for(current_user), @selected)
+  = f.select :role, options_for_select(valid_create_roles_for(current_user), @selected)
   = f.submit "Create User"

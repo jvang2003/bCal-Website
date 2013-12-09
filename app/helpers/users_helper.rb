@@ -10,23 +10,15 @@ module UsersHelper
     arr[0,index]
   end
 
-  def check_signed_in_user?
-    unless signed_in? or is_same_controller_and_action?(request.original_url, sign_up_path)
-      redirect_to sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in."
-    else
-      nil
-    end
-  end
-
   def is_admin?
     signed_in? and current_user.role > User.VALID_ROLES["Guest"]
   end
 
   ["App Admin", "Dept Admin", "Admin"].each do |name|
     define_method "is_#{name.to_slug}?" do
-      return if check_signed_in_user?
+      return if require_login
       if current_user.role < User.VALID_ROLES[name]
-        flash[:error] = "You must be an \"#{name}\" to access this page"
+        flash[:alert] = "You must be an \"#{name}\" to access this page"
         redirect_to calendars_path
       end
     end

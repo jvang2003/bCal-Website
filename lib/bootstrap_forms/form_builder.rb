@@ -86,7 +86,6 @@ module BootstrapForms
           label_field + input_div do
             options.merge!(@field_options.merge(required_attribute))
             input_append = (options[:append] || options[:prepend] || options[:append_button]) ? true : nil
-            puts raw_args
             extras(input_append) { super(name, *raw_args) }
           end
         end

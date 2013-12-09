@@ -1,4 +1,4 @@
-require 'helpers.rb'
+require 'helpers'
 include TableHelpers
 
 class CalendarTable < TableCloth::Base

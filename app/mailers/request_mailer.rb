@@ -11,4 +11,9 @@ class RequestMailer < ActionMailer::Base
     email=@request.email
     mail(:to => email,:subject => "Status Update")
   end
+
+  def collision_detected(calendar,email)
+    @calendar=calendar
+    mail(:to => email,:subject => "Overbooking")
+  end
 end

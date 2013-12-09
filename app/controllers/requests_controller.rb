@@ -12,6 +12,7 @@ class RequestsController < ApplicationController
   end
 
   def create
+    collide=false
     date=params["date"].split("/")
 
     to_pass = {}
@@ -19,10 +20,24 @@ class RequestsController < ApplicationController
       to_pass[attr] = params[:request][attr]
     end
 
-    to_pass[:time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0,"-8"
-    to_pass[:status] = :pending
+    to_pass[:time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["time"]["(4i)"].to_i,params["time"]["(5i)"].to_i, 0
+    to_pass[:finish_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["finish_time"]["(4i)"].to_i,params["finish_time"]["(5i)"].to_i, 0
 
-    Request.create! to_pass
+    to_pass[:status] = :pending
+    requests=Request.find_all_by_place(to_pass["place"])
+
+    request=Request.create! to_pass
+    requests.each do |req|
+        if request.collision(req)
+            collide=true
+            break
+        end
+    end
+    if collide
+        calendar=Calendar.find_by_name(request.place)
+        owner_email=User.find_by_calnet_id(calendar.owner).email
+        RequestMailer.collision_detected(calendar,owner_email).deliver
+    end
     params[:email] = params[:request][:email]
     RequestMailer.request_successful(params).deliver
 

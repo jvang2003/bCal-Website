@@ -32,6 +32,9 @@
 	%li.list-group-item
 		Department :
 		= @calendar.department
+	%li.list-group-item
+		Owner:
+		= @calendar.owner
 
 - if @calendar.access_token == nil
 	= "Calendar not yet authenticated with Google Calendars"

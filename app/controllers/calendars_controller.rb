@@ -3,6 +3,7 @@ include CalendarsHelper
 class CalendarsController < ApplicationController
   before_filter :find_calendar, :only => [:show]
   before_filter :check_auth, :only => [:auth]
+  skip_before_filter :require_login, :only => :index
 
   def self.can_view? user
     true
@@ -50,7 +51,7 @@ class CalendarsController < ApplicationController
   def create
     to_pass = {}
     calendar_params = params[:calendar]
-    %w(name visibility email fee_required disabled building usage department).each do |attr|
+    %w(name visibility email fee_required disabled building usage department owner).each do |attr|
       to_pass[attr] = calendar_params[attr]
     end
 

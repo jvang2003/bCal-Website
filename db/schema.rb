@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205011521) do
+ActiveRecord::Schema.define(:version => 20131208211239) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20131205011521) do
     t.string   "department"
     t.string   "usage"
     t.boolean  "fee_required",  :default => false
+    t.string   "owner"
   end
 
   create_table "events", :force => true do |t|
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20131205011521) do
     t.string   "department"
     t.integer  "calendar_id"
     t.string   "email"
+    t.datetime "finish_time"
   end
 
   create_table "users", :force => true do |t|
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20131205011521) do
     t.string   "remember_token"
     t.string   "calnet_id"
     t.integer  "role"
+    t.string   "email"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

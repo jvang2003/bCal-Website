@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
-
+  skip_before_filter :require_login, :only => [:new,:create,:index]
   def self.can_view? user
     user && user.role >= 2
   end

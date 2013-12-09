@@ -4,7 +4,7 @@ class Calendar < ActiveRecord::Base
   has_many :request
 
   attr_accessible :name, :email, :visibility, :fee_required,
-    :disabled, :refresh_token, :access_token, :building, :department, :usage
+    :disabled, :refresh_token, :access_token, :building, :department, :usage, :owner
   attr_accessor :gcalendar, :client
   after_initialize :init
   after_find :init

@@ -7,5 +7,5 @@ class UserTable < TableCloth::Base
   column :name
   column :role
 
-  update_delete_actions
+  common_actions
 end

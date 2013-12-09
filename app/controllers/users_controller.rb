@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
-  skip_before_filter :require_login, :only => [:new,:create,:index]
+
   def self.can_view? user
     user && user.role >= 2
   end
@@ -9,14 +9,16 @@ class UsersController < ApplicationController
     user && user.role >= 2
   end
 
-  before_filter :is_higher_admin?, only: [:edit, :update, :destroy]
+  before_filter :is_higher_admin?, :only => [:edit, :update, :destroy, :index]
+  before_filter :is_dept_admin?, :only => [:new, :create]
 
   def new
     @user = User.new
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new user_params
+
     if @user.save
       redirect_back_or users_path
     else

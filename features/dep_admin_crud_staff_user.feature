@@ -6,10 +6,10 @@ Feature: Dept Admin should be able to CRUD 'Staff Users'
 
 Background: users have been added to the database
     Given the following users exist:
-    |calnet_id    | role              | name     |
-    |bob          | App Admin         | Bob      |
-    |bill         | Dept Admin        | Bill     |
-    |alice        | Admin             | Alice    |
+    |calnet_id    | role              | name     | email                    |
+    |bob          | App Admin         | Bob      | DontEmailMe1@noemail.com |
+    |bill         | Dept Admin        | Bill     | DontEmailMe2@noemail.com |
+    |alice        | Admin             | Alice    | DontEmailMe3@noemail.com |
 
     And I am logged in as a "Dept Admin"
     And I am on the homepage

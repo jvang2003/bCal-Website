@@ -4,7 +4,7 @@ module UsersHelper
 
     index = 0
     arr = User.VALID_ROLES.to_a
-    while arr[index][1] <= user.role
+    while index < arr.length && arr[index][1] <= user.role
       index += 1
     end
     arr[0,index]
@@ -33,8 +33,8 @@ module UsersHelper
   end
 
   def is_higher_admin?
-    @user ||= User.find params[:id]
     return if check_signed_in_user?
+    @user ||= User.find params[:id]
 
     if not is_higher_admin_b? @user
       flash[:error] = "You don't have privileges for user \"#{@user.name}\""

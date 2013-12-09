@@ -1,5 +1,5 @@
 Given /^I am logged in as public user "(.*?)"$/ do |user_id|
-    User.create!(:name => 'test', :calnet_id => 'test', :role => 0)
+    User.create!(:name => 'test', :calnet_id => 'test', :role => 0, :email => 'DontEmailMe@noemail.com')
     login 'test'
 end
 

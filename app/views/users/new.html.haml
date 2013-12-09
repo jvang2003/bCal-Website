@@ -2,21 +2,10 @@
 %h1
   = "Create User"
 
-.row
-  .span6.offset3
-    = form_for(@user) do |f|
-      = render 'shared/error_messages'
-
-      = f.label :name
-      = f.text_field :name
-
-      = f.label :calnet_id
-      = f.text_field :calnet_id
-
-      = f.label :email
-      = f.email_field :email
-
-      = f.label :role
-      = select_tag "user[role]", options_for_select(valid_create_roles_for(current_user), @selected)
-
-      = f.submit "Create User"
+= bootstrap_form_for(@user) do |f|
+  = render 'shared/error_messages'
+  = f.text_field :name
+  = f.text_field :calnet_id
+  = f.email_field :email
+  = select_tag "user[role]", options_for_select(valid_create_roles_for(current_user), @selected)
+  = f.submit "Create User"

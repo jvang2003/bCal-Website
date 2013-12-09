@@ -1,5 +1,5 @@
 module TableHelpers
-  def update_delete_actions &block
+  def common_actions &block
     class_eval do
       include TableCloth::Extensions::Actions
       actions do

@@ -5,10 +5,6 @@ When /^I try to search by "(.*?)" with "(.*?)"/ do |attri, value|
   select attri, :from => :filter
   fill_in "keyword", :with => value
 
-	# click filter button to filter
-  puts find('#filter_submit').inspect
-  # find('#filter_submit').click
-  # click_on "Filter"
   click_button 'filter_submit'
 end
 

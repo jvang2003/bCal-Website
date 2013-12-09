@@ -8,13 +8,14 @@ class ApplicationController < ActionController::Base
   def self.can_crud? user
     false
   end
+
   include SessionsHelper
+  include UsersHelper
 
   private
     def require_login
       unless current_user
-        flash[:notice]="You need to sign in to continue"
-        redirect_to "/sign_in"
+        redirect_to sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in."
       end
     end
 end

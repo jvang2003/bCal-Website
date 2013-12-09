@@ -1,17 +1,18 @@
 class SessionsController < ApplicationController
-  skip_before_filter :require_login
+  skip_before_filter :require_login, :only => [:create, :new]
 
   def new
   end
 
   def create
-    user = User.find_by_calnet_id(params[:session][:calnet_id])
+    session_params = params[:session]
+    user = User.find_by_calnet_id(session_params[:calnet_id])
     if user
       sign_in user
       redirect_back_or root_path
     else
-      flash.now[:error] = "Invalid email/password combination"
-      render "new"
+      flash[:notice] = "Please sign up"
+      redirect_to new_user_path("user[calnet_id" => session_params[:calnet_id], :return_to => params[:return_to])
     end
   end
 

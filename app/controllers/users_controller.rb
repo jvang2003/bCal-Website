@@ -10,16 +10,18 @@ class UsersController < ApplicationController
   end
 
   before_filter :is_higher_admin?, :only => [:edit, :update, :destroy]
-  before_filter :is_dept_admin?, :only => [:new, :create, :index]
+  before_filter :is_dept_admin?, :only => [:index]
+  skip_before_filter :require_login, :only => [:new, :create]
 
   def new
-    @user = User.new
+    @user = User.new user_params
   end
 
   def create
     @user = User.new user_params
 
     if @user.save
+      sign_in @user
       redirect_back_or users_path
     else
       render :new

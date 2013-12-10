@@ -28,14 +28,27 @@ class RequestsController < ApplicationController
 
     @request = Request.new
     to_pass = handle_params params[:request].pluck Request::FIELDS
+    %w(people details reason place course_related accept_different_room department email user_id).each do |attr|
+      to_pass[attr] = params[:request][attr]
+    end
+
+    time=Time.strptime(params["date"],"%m/%d/%Y")
+    to_pass[:start_time] = generate_time("start_time", time)
+    to_pass[:finish_time] = generate_time("end_time", time)
+
+
+    # to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00")
+    # to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
     to_pass[:status] = "Pending"
     to_pass[:email] = current_user.email
 
-    request = Request.create! to_pass
-
-    RequestMailer.request_successful(request).deliver
-
-    flash[:notice]= "Request has been submitted"
+    if blocked?(to_pass[:start_time], to_pass[:end_time])
+      flash[:error] = "Your request was automatically rejected because there is a blocked off time section."
+    else
+      request = Request.create! to_pass
+      RequestMailer.request_successful(request).deliver
+      flash[:notice]= "Request has been submitted"
+    end
     redirect_to calendars_path
   end
 
@@ -114,6 +127,14 @@ class RequestsController < ApplicationController
   private
 
   def generate_time(which, time)
+<<<<<<< Updated upstream
     Time.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00")
+=======
+    DateTime.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00") 
+  end
+
+  def blocked?(start, finish)
+    (not BlockedTimes.all(:conditions => ['start_time BETWEEN ? AND ?', start, finish]).empty?) || (not BlockedTimes.all(:conditions => ['end_time BETWEEN ? AND ?', start, finish]).empty?)
+>>>>>>> Stashed changes
   end
 end

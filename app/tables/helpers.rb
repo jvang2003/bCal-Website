@@ -3,13 +3,15 @@ module TableHelpers
     class_eval do
       include TableCloth::Extensions::Actions
       actions do
-        action do |object|
-          link_to "Update", edit_polymorphic_path(object), :class => 'btn btn-info update-status', :id => "update_#{object.id}"
-        end
-        action do |object|
-          button_to "Delete", polymorphic_path(object), :class => 'btn btn-danger delete-status', :method => :delete, :id => "delete_#{object.id}"
-        end
         yield if block_given?
+        action do |object|
+          content_tag :div, :class => 'button-fix' do
+            link_to "Update", edit_polymorphic_path(object), :class => 'btn btn-info update-status', :id => "update_#{object.id}"
+          end
+        end
+        action do |object|
+          button_to "Delete", object, :method => :delete, :class => 'btn btn-danger delete-status', :id => "delete_#{object.id}", :remote => true
+        end
       end
     end
   end

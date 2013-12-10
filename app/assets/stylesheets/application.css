@@ -13,7 +13,6 @@
  *= require chosen
  *= require_tree .
  */
-/*.create-cal {float: right;}*/
 
 .form-header {
     margin-bottom: 20px;
@@ -25,4 +24,16 @@
 
 .fit-table {
     width: auto!important;
+}
+
+.button-fix {
+    float:left;
+    overflow: hidden;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 6px;
+}
+
+td .button-fix:first-child {
+    margin-left: 0px;
 }

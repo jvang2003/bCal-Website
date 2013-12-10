@@ -15,7 +15,7 @@ class RequestsController < ApplicationController
     collide=false
 
     to_pass = {}
-    %w(people details reason place course_related accept_different_room department email).each do |attr|
+    %w(people details reason place course_related accept_different_room department email user_id).each do |attr|
       to_pass[attr] = params[:request][attr]
     end
     time=Time.strptime(params["date"],"%m/%d/%Y")
@@ -27,7 +27,9 @@ class RequestsController < ApplicationController
 
     to_pass[:status] = "Pending"
     to_pass[:email] =current_user.email
+
     request = Request.create! to_pass
+
     RequestMailer.request_successful(request).deliver
 
     flash[:notice]= "Request has been submitted"
@@ -51,27 +53,38 @@ class RequestsController < ApplicationController
     @request.status = params[:status] unless params[:status] == nil
     calendar = Calendar.find_by_name(@request.place)
     @request.calendar = calendar if @request.calendar == nil
-    @request.save
+
+    if not @request.save
+      render 'edit' and return
+    end
+
     RequestMailer.status_changed(@request).deliver
-    if (prev_status != "Approved" and @request.status == "Approved" and calendar.access_token != nil)
+    if prev_status != "Approved" and @request.status == "Approved" and calendar.try(:access_token)
       @event = Event.new
       @request.event = @event
       @request.event.update_gcal
       if @request.calendar.check_collision(@request)
-          email=User.find_by_calnet_id(@request.calendar.owner).email
+          email = User.find_by_calnet_id(@request.calendar.owner).email
           RequestMailer.collision_detected(@request.calendar,email).deliver
       end
-    elsif (params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and calendar.access_token != nil)
+    elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and calendar.try(:access_token)
       if @request.event
         @request.event.delete_event
         @request.event.destroy
       end
     end
-    flash[:notice] = "Request Status has been updated."
+
+    flash[:notice] = "Your request has been updated."
     redirect_to requests_path
   end
 
   def edit
     @request ||= Request.find params[:id]
+  end
+
+  def destroy
+    @request ||= Request.find params[:id]
+    @request.destroy
+    redirect_to requests_path
   end
 end

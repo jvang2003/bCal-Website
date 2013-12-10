@@ -1,2 +1,5 @@
-%h1 BlockedTimes#new
-%p Find me in app/views/blocked_times/new.html.haml
+%h1 Block a section of time
+= form_for [@calendar, @blocked_time], url: {action: 'create'} do |f|
+	= label_tag :date, 'Date'
+	= text_field_tag :date ,nil,:required => true
+	%div#slider

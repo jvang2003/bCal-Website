@@ -16,6 +16,8 @@ class BlockedTimesController < ApplicationController
   end
 
   def new
+    @calendar = Calendar.find(params[:calendar_id])
+    @blocked_time = BlockedTimes.new
   end
 
   def update

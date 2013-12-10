@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210092002) do
+ActiveRecord::Schema.define(:version => 20131210105604) do
 
   create_table "blocked_times", :force => true do |t|
     t.datetime "start_time"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20131210092002) do
     t.integer  "calendar_id"
     t.string   "email"
     t.datetime "finish_time"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|

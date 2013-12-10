@@ -21,10 +21,14 @@ class RequestTable < TableCloth::Base
   common_actions do
     actions do
       action do |request|
-        link_to "Approve", edit_request_path(request, :status => :approved), :class => 'btn btn-success', :id => "approve_#{request.id}"
+        content_tag :div, :class => 'button-fix' do
+          button_to "Approve", request_path(request, :status => :Approved), :method => :put, :class => 'btn btn-success', :id => "approve_#{request.id}"
+        end
       end
       action do |request|
-        link_to "Reject", edit_request_path(request, :status => :rejected), :class => 'btn btn-warning', :id => "reject_#{request.id}"
+        content_tag :div, :class => 'button-fix' do
+          button_to "Reject", request_path(request, :status => :Rejected), :method => :put, :class => 'btn btn-warning', :id => "reject_#{request.id}"
+        end
       end
     end
   end

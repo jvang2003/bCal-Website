@@ -26,4 +26,5 @@
   - if current_user.is_admin? && params[:action] != "new"
     = f.select :status, Request::STATUSES
   / = submit_tag "Submit Request", :class => "btn btn-inverse btn-success", :data => {:confirm => "Ready to submit?"}
+  = f.hidden_field :user_id, :value => current_user.id
   = f.submit

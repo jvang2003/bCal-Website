@@ -6,7 +6,7 @@ Given /^the following users exist:$/ do |users_table|
 end
 
 Given /^I am logged in as a(?:n)? "(.*?)"$/ do |role|
-    login User.find_by_role(User.VALID_ROLES[role]).name
+    login User.find_by_role(User.VALID_ROLES[role]).calnet_id
 end
 
 Given /^I am logged in as? "(.*?)"$/ do |name|
@@ -15,8 +15,8 @@ end
 
 def login username
     visit sign_in_path
-    fill_in 'username', with: username
-    fill_in 'password', with: 'any password'
+    fill_in 'Username', with: username
+    fill_in 'Password', with: 'any password'
     click_button 'Login'
 end
 

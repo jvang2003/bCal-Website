@@ -1,11 +1,11 @@
 We have received your request
 ===============================================
 
-You have requested room: <%= @info["place"] %>
-       number of people: <%= @info["people"] %>
-               details : <%= @info["details"] %>
-               date:<%= @info["date"] %>
-               time:<%= @info["time"]["(4i)"] %>:<%= @info["time"]["(5i)"]
+You have requested room: <%= @info.place %>
+       number of people: <%= @info.people %>
+               details : <%= @info.details %>
+               Start time:<%= @info.start_time %>
+	       End Time  :<%= @info.finish_time %>
  We will evaluate your request and get back to you soon
 Thank you and have a great day!
 

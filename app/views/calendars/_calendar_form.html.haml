@@ -8,5 +8,5 @@
   = f.text_field :building
   = f.text_field :usage
   = f.text_field :department
-  = f.text_field :owner
+  = f.select :owner_id, User.all.collect { |user| ["#{user.name} (#{user.email})", user.id] }, :include_blank => true
   = f.submit @title, :class => 'btn btn-primary btn-large'

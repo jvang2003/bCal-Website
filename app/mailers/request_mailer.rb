@@ -1,9 +1,9 @@
 class RequestMailer < ActionMailer::Base
   default from: "no_reply@bcal.com"
   
-  def request_successful(params)
-    @info=params
-    mail(:to => params["email"] ,:subject => "Room Request")
+  def request_successful(request)
+    @info=request
+    mail(:to => request.email ,:subject => "Room Request")
   end
 
   def status_changed(request)

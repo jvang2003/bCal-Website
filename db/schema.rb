@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209082120) do
+ActiveRecord::Schema.define(:version => 20131210092002) do
 
   create_table "blocked_times", :force => true do |t|
     t.datetime "start_time"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20131209082120) do
     t.string   "department"
     t.string   "usage"
     t.boolean  "fee_required",  :default => false
-    t.string   "owner"
+    t.string   "owner_id"
   end
 
   create_table "events", :force => true do |t|

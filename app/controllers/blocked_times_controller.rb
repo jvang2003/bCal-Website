@@ -11,8 +11,8 @@ class BlockedTimesController < ApplicationController
     date = params["date"].split("/")
     to_pass = {}
     to_pass[:calendar_id] = params[:calendar_id]
-    to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["hour"].to_i,params["start_time"]["hour"].to_i, 0
-    to_pass[:end_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["end_time"]["min"].to_i,params["end_time"]["min"].to_i, 0
+    to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["hour"].to_i,params["start_time"]["min"].to_i, 0
+    to_pass[:end_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["end_time"]["hour"].to_i,params["end_time"]["min"].to_i, 0
     BlockedTimes.create! to_pass
     redirect_to calendar_blocked_times_path
   end
@@ -23,10 +23,11 @@ class BlockedTimesController < ApplicationController
   end
 
   def destroy
-    @blocked_times = BlockedTimes.where :calendar_id => params[:calendar_id]
+    @blocked_times = BlockedTimes.find(params[:id])
     @blocked_times.destroy
+
     flash[:notice] = "Blocked Times deleted"
-    redirect_to blocked_times_path
+    redirect_to calendar_blocked_times_path
   end
 
   def new

@@ -12,7 +12,7 @@ Background: calendars have been added
 
 	Given the following requests exist:
 	| reason                 | status   | details        | start_time  	    | finish_time         |
-	| We're having a partay  | approved | fofofofofofofo | 2013-11-10 12:22:26  | 2013-11-10 19:22:26 |
+	| We're having a partay  | Approved | fofofofofofofo | 2013-11-10 12:22:26  | 2013-11-10 19:22:26 |
 
 	Given I am logged in as public user "1"
 	And I am on the homepage

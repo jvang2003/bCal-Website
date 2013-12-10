@@ -13,6 +13,5 @@ BCalIntegration::Application.routes.draw do
 
   get "calendar/:id/auth", :to => "calendars#auth", :as => :oauth
   get "oauth_redirect", :to => "calendars#oauth_redirect"
-
   get 'about', :to => "static#about"
 end

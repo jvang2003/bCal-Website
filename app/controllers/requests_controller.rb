@@ -18,29 +18,15 @@ class RequestsController < ApplicationController
     %w(people details reason place course_related accept_different_room department email).each do |attr|
       to_pass[attr] = params[:request][attr]
     end
-
-    to_pass[:start_time] = Time.new(Time.new.year, hour=params[:time]['hour'].to_i, minute=params[:time]['min'].to_i)
-    to_pass[:finish_time] = Time.new(Time.new.year, hour=params['finish_time']['hour'], minute=params['finish_time']['min'].to_i)
+    time=Time.strptime(params["date"],"%m/%d/%Y")
+    to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["time"]['hour'].to_i, minute=params["time"]['min'].to_i,0,"-08:00")
+    to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
     # to_pass[:start_time] = DateTime.strptime("12/22/2011", "%m/%d/%Y")
     # to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["(4i)"].to_i,params["start_time"]["(5i)"].to_i, 0
     # to_pass[:finish_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["finish_time"]["(4i)"].to_i,params["finish_time"]["(5i)"].to_i, 0
 
-    to_pass[:status] = :pending
-    requests = Request.find_all_by_place(to_pass[:place])
-
+    to_pass[:status] = "Pending"
     request = Request.create! to_pass
-    requests.each do |req|
-      if request.collision(req)
-        collide = true
-        break
-      end
-    end
-
-    if collide
-      calendar=Calendar.find_by_name(request.place)
-      owner_email=User.find_by_calnet_id(calendar.owner).email
-      RequestMailer.collision_detected(calendar,owner_email).deliver
-    end
     params[:email] = params[:request][:email]
     RequestMailer.request_successful(params).deliver
 
@@ -67,7 +53,7 @@ class RequestsController < ApplicationController
     @request.calendar = calendar if @request.calendar == nil
     @request.save
     RequestMailer.status_changed(@request).deliver
-    if (prev_status != "approved" and @request.status == "approved" and calendar.access_token != nil)
+    if (prev_status != "Approved" and @request.status == "Approved" and calendar.access_token != nil)
       @event = Event.new
       @request.event = @event
       @request.event.update_gcal
@@ -75,7 +61,7 @@ class RequestsController < ApplicationController
           email=User.find_by_calnet_id(@request.calendar.owner).email
           RequestMailer.collision_detected(@request.calendar,email).deliver
       end
-    elsif (params[:status] and (@request.status == "rejected" or @request.status == "pending") and calendar.access_token != nil)
+    elsif (params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and calendar.access_token != nil)
       if @request.event
         @request.event.delete_event
         @request.event.destroy

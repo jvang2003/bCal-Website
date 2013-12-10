@@ -62,16 +62,32 @@ class RequestsController < ApplicationController
 
     time=Time.strptime(params["date"],"%m/%d/%Y") if params["date"]
 
-    request_params[:start_time] = generate_time("start_time", time) if params["start_time"]
-    request_params[:finish_time] = generate_time("end_time", time) if params["end_time"]
-    request_params[:status] = request_params[:status] || @request.status if request_params[:status]
-    request_params[:place_id] = Calendar.find(request_params["place_id"]).id if request_params["place_id"]
+    
+    start_param(request_params, time)
+    finish_param(request_params, time)
+    status_param(request_params, @request)
+    place_param(request_params)
     request_params
+  end
+
+  def start_param(request_params, time)
+    request_params[:start_time] = generate_time("start_time", time) if params["start_time"]
+  end
+
+  def finish_param(request_params, time)
+    request_params[:finish_time] = generate_time("end_time", time) if params["end_time"]
+  end
+
+  def status_param(request_params, request)
+    request_params[:status] = request_params[:status] || request.status if request_params[:status]
+  end
+
+  def place_param(request_params) 
+    request_params[:place_id] = Calendar.find(request_params["place_id"]).id if request_params["place_id"]
   end
 
   def update
     @request ||= Request.find(params[:id])
-    prev_status = @request.status
     to_pass = @request.attributes.pluck Request::FIELDS
     params[:request].pluck(Request::FIELDS).each { |key, val|  to_pass[key] = val if val}
     to_pass = handle_params(to_pass)
@@ -85,9 +101,8 @@ class RequestsController < ApplicationController
 
     RequestMailer.status_changed(@request).deliver
 
-    if prev_status != "Approved" and @request.status == "Approved" and @request.place.try(:access_token)
-      @event = Event.new
-      @request.event = @event
+    if @request.status != "Approved" and @request.status == "Approved" and @request.place.try(:access_token)
+      @request.event = Event.new
       if @request.place.check_collision(@request)
           email = @request.place.owner.email
           RequestMailer.collision_detected(@request.place,email).deliver

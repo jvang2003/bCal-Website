@@ -23,10 +23,11 @@ class BlockedTimesController < ApplicationController
   end
 
   def destroy
-    @blocked_times = BlockedTimes.where :calendar_id => params[:calendar_id]
+    @blocked_times = BlockedTimes.find(params[:id])
     @blocked_times.destroy
+
     flash[:notice] = "Blocked Times deleted"
-    redirect_to blocked_times_path
+    redirect_to calendar_blocked_times_path
   end
 
   def new

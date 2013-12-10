@@ -17,10 +17,10 @@ Background: requests have been added
     | Room 3         |345   |private     | false        |false   |
 
 	And the following requests exist:
-	| place    | people  | reason                 | status   | user_id |
-	| Room 1   | 4       | We're having a partay  | Approved | bill	   |
-	| Room 2   | 42      | Office hours           | Pending  | bill    |
-	| Room 3   | 5       | Serious business       | Rejected | bill    |
+	| place    | people  | reason                 | status   | user  |
+	| Room 1   | 4       | We're having a partay  | Approved | bill	 |
+	| Room 2   | 42      | Office hours           | Pending  | bill  |
+	| Room 3   | 5       | Serious business       | Rejected | bill  |
 
 	And I am on the homepage
 	And I am logged in as "bill"

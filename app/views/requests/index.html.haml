@@ -1,15 +1,15 @@
 = content_for :javascripts do
-	= javascript_include_tag 'show_request.js'
+    = javascript_include_tag 'show_request.js'
 
+
+= form_tag requests_path, :method => :get, :class => 'form-inline form-header' do
+    .form-group
+        = select_tag 'filter', options_for_select(%w(All Pending Approved Rejected).map { |e| [e,e] }, params[:filter] || "All"), :class => 'form-control'
+    .form-group
+        = button_tag(:type => :submit, :class => 'btn btn-default form-control') do
+            Filter
 
 - if @requests.empty?
-	.jumbotron No Requests
+    .jumbotron No Requests
 - else
-	= form_tag requests_path, :method => :get, :class => 'form-inline form-header' do
-		.form-group
-			= select_tag 'filter', options_for_select(%w(All Pending Approved Rejected).map { |e| [e,e] }, params[:filter] || "All"), :class => 'form-control'
-		.form-group
-			= button_tag(:type => :submit, :class => 'btn btn-default form-control') do
-				Filter
-
-	= simple_table_for @requests, with: RequestTable
+    = simple_table_for @requests, with: RequestTable

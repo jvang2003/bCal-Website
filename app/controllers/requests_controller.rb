@@ -91,9 +91,9 @@ class RequestsController < ApplicationController
       @event = Event.new
       @request.event = @event
       @request.event.update_gcal
-      if @request.calendar.check_collision(@request)
-          email = User.find_by_calnet_id(@request.calendar.owner).email
-          RequestMailer.collision_detected(@request.calendar,email).deliver
+      if @request.place.check_collision(@request)
+          email = User.find_by_calnet_id(@request.place.owner).email
+          RequestMailer.collision_detected(@request.place,email).deliver
       end
     elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and @request.place.try(:access_token)
       if @request.event

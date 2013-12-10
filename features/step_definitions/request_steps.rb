@@ -3,6 +3,7 @@ Given /the following requests exist/ do |requests_table| #done
     	request[:start_time] = Time.now
         request[:finish_time] = Time.now
         request["place_id"] = Calendar.find_by_name(request.delete("place")).id if request["place"]
+        request["user_id"] = User.find_by_calnet_id(request.delete("user")).id if request["user"]
         Request.create!(request)
     end
 end
@@ -12,7 +13,7 @@ When /I view my request history/ do
 end
 
 When /I filter by (.*)/ do |filter|
-	find("option[value='#{filter}']").click
+	find("option[value=\"#{filter}\"]").click
 end
 
 def find_row name
@@ -22,7 +23,7 @@ def find_row name
     rows.each do |row|
         if not found
             data = row.all('td')
-            if data.first.text eql? name
+            if data.first.text == name
                 found = data
             end
         end

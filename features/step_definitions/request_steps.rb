@@ -2,7 +2,7 @@ Given /the following requests exist/ do |requests_table| #done
     requests_table.hashes.each do |request|
     	request[:start_time] = Time.now
         request[:finish_time] = Time.now
-        request["place_id"] = Calendar.find_by_name(request.delete("place")) if request["place"]
+        request["place_id"] = Calendar.find_by_name(request.delete("place")).id if request["place"]
         Request.create!(request)
     end
 end

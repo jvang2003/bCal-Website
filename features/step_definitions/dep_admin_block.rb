@@ -35,6 +35,13 @@ Then /^"(.*)" should not be able to be booked on "(.*)" from "(.*)" to "(.*)"/ d
 	start_min = start_time.split(":").last
 	end_hour = end_time.split(":").first
 	end_min = end_time.split(":").last
+	
+	if start_min == "00"
+		start_min = "0"
+	end
+	if end_min == "00"
+		end_min = "0"
+	end
 
 	page.find(:xpath, '//input[@id="startHour"]').set start_hour
 	page.find(:xpath, '//input[@id="startMin"]').set start_min

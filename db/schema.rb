@@ -23,17 +23,17 @@ ActiveRecord::Schema.define(:version => 20131209082120) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
-    t.boolean  "fee_required",  :limit => 255
     t.string   "email"
     t.string   "visibility"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.boolean  "disabled"
     t.string   "access_token"
     t.string   "refresh_token"
     t.string   "building"
     t.string   "department"
     t.string   "usage"
+    t.boolean  "fee_required",  :default => false
     t.string   "owner"
   end
 

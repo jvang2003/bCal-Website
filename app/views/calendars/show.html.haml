@@ -33,8 +33,11 @@
 		Department :
 		= @calendar.department
 	%li.list-group-item
-		Owner:
+		Owner :
 		= @calendar.owner
+	%li.list-group-item
+		Blocked Times:
+		= link_to "Click to see this calendar's blocked times", blocked_time_path(@calendar.id)
 
 - if @calendar.access_token == nil
 	= "Calendar not yet authenticated with Google Calendars"

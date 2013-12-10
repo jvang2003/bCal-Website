@@ -6,7 +6,17 @@ Given /^the following users exist:$/ do |users_table|
 end
 
 Given /^I am logged in as a(?:n)? "(.*?)"$/ do |role|
-    login User.find_by_role(User::VALID_ROLES[role]).calnet_id
+    user = User.find_by_role(User::VALID_ROLES[role])
+    if user
+        login User.find_by_role(User::VALID_ROLES[role]).calnet_id
+    else
+        user_params = {}
+        user_params[:role] = role
+        user_params[:calnet_id] = "tester"  
+        user_params[:name] = "tester"
+        user_params[:email] = "tester@fakeDomain.com"
+        login "tester"
+    end
 end
 
 Given /^I am logged in as? "(.*?)"$/ do |name|

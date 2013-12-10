@@ -5,16 +5,15 @@ Feature: Any changes a user makes in our app will show up in Google Calendar
 	So that I the Google Calendar can be easily maintained
 
 Background: calendars have been added
-
+	Given I am logged in as a "Guest"
 	Given the following calendars exist:
 	| name | email 				          |
 	| Test | bCalWebsiteTesting@gmail.com |
 
 	Given the following requests exist:
-	| reason                 | status   | details        | start_time  	    | finish_time         |
-	| We're having a partay  | Approved | fofofofofofofo | 2013-11-10 12:22:26  | 2013-11-10 19:22:26 |
+	| reason                 | status   | details        | start_time  	       | finish_time         | user_id |
+	| We're having a partay  | Approved | fofofofofofofo | 2013-11-10 12:22:26  | 2013-11-10 19:22:26 | 1 |
 
-	Given I am logged in as public user "1"
 	And I am on the homepage
 	And I authenticate the calendar "Test" the refresh token "1/HOP_Fhq1XuuNWEc_DkDw0M7F8KG3I8YpFnXKGnjlbjs"
 

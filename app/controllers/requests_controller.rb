@@ -71,6 +71,10 @@ class RequestsController < ApplicationController
       @event = Event.new
       @request.event = @event
       @request.event.update_gcal
+      if @request.calendar.check_collision(@request)
+          email=User.find_by_calnet_id(@request.calendar.owner).email
+          RequestMailer.collision_detected(@request.calendar,email).deliver
+      end
     elsif (params[:status] and (@request.status == "rejected" or @request.status == "pending") and calendar.access_token != nil)
       if @request.event
         @request.event.delete_event

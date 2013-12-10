@@ -19,7 +19,7 @@ class RequestsController < ApplicationController
       to_pass[attr] = params[:request][attr]
     end
     time=Time.strptime(params["date"],"%m/%d/%Y")
-    to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["time"]['hour'].to_i, minute=params["time"]['min'].to_i,0,"-08:00")
+    to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00") 
     to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
     # to_pass[:start_time] = DateTime.strptime("12/22/2011", "%m/%d/%Y")
     # to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["(4i)"].to_i,params["start_time"]["(5i)"].to_i, 0

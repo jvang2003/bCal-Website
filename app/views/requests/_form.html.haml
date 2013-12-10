@@ -19,6 +19,10 @@
   / = hidden_field :end_time, '(4i)'
   / = hidden_field :end_time, '(5i)'
   #slider
+  = hidden_field_tag 'start_time[hour]', '', :id => 'startHour'
+  = hidden_field_tag 'start_time[min]', '', :id => 'startMin'
+  = hidden_field_tag 'end_time[hour]', '', :id => 'endHour'
+  = hidden_field_tag 'end_time[min]', '', :id => 'endMin'
   = f.text_area :reason, :rows => 5, :required => true
   = f.text_area :details, :rows => 5, :required => true
   = f.check_box :course_related, {}, true, params[:new]

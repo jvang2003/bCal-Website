@@ -9,12 +9,6 @@ end
 
 When /^I (approve|deny) a request for "(.*?)"$/ do |approve, room|
     click_link "request_index"
-
-    # # row = find_row room
-    # # row[row.length - 1].click_link "Update"
-    # request_id = Request.find_by_place(room).id
-    # click_link (approve == "approve" ? "approve_#{request_id}" : "reject_#{request_id}") 
-    # # click_button "Update Status"
     row = find_row room
     row[row.length - 1].click_link "Update"
     select (approve == "approve" ? "Approved" : "Rejected"), :from => "request_status"

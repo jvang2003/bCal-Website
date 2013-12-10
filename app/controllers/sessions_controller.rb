@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         sign_in user
         redirect_back_or root_path
       else
-        flash[:notice] = "Please sign up"
+        flash[:info] = "You currently do not have any information in the B-Cal Integration System. Please sign up."
         redirect_to new_user_path("user[calnet_id]" => session["cas"]["user"], :return_to => params[:return_to])
       end
     else

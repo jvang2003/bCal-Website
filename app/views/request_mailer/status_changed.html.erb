@@ -10,7 +10,8 @@
 room : <b><%= @request.place %></b><br/>
 Number of people: <b><%= @request.people %></b><br/>
 Details : <b><%= @request.details %></b><br/>
-Date and Time: <b><%= @request.time %></b><br/>
+Start Date and Time: <b><%= @request.start_time %></b><br/>
+End Date and Time: <b><%= @request.finish_time %></b><br/>
     </p>
     <% if @request.status.eql? :approved %>
     <p>You can use the reserved room on the specified date</p>

@@ -5,7 +5,8 @@ Your request details:
        Room: <%= @request.place %>
        Number of people: <%= @request.people %>
                Details : <%= @request.details %>
-               Date and Time: <%= @request.time %>
+               Start Date and Time: <%= @request.start_time %>
+               End Date and Time: <%= @request.finish_time %>
 
 <% if @request.status.eql?"approved" %>
 You can use the room during the specified time

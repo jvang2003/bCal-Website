@@ -6,11 +6,11 @@
   <body>
     <h1>We have received your request</h1>
     <p>
-      You have requested room : <b><%= @info["place"] %></b><br/>
-Number of people: <b><%= @info["people"] %></b><br/>
-Details : <b><%= @info["details"] %></b><br/>
-Date: <b><%= @info["date"] %></b><br/>
-Time: <b><%= @info["time"]["(4i)"] %>:<%= @info["time"]["(5i)"] %></b><br/>
+      You have requested room : <b><%= @info.place %></b><br/>
+Number of people: <b><%= @info.people %></b><br/>
+Details : <b><%= @info.details %></b><br/>
+Start Time: <b><%= @info.start_time.in_time_zone("Pacific Time (US & Canada)") %></b><br/>
+End Time  : <b><%= @info.finish_time.in_time_zone("Pacific Time (US & Canada)") %></b><br/>
       We will evaluate your request and get back to you soon
     </p>
     <p>Thank you and have a great day!</p>

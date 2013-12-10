@@ -32,9 +32,11 @@
 	%li.list-group-item
 		Department :
 		= @calendar.department
+
 	%li.list-group-item
 		Owner :
-		= @calendar.owner
+		= @calendar.owner.try(:name) || "None"
+
 	%li.list-group-item
 		Blocked Times:
 		= link_to "View blocked times", calendar_blocked_times_path(@calendar.id)
@@ -44,5 +46,5 @@
 	= "Calendar not yet authenticated with Google Calendar."
 	= link_to "Click to Authenticate", oauth_path(@calendar.id)
 - else
-	= simple_table_for @events, with: EventTable
 	= link_to "Download Events as CSV", calendar_path(@calendar.id) + ".csv"
+	= simple_table_for @events, with: EventTable

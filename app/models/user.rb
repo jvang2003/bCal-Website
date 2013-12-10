@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
+  include UsersHelper
   attr_accessible :name, :calnet_id, :role, :email
 
   validates :name, presence: true
-  validates :calnet_id, presence: true
+  # validates :calnet_id, presence: true
   validates :email, presence: true
+
   def User.VALID_ROLES
     {
       "Guest" => 0,

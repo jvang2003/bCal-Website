@@ -1,4 +1,4 @@
-#require 'helpers'
+require 'helpers'
 include TableHelpers
 
 class RequestTable < TableCloth::Base

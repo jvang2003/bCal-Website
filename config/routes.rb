@@ -8,8 +8,8 @@ BCalIntegration::Application.routes.draw do
   resources :requests
 
   root :to => 'calendars#index'
-  match '/sign_in',  to: 'sessions#new',         via: 'get'
-  match '/sign_out', to: 'sessions#destroy',     via: 'delete'
+  match 'sign_in',  to: 'sessions#new',         via: 'get'
+  match 'sign_out', to: 'sessions#destroy'
 
   get "calendar/:id/auth", :to => "calendars#auth", :as => :oauth
   get "oauth_redirect", :to => "calendars#oauth_redirect"

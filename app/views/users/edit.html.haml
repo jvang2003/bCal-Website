@@ -2,21 +2,4 @@
 %h1
   = "Edit User"
 
-.row
-  .span6.offset3
-    = form_for(@user) do |f|
-      = render 'shared/error_messages'
-
-      = f.label :name
-      = f.text_field :name, :value => @user.name
-
-      = f.label :calnet_id
-      = f.text_field :calnet_id, :value => @user.calnet_id
-
-      = f.label :role
-      %select{:name => "user[role]"}
-        - User.VALID_ROLES.each do |name, number|
-          %option{:value => number, :selected => @user.role == number}
-            =name
-
-      = f.submit "Edit User"
+= render 'form'

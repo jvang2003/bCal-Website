@@ -16,25 +16,7 @@ module UsersHelper
 
   ["App Admin", "Dept Admin", "Admin"].each do |name|
     define_method "is_#{name.to_slug}?" do
-      return if require_login
-      if current_user.role < User.VALID_ROLES[name]
-        flash[:alert] = "You must be an \"#{name}\" to access this page"
-        redirect_to calendars_path
-      end
+      return self.role >= User.VALID_ROLES[name]
     end
-  end
-
-  def is_higher_admin?
-    return if check_signed_in_user?
-    @user ||= User.find params[:id]
-
-    if not is_higher_admin_b? @user
-      flash[:error] = "You don't have privileges for user \"#{@user.name}\""
-      redirect_back_or calendars_path
-    end
-  end
-
-  def is_higher_admin_b? user
-    return signed_in? && (current_user.role >= user.role)
   end
 end

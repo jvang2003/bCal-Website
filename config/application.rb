@@ -63,5 +63,7 @@ module BCalIntegration
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.assets.initialize_on_precompile = false
+
+    config.rack_cas.server_url = 'https://auth.berkeley.edu/cas'
   end
 end

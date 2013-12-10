@@ -54,6 +54,7 @@ gem 'quiet_assets', :group => :development
 gem 'thin'
 gem 'table_cloth'
 gem 'chosen-rails'
+gem 'rack-cas'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

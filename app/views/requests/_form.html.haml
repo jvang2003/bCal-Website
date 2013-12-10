@@ -1,0 +1,29 @@
+= content_for :javascripts do
+  = javascript_include_tag 'request.js'
+
+= bootstrap_form_for @request do |f|
+  = f.error_messages
+  = f.select :place, Calendar.all.collect { |cal| [cal.name, cal.id] }, :include_blank => true
+  = # will be removing this because Users already have an e-mail
+  = # f.email_field :email, :placeholder => "youremail@example.com", :required => true
+  = f.number_field :people, :min => 0, :label => "Number of Attendees", :required => true
+  = f.text_field :department, :placeholder => "Civil Engineering", :required => true
+  = label_tag :date, 'Date'
+  = text_field_tag :date ,nil,:required => true
+  / = label_tag :time, 'Start Time'
+  / = time_select :time, ""
+  / = label_tag :finish_time, 'End Time'
+  / = time_select :finish_time, ""
+  / = hidden_field :time, '(4i)'
+  / = hidden_field :time, '(5i)'
+  / = hidden_field :end_time, '(4i)'
+  / = hidden_field :end_time, '(5i)'
+  #slider
+  = f.text_area :reason, :rows => 5, :required => true
+  = f.text_area :details, :rows => 5, :required => true
+  = f.check_box :course_related, {}, true, params[:new]
+  = f.check_box :accept_different_room, {}, true, params[:new]
+  - if current_user.is_admin? && params[:action] != "new"
+    = f.select :status, Request::STATUSES
+  / = submit_tag "Submit Request", :class => "btn btn-inverse btn-success", :data => {:confirm => "Ready to submit?"}
+  = f.submit

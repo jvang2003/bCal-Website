@@ -2,7 +2,7 @@ include CalendarsHelper
 
 class CalendarsController < ApplicationController
   before_filter :check_auth, :only => [:auth]
-  before_filter :is_dept_admin?, :only => [:edit, :new, :create, :destroy]
+  before_filter :require_dept_admin, :only => [:edit, :new, :create, :destroy]
   skip_before_filter :require_login, :only => :index
 
   def self.can_view? user

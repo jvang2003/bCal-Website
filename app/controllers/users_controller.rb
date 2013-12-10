@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     user && user.role >= 2
   end
 
-  before_filter :is_higher_admin?, :only => [:edit, :update, :destroy]
-  before_filter :is_dept_admin?, :only => [:index]
+  before_filter :require_higher_admin, :only => [:edit, :update, :destroy]
+  before_filter :require_dept_admin, :only => [:index]
   skip_before_filter :require_login, :only => [:new, :create]
 
   def new
@@ -18,11 +18,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new user_params
+    if user_params.include?(:email)
+      @user = User.find_by_email user_params[:email]
+      if @user
+        @user.calnet_id = user_params[:calnet_id]
+      end
+    end
+
+
+    @user ||= User.new user_params
 
     if @user.save
       sign_in @user
-      redirect_back_or users_path
+      redirect_back_or root_path
     else
       render :new
     end
@@ -65,7 +73,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params[:user] # TODO: FIX BIG SECURITY HOLE
+      params[:user] # TODO: FIX SECURITY HOLE
     end
 
     def is_same_controller_and_action?(url1, url2)

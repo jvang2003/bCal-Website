@@ -28,49 +28,56 @@ class RequestsController < ApplicationController
 
     request=Request.create! to_pass
     requests.each do |req|
-        if request.collision(req)
-            collide=true
-            break
-        end
+      if request.collision(req)
+        collide = true
+        break
+      end
     end
+
     if collide
-        calendar=Calendar.find_by_name(request.place)
-        owner_email=User.find_by_calnet_id(calendar.owner).email
-        RequestMailer.collision_detected(calendar,owner_email).deliver
+      calendar=Calendar.find_by_name(request.place)
+      owner_email=User.find_by_calnet_id(calendar.owner).email
+      RequestMailer.collision_detected(calendar,owner_email).deliver
     end
     params[:email] = params[:request][:email]
     RequestMailer.request_successful(params).deliver
 
-    flash[:notice]="Request has been submitted"
+    flash[:notice]= "Request has been submitted"
     redirect_to calendars_path
   end
 
   def index
-    @requests = Request.all
+    filter = params[:filter].downcase
+
+    if filter and filter != "all"
+      @requests = Request.where(:status => filter)
+    else
+      @requests = Request.all
+    end
     # @requests = Request.all(:user_id => @user_id) #TODO: ACTUALLY MAKE THIS USE THE USER ID!!!!
   end
 
   def edit
-     @request = Request.find(params[:id])
-     prev_status = @request.status
-     @request.status = params[:status] unless params[:status] == nil
-     calendar = Calendar.find_by_name(@request.place)
-     @request.calendar = calendar if @request.calendar == nil
-     @request.save!
-     if (params[:status])
-       RequestMailer.status_changed(@request).deliver
-       if (prev_status != "approved" and @request.status == "approved" and calendar.access_token != nil)
-         @event = Event.new
-         @request.event = @event
-         @request.event.update_gcal
-       elsif (params[:status] and (@request.status == "rejected" or @request.status == "pending") and calendar.access_token != nil)
-         if @request.event
-           @request.event.delete_event
-           @request.event.destroy
-         end
-       end
-       flash[:notice] = "Request Status has been updated."
-       redirect_to requests_path
+    @request = Request.find(params[:id])
+    prev_status = @request.status
+    @request.status = params[:status] unless params[:status] == nil
+    calendar = Calendar.find_by_name(@request.place)
+    @request.calendar = calendar if @request.calendar == nil
+    @request.save!
+    if (params[:status])
+      RequestMailer.status_changed(@request).deliver
+      if (prev_status != "approved" and @request.status == "approved" and calendar.access_token != nil)
+        @event = Event.new
+        @request.event = @event
+        @request.event.update_gcal
+      elsif (params[:status] and (@request.status == "rejected" or @request.status == "pending") and calendar.access_token != nil)
+        if @request.event
+          @request.event.delete_event
+          @request.event.destroy
+        end
+      end
+      flash[:notice] = "Request Status has been updated."
+      redirect_to requests_path
     end
   end
 end

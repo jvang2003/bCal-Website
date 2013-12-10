@@ -7,8 +7,8 @@ Feature: Public user can enter details about events
 Background: calendars have been added to the database
     Given the following calendars exist:
     |name           |email |visibility  | fee_required |disabled |
-    |calendar1      |123   |public      | true         |true     |
-    |calendar2      |345   |private     | false        |false    |
+    |125 Cory       |123   |public      | true         |true     |
+    |Campanile      |345   |private     | false        |false    |
 
     And I am logged in as public user "public_user"
     And I am on the homepage
@@ -16,7 +16,7 @@ Background: calendars have been added to the database
 
 Scenario: able to add details
     When I try to submit a request for reserving a room
-    Then I will be able to fill in 11, abc@gmail.com, Civil Engineering, 125 Cory, infosession, none, yes, no
+    Then I will be able to fill in 11, Civil Engineering, 125 Cory, infosession, none, yes, no
 
 
 

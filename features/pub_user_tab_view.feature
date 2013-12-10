@@ -11,6 +11,8 @@ Background: a calendar has been added to the app
     # hacky way of authentication
 	And I authenticate the calendar "real google cal" the refresh token "1/HOP_Fhq1XuuNWEc_DkDw0M7F8KG3I8YpFnXKGnjlbjs"
 
+	And I am logged in as public user "User"
+
 Scenario: when I viewing a calendar, I should see it in its tabular view.
 	And I am viewing the calendar "real google cal"
 	Then I should see the calendar in tabular form

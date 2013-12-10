@@ -54,6 +54,7 @@ gem 'thin'
 gem 'table_cloth'
 gem 'chosen-rails'
 gem 'rack-cas'
+gem 'bootstrap_3_forms', :git => 'git@github.com:moowiz/bootstrap_forms.git'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

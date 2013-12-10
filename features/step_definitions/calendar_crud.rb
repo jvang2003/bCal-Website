@@ -107,7 +107,6 @@ When /I (?:delete|destroy|remove) calendar "([^\"]*)"$/ do |calendar_name|
 end
 
 Then /I should not see calendar "(.*?)"/ do |calendar_name|
-  save_and_open_page
   if page.respond_to? :should
     page.should have_no_content(calendar_name)
   else

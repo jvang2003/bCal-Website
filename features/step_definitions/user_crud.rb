@@ -1,11 +1,11 @@
-Then /^I should (not )?see "(.*)" in the list of (.*?)$/ do |nope, calnet_id, list_type|
+Then /^I should (not )?see "(.*)" in the list of (.*?)$/ do |nope, item, list_type|
     # for now do nothing with the list type :D
     if list_type.downcase == "users"
         visit users_path
     elsif list_type.downcase == "roles"
         visit new_user_path
     end
-    page.text.send("should#{"_not" if nope}", include(calnet_id))
+    page.text.send("should#{"_not" if nope}", include(item))
 end
 
 When /^I try to delete user "(.*)"$/ do |calnet_id|

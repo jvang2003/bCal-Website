@@ -37,7 +37,8 @@
 		= @calendar.owner
 	%li.list-group-item
 		Blocked Times:
-		= link_to "Click to see this calendar's blocked times", calendar_blocked_times_path(@calendar.id)
+		= link_to "View blocked times", calendar_blocked_times_path(@calendar.id)
+		= link_to "Create blocked time", new_calendar_blocked_time_path(@calendar.id)
 
 - if @calendar.access_token == nil
 	= "Calendar not yet authenticated with Google Calendar."

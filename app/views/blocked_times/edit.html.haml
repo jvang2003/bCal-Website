@@ -1,2 +1,11 @@
-%h1 BlockedTimes#edit
-%p Find me in app/views/blocked_times/edit.html.haml
+= content_for :javascripts do
+	= javascript_include_tag 'edit_blocked_times.js'
+
+%h1 Edit a time block
+= form_for [@calendar, @blocked_time], url: {action: 'create'}, :html => {:id => 'edit_blocked_times'} do |f|
+	= label_tag :date, 'Date'
+	= text_field_tag :date ,nil,:required => true
+	%div#slider{:style => 'padding-bottom: 10px;'}
+	= submit_tag "Submit Request", :class => "btn btn-inverse btn-success", :data => {:confirm => "Ready to submit?"}
+
+A blocked section of time will only prevent future events from being created.

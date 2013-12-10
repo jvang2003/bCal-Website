@@ -26,17 +26,10 @@ class RequestsController < ApplicationController
   def create
     collide=false
 
-    to_pass = {}
-    %w(people details reason place course_related accept_different_room department email user_id).each do |attr|
-      to_pass[attr] = params[:request][attr]
-    end
-
-    time=Time.strptime(params["date"],"%m/%d/%Y")
-
-    to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00")
-    to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
+    @request = Request.new
+    to_pass = handle_params params[:request].pluck Request::FIELDS
     to_pass[:status] = "Pending"
-    to_pass[:email] =current_user.email
+    to_pass[:email] = current_user.email
 
     request = Request.create! to_pass
 
@@ -47,7 +40,7 @@ class RequestsController < ApplicationController
   end
 
   def index
-    filter = params[:filter].try(:downcase)
+    filter = params[:filter]
 
     @requests = Request.scoped
     if filter and filter != "All"
@@ -64,12 +57,25 @@ class RequestsController < ApplicationController
     end
   end
 
+  def handle_params request_params
+    @request ||= Request.find params[:id]
+
+    time=Time.strptime(params["date"],"%m/%d/%Y")
+
+    request_params[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00")
+    request_params[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
+    request_params[:status] = request_params[:status] || @request.status
+    request_params[:place_id] = Calendar.find(request_params["place_id"]).id
+    request_params
+  end
+
   def update
-    @request = Request.find(params[:id])
+    @request ||= Request.find(params[:id])
     prev_status = @request.status
-    @request.status = params[:status] unless params[:status] == nil
-    calendar = Calendar.find_by_name(@request.place)
-    @request.calendar = calendar if @request.calendar == nil
+    to_pass = handle_params params[:request].pluck Request::FIELDS
+    to_pass[:email] = params[:request][:email]
+
+    @request.update_attributes to_pass
 
     if not @request.save
       render 'edit' and return

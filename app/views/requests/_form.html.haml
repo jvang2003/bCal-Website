@@ -3,21 +3,11 @@
 
 = bootstrap_form_for @request do |f|
   = f.error_messages
-  = f.select :place, Calendar.all.collect { |cal| [cal.name, cal.id] }, :include_blank => true
-  = # will be removing this because Users already have an e-mail
-  = # f.email_field :email, :placeholder => "youremail@example.com", :required => true
+  = f.select :place_id, Calendar.all.collect { |cal| [cal.name, cal.id] }, :include_blank => true
   = f.number_field :people, :min => 0, :label => "Number of Attendees", :required => true
   = f.text_field :department, :placeholder => "Civil Engineering", :required => true
   = label_tag :date, 'Date'
-  = text_field_tag :date ,nil,:required => true
-  / = label_tag :time, 'Start Time'
-  / = time_select :time, ""
-  / = label_tag :finish_time, 'End Time'
-  / = time_select :finish_time, ""
-  / = hidden_field :time, '(4i)'
-  / = hidden_field :time, '(5i)'
-  / = hidden_field :end_time, '(4i)'
-  / = hidden_field :end_time, '(5i)'
+  = text_field_tag :date ,nil,:required => true, :value => @request.start_time ? @request.start_time.strftime("%m/%d/%Y") : ""
   #slider
   = hidden_field_tag 'start_time[hour]', '', :id => 'startHour'
   = hidden_field_tag 'start_time[min]', '', :id => 'startMin'
@@ -29,6 +19,7 @@
   = f.check_box :accept_different_room, {}, true, params[:new]
   - if current_user.is_admin? && params[:action] != "new"
     = f.select :status, Request::STATUSES
-  / = submit_tag "Submit Request", :class => "btn btn-inverse btn-success", :data => {:confirm => "Ready to submit?"}
-  = f.hidden_field :user_id, :value => current_user.id
+    = f.select :user_id, User.all.collect { |user| [user.name, user.id]}
+  - else
+    = f.hidden_field :user_id, :value => current_user.id
   = f.submit

@@ -8,15 +8,19 @@ class Request < ActiveRecord::Base
     where "status = ?", keyword
   end
 
-  attr_accessible :details, :people, :reason, :place, :start_time, :status, :course_related, :accept_different_room, :department, :finish_time, :email, :user_id
+
+  FIELDS = %w(details people reason place_id start_time status course_related accept_different_room department finish_time user_id email)
+  FIELDS.each do |it|
+    attr_accessible it
+  end
   attr_accessor :google_format_time
 
-  STATUSES = ["Approved", "Pending", "Rejected"]
+  STATUSES = %w(Approved Pending Rejected)
 
   validates :status, inclusion: Request::STATUSES
 
   belongs_to :user
-  belongs_to :calendar
+  belongs_to :place, :class_name => "Calendar"
   has_one :event
 
   def summary; return @details;end

@@ -16,9 +16,7 @@ When /I filter by (.*)/ do |filter|
 	find("option[value=\"#{filter}\"]").click
 end
 
-def find_row_for_room room_name
-    room_id = Calendar.find_by_name(room_name).id.to_s
-
+def find_row name
     rows = page.all('tbody > tr')
     rows.should_not be_nil
     found = false
@@ -36,8 +34,7 @@ def find_row_for_room room_name
 end
 
 Then /I should see room "([^\"]*)" with status "([^\"]*)"/ do |name, status|
-
-    row = find_row_for_room name
+    row = find_row name
     row.to_a[3].text.should == status
 end
 

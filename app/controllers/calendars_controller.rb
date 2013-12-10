@@ -16,14 +16,10 @@ class CalendarsController < ApplicationController
 
   def new
     @calendar = Calendar.new
-    @method = :post
-    @title = "Create Calendar"
   end
 
   def edit
     @calendar = Calendar.find_by_id(params[:id])
-    @method = :put
-    @title = "Update Calendar"
   end
 
   def index
@@ -52,7 +48,7 @@ class CalendarsController < ApplicationController
   def create
     to_pass = {}
     calendar_params = params[:calendar]
-    %w(name visibility email fee_required disabled building usage department owner).each do |attr|
+    %w(name visibility email fee_required disabled building usage department owner_id).each do |attr|
       to_pass[attr] = calendar_params[attr]
     end
 

@@ -1,46 +1,49 @@
 %h1 #{@calendar.name}
-%ul.list-group
-	%li.list-group-item
-		Name:
-		= @calendar.name
-	/ I imagine all the data below this is rendered for admin only
-	/ When u uncomment the if push everything affected by the if in by an indentation
-	/ - if @dept_admin
-	%li.list-group-item
-		E-mail :
-		= @calendar.email
-	%li.list-group-item
-		Visibility :
-		= @calendar.visibility
+%table.table.table-bordered.table-striped.fit-table
+	%tr
+		%td
+			Name
+		%td
+			= @calendar.name
 
-	%li.list-group-item
-		Fee Required ? :
-		= @calendar.fee_required
+	- %w(email visibility).each do |field_name|
+		%tr
+			%td
+				= "#{field_name.titlecase}"
+			%td
+				= "#{@calendar.send(field_name)}"
 
-	%li.list-group-item
-		Disabled? :
-		= @calendar.disabled
+	- %w(fee_required disabled).each do |field_name|
+		%tr
+			%td
+				= "#{field_name.titlecase}"
+			%td
+				= "#{@calendar.send(field_name).to_s.titlecase}"
 
-	%li.list-group-item
-		Building :
-		= @calendar.building
+	- %w(building usage department).each do |field_name|
+		- item = @calendar.send(field_name)
+		%tr
+			%td
+				= "#{field_name.titlecase}: "
+			%td
+				- if item.length > 0
+					= item
+				- else
+					%span.text-muted None
 
-	%li.list-group-item
-		Usage :
-		= @calendar.usage
+	%tr
+		%td
+			Owner
+		%td
+			= @calendar.owner.try(:name) || content_tag(:span, "None", :class => 'text-muted')
 
-	%li.list-group-item
-		Department :
-		= @calendar.department
-
-	%li.list-group-item
-		Owner :
-		= @calendar.owner.try(:name) || "None"
-
-	%li.list-group-item
-		Blocked Times:
-		= link_to "View blocked times", calendar_blocked_times_path(@calendar.id)
-		= link_to "Create blocked time", new_calendar_blocked_time_path(@calendar.id)
+	- if current_user.is_dept_admin?
+		%tr
+			%td
+				Blocked Times
+			%td
+				= link_to "View blocked times", calendar_blocked_times_path(@calendar.id), :class => 'btn btn-primary'
+				= link_to "Create blocked time", new_calendar_blocked_time_path(@calendar.id), :class => 'btn btn-success'
 
 - if @calendar.access_token == nil
 	= "Calendar not yet authenticated with Google Calendar."

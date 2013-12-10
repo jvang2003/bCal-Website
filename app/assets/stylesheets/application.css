@@ -22,3 +22,7 @@
 .big-label {
     font-size: 100%!important;
 }
+
+.fit-table {
+    width: auto!important;
+}

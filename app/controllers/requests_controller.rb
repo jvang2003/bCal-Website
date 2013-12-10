@@ -60,20 +60,24 @@ class RequestsController < ApplicationController
   def handle_params request_params
     @request ||= Request.find params[:id]
 
-    time=Time.strptime(params["date"],"%m/%d/%Y")
+    time=Time.strptime(params["date"],"%m/%d/%Y") if params["date"]
 
-    request_params[:start_time] = generate_time("start_time", time)
-    request_params[:finish_time] = generate_time("end_time", time)
-    request_params[:status] = request_params[:status] || @request.status
-    request_params[:place_id] = Calendar.find(request_params["place_id"]).id
+    request_params[:start_time] = generate_time("start_time", time) if params["start_time"]
+    request_params[:finish_time] = generate_time("end_time", time) if params["end_time"]
+    request_params[:status] = request_params[:status] || @request.status if request_params[:status]
+    request_params[:place_id] = Calendar.find(request_params["place_id"]).id if request_params["place_id"]
     request_params
   end
 
   def update
     @request ||= Request.find(params[:id])
     prev_status = @request.status
-    to_pass = handle_params params[:request].pluck Request::FIELDS
-    to_pass[:email] = params[:request][:email]
+    puts @request.attributes
+    to_pass = @request.attributes.pluck Request::FIELDS
+    params[:request].pluck(Request::FIELDS).each { |key, val|  to_pass[key] = val if val}
+    to_pass = handle_params(to_pass)
+    puts to_pass
+    to_pass[:email] ||= params[:request][:email]
 
     @request.update_attributes to_pass
 

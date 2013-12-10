@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
      print(split_datetime[0] + "T" + result_time)
      return split_datetime[0] + "T" + result_time
   end
+
   def update_gcal
   	#TODO make this handle errors in updating to the api
   	if self.request and self.request.status == "Approved"

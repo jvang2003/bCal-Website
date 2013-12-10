@@ -12,6 +12,7 @@
 //
 //= require twitter/bootstrap
 //= require chosen-jquery
+//= require scaffold
 
 
 jQuery(function() {

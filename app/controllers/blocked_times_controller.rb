@@ -9,6 +9,11 @@ class BlockedTimesController < ApplicationController
 
   def create
     # need to work with Bryan's slider
+    date = params["date"].split("/")
+    to_pass = {}
+    to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["hour"].to_i,params["start_time"]["hour"].to_i, 0
+    to_pass[:end_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["end_time"]["min"].to_i,params["end_time"]["min"].to_i, 0
+    BlockedTimes.create! to_pass
   end
 
   def edit

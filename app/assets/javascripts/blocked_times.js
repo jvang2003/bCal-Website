@@ -2,5 +2,5 @@
 
 $(function(){
  	$("#date").datepicker();
- 	DateSlider.render('#slider', 'new_blocked_times', 'time[(4i)]', 'time[(5i)]', 'finish_time[(4i)]', 'finish_time[(5i)]');
+ 	DateSlider.render('#slider', 'new_blocked_times', 'start_time[hour]', 'start_time[min]', 'end_time[hour]', 'end_time[min]');
 });

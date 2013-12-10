@@ -29,8 +29,8 @@ class RequestsController < ApplicationController
     to_pass[:status] = "Pending"
     to_pass[:email] = current_user.email
 
-    if blocked?(to_pass[:start_time], to_pass[:end_time])
-      flash[:error] = "Your request was automatically rejected because there is a blocked off time section."
+    if blocked?(to_pass[:start_time], to_pass[:finish_time], params[:request][:place_id])
+      flash[:error] = "Your request was automatically rejected because it conflicts blocked off time section on the requested calendar."
     else
       request = Request.create! to_pass
       RequestMailer.request_successful(request).deliver
@@ -122,7 +122,9 @@ class RequestsController < ApplicationController
     DateTime.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00")
   end
 
-  def blocked?(start, finish)
-    (not BlockedTimes.all(:conditions => ['start_time BETWEEN ? AND ?', start, finish]).empty?) || (not BlockedTimes.all(:conditions => ['end_time BETWEEN ? AND ?', start, finish]).empty?)
+  # (StartA <= EndB) and (EndA >= StartB)
+  def blocked?(start, finish, cal_id)
+    with_cal = BlockedTimes.where(calendar_id: cal_id)
+    return (not with_cal.where(['start_time < ? AND end_time > ?', finish, start]).empty?)
   end
 end

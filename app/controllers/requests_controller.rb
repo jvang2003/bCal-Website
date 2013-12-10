@@ -65,7 +65,6 @@ class RequestsController < ApplicationController
     request_params[:start_time] = generate_time("start_time", time) if params["start_time"]
     request_params[:finish_time] = generate_time("end_time", time) if params["end_time"]
     request_params[:status] = request_params[:status] || @request.status if request_params[:status]
-    puts "PLACE ID = " + request_params["place_id"]
     request_params[:place_id] = Calendar.find(request_params["place_id"]).id if request_params["place_id"]
     request_params
   end

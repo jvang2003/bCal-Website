@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
   end
 
   def self.can_crud? user
-    user && user.role >= 1
+    user && user.role && user.role >= 1
   end
 
   def new

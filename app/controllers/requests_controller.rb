@@ -1,5 +1,15 @@
 class RequestsController < ApplicationController
-  before_filter :require_admin, :only => [:index]
+  before_filter :require_mine, :only => [:edit, :update, :show]
+
+  def require_mine
+    if params[:id] && (not current_user.is_dept_admin?)
+      @request ||= Request.find params[:id]
+      if @request.user.id != current_user.id
+        flash[:error] = "You must be a \"Department Admin\" to view other people's requests."
+        redirect_to requests_path and return
+      end
+    end
+  end
 
   def self.can_view? user
     user && user.role >= 0
@@ -22,7 +32,7 @@ class RequestsController < ApplicationController
     end
 
     time=Time.strptime(params["date"],"%m/%d/%Y")
-    puts params
+
     to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00")
     to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
     to_pass[:status] = "Pending"
@@ -39,12 +49,19 @@ class RequestsController < ApplicationController
   def index
     filter = params[:filter].try(:downcase)
 
+    @requests = Request.scoped
     if filter and filter != "All"
-      @requests = Request.where :status => filter
-    else
-      @requests = Request.all
+      @requests = @requests.filter_status filter
     end
-    # @requests = Request.all(:user_id => @user_id) #TODO: ACTUALLY MAKE THIS USE THE USER ID!!!!
+
+    user_id = params[:user_id]
+    if not current_user.is_dept_admin?
+      user_id = current_user.id
+    end
+
+    if user_id
+      @requests = @requests.mine user_id
+    end
   end
 
   def update

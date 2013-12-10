@@ -1,6 +1,6 @@
 Given /^the following users exist:$/ do |users_table|
     users_table.hashes.each do |user|
-        user[:role] = User::VALID_ROLES[user[:role]]
+        user[:role] = User::VALID_ROLES[user[:role]] if not user[:role].kind_of? Fixnum
         User.create!(user)
     end
 end

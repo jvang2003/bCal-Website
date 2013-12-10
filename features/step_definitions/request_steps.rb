@@ -2,6 +2,7 @@ Given /the following requests exist/ do |requests_table| #done
     requests_table.hashes.each do |request|
     	request[:start_time] = Time.now
         request[:finish_time] = Time.now
+        request[:user_id] = User.find_by_calnet_id(request[:user_id]).id
         Request.create!(request)
     end
 end

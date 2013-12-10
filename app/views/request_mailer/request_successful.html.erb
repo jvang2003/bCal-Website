@@ -6,7 +6,7 @@
   <body>
     <h1>We have received your request</h1>
     <p>
-      You have requested room : <b><%= @info.place %></b><br/>
+      You have requested room : <b><%= @info.place.name %></b><br/>
 Number of people: <b><%= @info.people %></b><br/>
 Details : <b><%= @info.details %></b><br/>
 Start Time: <b><%= @info.start_time.in_time_zone("Pacific Time (US & Canada)") %></b><br/>

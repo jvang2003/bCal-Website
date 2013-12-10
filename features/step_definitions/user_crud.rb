@@ -10,7 +10,7 @@ end
 
 When /^I try to delete user "(.*)"$/ do |calnet_id|
     found = User.find_by_calnet_id calnet_id
-    click_link "delete_" + found.id.to_s
+    click_button "delete_" + found.id.to_s
     visit users_path
 end
 

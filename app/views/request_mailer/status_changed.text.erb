@@ -12,8 +12,7 @@ Your request details:
 You can use the room during the specified time.
 If you want to cancel your reservation please let us know.
 Thank you and enjoy the rest of your day!
-<% end %>
-<% if @request.status.eql? "Rejected" %>
+<% elsif @request.status.eql? "Rejected" %>
 We are sorry but we can't accomodate your request right now.
 Please contact us if you have any question.
 We hope that you have a wonderful day!

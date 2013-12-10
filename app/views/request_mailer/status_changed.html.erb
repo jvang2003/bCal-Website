@@ -13,15 +13,14 @@ Details : <b><%= @request.details %></b><br/>
 Start Date and Time: <b><%= @request.start_time %></b><br/>
 End Date and Time: <b><%= @request.finish_time %></b><br/>
     </p>
-    <% if @request.status.eql? :Approved %>
-    <p>You can use the reserved room on the specified date.</p>
-    <p>If you want to cancel your request please let us know.</p>
-    <p>Thank you and enjoy the rest of your day!</p>
-    <% end %>
-    <% if @request.status.eql? :Rejected %>
-    <p> We are sorry but we can't accomodate your room request right now. </p>
-    <p> Please contact us if you have any questions. </p>
-    <p> We hope that you have a wonderful day!s</p>
+    <% if @request.status.eql? "Approved" %>
+    <p>You can use the reserved room on the specified date.
+    If you want to cancel your request please let us know.
+    Thank you and enjoy the rest of your day!</p>
+    <% elsif @request.status.eql? "Rejected" %>
+    <p>We are sorry but we can't accomodate your room request right now.
+    Please contact us if you have any questions.
+    We hope that you have a wonderful day!</p>
     <% end %>
   </body>
 </html>

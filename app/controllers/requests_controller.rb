@@ -62,8 +62,8 @@ class RequestsController < ApplicationController
 
     time=Time.strptime(params["date"],"%m/%d/%Y")
 
-    request_params[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00")
-    request_params[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
+    request_params[:start_time] = generate_time("start_time", time)
+    request_params[:finish_time] = generate_time("end_time", time)
     request_params[:status] = request_params[:status] || @request.status
     request_params[:place_id] = Calendar.find(request_params["place_id"]).id
     request_params
@@ -111,4 +111,9 @@ class RequestsController < ApplicationController
     redirect_to requests_path
   end
 
+  private
+
+  def generate_time(which, time)
+    Time.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00")
+  end
 end

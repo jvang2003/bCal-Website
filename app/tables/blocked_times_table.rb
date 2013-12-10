@@ -6,6 +6,14 @@ class BlockedTimesTable < TableCloth::Base
 
   column :start_time, :end_time
 
+  column :start_time do |block|
+    content_tag block.start_time.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")
+  end
+
+  column :end_time do |block|
+    content_tag block.end_time.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")
+  end
+
   class_eval do
       include TableCloth::Extensions::Actions
       actions do

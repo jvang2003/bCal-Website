@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create :name => "Andy Admin", :role => 3, :email => "admin@example.com"
-User.create(name: 'bryan', calnet_id: 'bryanchu', email: 'bryanchu08@yahoo.com', role: 3)
+User.create(name: 'bryan', calnet_id: 'bryanchu', email: 'bryanchu08@yahoo.com', role: 2)

@@ -1,7 +1,7 @@
 !!! 5
 %html(lang="en")
   %head
-    %script{:type => 'text/javascript', :src => 'http://codeorigin.jquery.com/jquery-1.10.2.min.js'}
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
     = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
     = stylesheet_link_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/flick/jquery-ui.min.css"
     = yield :javascripts

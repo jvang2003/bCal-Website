@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:moowiz/bootstrap_forms.git
+  remote: https://github.com/moowiz/bootstrap_forms.git
   revision: 0863fb058bc4a3b5690b689818d5369cc745702c
   specs:
     bootstrap_3_forms (4.0.1)

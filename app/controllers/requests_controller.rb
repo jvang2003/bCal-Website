@@ -127,14 +127,10 @@ class RequestsController < ApplicationController
   private
 
   def generate_time(which, time)
-<<<<<<< Updated upstream
-    Time.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00")
-=======
     DateTime.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00") 
   end
 
   def blocked?(start, finish)
     (not BlockedTimes.all(:conditions => ['start_time BETWEEN ? AND ?', start, finish]).empty?) || (not BlockedTimes.all(:conditions => ['end_time BETWEEN ? AND ?', start, finish]).empty?)
->>>>>>> Stashed changes
   end
 end

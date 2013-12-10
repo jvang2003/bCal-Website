@@ -7,8 +7,8 @@ Then /I should see the calendar in tabular form/ do
 	# elements are the column names that represent attributes of events
 	page.should have_content("Event")
 	page.should have_content("Attendees")
-	page.should have_content("Starting")
-	page.should have_content("Ending")
+	page.should have_content("Start")
+	page.should have_content("End")
 end
 
 And /I should see the event "(.*)"/ do |name|

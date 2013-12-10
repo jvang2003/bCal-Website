@@ -1,6 +1,5 @@
 class Event < ActiveRecord::Base
   belongs_to :request
-
   before_save :update_gcal
 
   def serialize
@@ -43,7 +42,7 @@ class Event < ActiveRecord::Base
 				  		   :body => JSON.dump(event),
 	                       :headers => {'Content-Type' => 'application/json'})
 	  	end
-	  	#puts res.data
+
 	  	parsed = JSON.parse(res.body)
 	  	self.google_cal_id = parsed["id"]
   	end

@@ -140,6 +140,10 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-cas (0.8.1)
+      addressable (>= 2.3)
+      nokogiri
+      rack
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -242,6 +246,7 @@ DEPENDENCIES
   mail
   pg
   quiet_assets
+  rack-cas
   rails (= 3.2.14)
   rspec-rails
   ruby-debug19

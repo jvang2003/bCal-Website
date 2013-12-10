@@ -1,4 +1,5 @@
 require 'helpers'
+include TableHelpers
 
 class RequestTable < TableCloth::Base
   # To include actions on this table, uncomment this line

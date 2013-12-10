@@ -1,4 +1,5 @@
 require 'helpers'
+include TableHelpers
 
 class BlockedTimesTable < TableCloth::Base
   include TableCloth::Extensions::Actions

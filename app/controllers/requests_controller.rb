@@ -47,7 +47,7 @@ class RequestsController < ApplicationController
   end
 
   def index
-    filter = params[:filter].downcase
+    filter = params[:filter] ? params[:filter].downcase : nil
 
     if filter and filter != "all"
       @requests = Request.where(:status => filter)

@@ -18,14 +18,14 @@ module UsersHelper
     define_method "is_#{name.to_slug}?" do
       return if require_login
       if current_user.role < User.VALID_ROLES[name]
-        flash[:alert] = "You must be an \"#{name}\" to access this page"
+        flash[:error] = "You must be an \"#{name}\" to access this page"
         redirect_to calendars_path
       end
     end
   end
 
   def is_higher_admin?
-    return if check_signed_in_user?
+    return if require_login
     @user ||= User.find params[:id]
 
     if not is_higher_admin_b? @user

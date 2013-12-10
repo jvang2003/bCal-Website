@@ -37,27 +37,11 @@
 		= @calendar.owner
 	%li.list-group-item
 		Blocked Times:
-		= link_to "Click to see this calendar's blocked times", blocked_time_path(@calendar.id)
+		= link_to "Click to see this calendar's blocked times", calendar_blocked_times_path(@calendar.id)
 
 - if @calendar.access_token == nil
-	= "Calendar not yet authenticated with Google Calendars"
-	%br
-	%a= link_to "Click to Authenticate", oauth_path(@calendar.id)
+	= "Calendar not yet authenticated with Google Calendar."
+	= link_to "Click to Authenticate", oauth_path(@calendar.id)
 - else
-	%a= link_to "Download Events as CSV", calendar_path(@calendar.id) + ".csv"
-
-%table#events.table
-	%thead
-		%tr
-			%th  Event
-			%th  Starting
-			%th  Ending
-			%th  Number of Attendees
-	%tbody
-		- @events.each do |e|
-			%tr
-				%td= e.summary
-				%td= e.start.nil? ? "" : e.start.date_time.to_s
-				%td= e.end.nil? ? "" : e.end.date_time.to_s
-				%td= e.attendees.size
-
+	= simple_table_for @events, with: EventTable
+	= link_to "Download Events as CSV", calendar_path(@calendar.id) + ".csv"

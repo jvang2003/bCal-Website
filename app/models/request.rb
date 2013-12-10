@@ -39,4 +39,19 @@ class Request < ActiveRecord::Base
     return crash
   end
 
+  def email_verify(status)
+    if self.status != "Approved" and self.status == "Approved" and self.place.try(:access_token)
+      self.event = Event.new
+      if self.place.check_collision(self)
+          email = self.place.owner.email
+          RequestMailer.collision_detected(self.place,email).deliver
+      end
+      self.event.update_gcal
+    elsif status and (self.status == "Rejected" or self.status == "Pending") and self.place.try(:access_token)
+      if self.event
+        self.event.delete_event
+        self.event.destroy
+      end
+    end
+  end
 end

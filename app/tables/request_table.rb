@@ -13,6 +13,14 @@ class RequestTable < TableCloth::Base
     :rejected => "danger",
   }
 
+  column :start_time do |request|
+    content_tag request.start_time.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")
+  end
+
+  column :finish_time do |request|
+    content_tag request.finish_time.in_time_zone("Pacific Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")
+  end
+
   column :status do |request|
     content_tag :span, request.status, :class => 'big-label label label-' + RequestTable::CSS_MAPPING[request.status.downcase.to_sym]
   end

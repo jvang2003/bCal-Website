@@ -19,6 +19,8 @@ class RequestsController < ApplicationController
       to_pass[attr] = params[:request][attr]
     end
     time=Time.strptime(params["date"],"%m/%d/%Y")
+    # to_pass[:start_time] = generate_time("start_time", time)
+    # to_pass[:finish_time] = generate_time("end_time", time)
     to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00") 
     to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
     # to_pass[:start_time] = DateTime.strptime("12/22/2011", "%m/%d/%Y")
@@ -87,5 +89,10 @@ class RequestsController < ApplicationController
     @request.destroy
     redirect_to requests_path
   end
-  
+
+  private
+
+  def generate_time(which, time)
+    Time.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00") 
+  end
 end

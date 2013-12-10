@@ -6,11 +6,12 @@ Feature: Staff User should be able to view/edit/approve/deny any reservations
 Background: requests have been added
     Given I am logged in as staff user "user1"
 
+    # assuming user1's id is 1 as it is the only given user in the db
 	Given the following requests exist:
-	| place    | people  | reason                 | status   | email |
-	| Room 1   | 4       | We're having a partay  | Pending  | asdf  |
-	| Room 2   | 42      | Office hours           | Pending  | asdf  |
-	| Room 3   | 5       | Serious business       | Pending  | asdf  |
+	| place    | people  | reason                 | status   | user_id |
+	| Room 1   | 4       | We're having a partay  | Pending  |  1      |
+	| Room 2   | 42      | Office hours           | Pending  |  1      |
+	| Room 3   | 5       | Serious business       | Pending  |  1      |
 
     Given the following calendars exist:
     |name           |email |visibility  | fee_required |disabled|

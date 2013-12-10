@@ -34,7 +34,7 @@ end
 
 Then /I should see room "([^\"]*)" with status "([^\"]*)"/ do |name, status|
     row = find_row name
-    row.to_a[row.length - 2].text.should == status
+    row.to_a[3].text.should == status
 end
 
 Then /I should not see room "([^\"]*)"/ do |request|

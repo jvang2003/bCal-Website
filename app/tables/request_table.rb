@@ -9,7 +9,7 @@ class RequestTable < TableCloth::Base
     link_to(request.place.try(:name), request.place)
   end
 
-  column :people, :reason, :start_time, :finish_time, :status
+  column :people, :reason, :status
 
   CSS_MAPPING = {
     :approved => "success",

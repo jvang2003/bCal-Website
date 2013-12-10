@@ -36,6 +36,6 @@ Then /I should see room "([^\"]*)" with status "([^\"]*)"/ do |name, status|
     row.to_a[row.length - 2].text.should == status
 end
 
-Then /I should not see room "([^\"]*)"/ do |name|
-	page.all('td', :text => name).first.should_not be_visible
+Then /I should not see room "([^\"]*)"/ do |request|
+    page.body.should have_content request
 end

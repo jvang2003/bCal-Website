@@ -1,8 +1,8 @@
-Feature: Any user can show the history of all event requests they made
+Feature: Any user can view and filter through the history of requests they have made.
 
 	As a 'Public User'
-	I want to be able to see my reservations and status
-	So that I can track my reservation history.
+	I want to be able to filter through my reservations by their status
+	So that I can track my reservation history easily.
 
 Background: requests have been added
 
@@ -21,17 +21,23 @@ Scenario: show all history
 	And I should see room "Room 2" with status "Pending"
 	And I should see room "Room 3" with status "Rejected"
 
-Scenario: show approved
+Scenario: show only my approved requests
 	When I view my request history
 	And I filter by Approved
 	Then I should see room "Room 1" with status "Approved"
+	And I should not see room "Room 2"
+	And I should not see room "Room 3"
 
-Scenario: show pending
+Scenario: show only myy pending requests
 	When I view my request history
 	And I filter by Pending
 	Then I should see room "Room 2" with status "Pending"
+	And I should not see room "Room 3"
+	And I should not see room "Room 1"
 
-Scenario: show rejected
+Scenario: show only my rejected requests
 	When I view my request history
 	And I filter by Rejected
 	Then I should see room "Room 3" with status "Rejected"
+	And I should not see room "Room 1"
+	And I should not see room "Room 2"

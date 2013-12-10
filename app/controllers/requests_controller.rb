@@ -24,21 +24,8 @@ class RequestsController < ApplicationController
   end
 
   def create
-    collide=false
-
     @request = Request.new
     to_pass = handle_params params[:request].pluck Request::FIELDS
-    %w(people details reason place course_related accept_different_room department email user_id).each do |attr|
-      to_pass[attr] = params[:request][attr]
-    end
-
-    time=Time.strptime(params["date"],"%m/%d/%Y")
-    to_pass[:start_time] = generate_time("start_time", time)
-    to_pass[:finish_time] = generate_time("end_time", time)
-
-
-    # to_pass[:start_time] = Time.new(time.year,time.month,time.day, hour=params["start_time"]['hour'].to_i, minute=params["start_time"]['min'].to_i,0,"-08:00")
-    # to_pass[:finish_time] = Time.new(time.year,time.month,time.day, hour=params['end_time']['hour'], minute=params['end_time']['min'].to_i,0,"-08:00")
     to_pass[:status] = "Pending"
     to_pass[:email] = current_user.email
 
@@ -99,7 +86,8 @@ class RequestsController < ApplicationController
     end
 
     RequestMailer.status_changed(@request).deliver
-    if prev_status != "Approved" and @request.status == "Approved" and calendar.try(:access_token)
+
+    if prev_status != "Approved" and @request.status == "Approved" and @request.place.try(:access_token)
       @event = Event.new
       @request.event = @event
       @request.event.update_gcal
@@ -107,7 +95,7 @@ class RequestsController < ApplicationController
           email = User.find_by_calnet_id(@request.calendar.owner).email
           RequestMailer.collision_detected(@request.calendar,email).deliver
       end
-    elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and calendar.try(:access_token)
+    elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and @request.place.try(:access_token)
       if @request.event
         @request.event.delete_event
         @request.event.destroy
@@ -131,7 +119,7 @@ class RequestsController < ApplicationController
   private
 
   def generate_time(which, time)
-    DateTime.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00") 
+    DateTime.new(time.year,time.month,time.day, hour=params[which]['hour'].to_i, minute=params[which]['min'].to_i,0,"-08:00")
   end
 
   def blocked?(start, finish)

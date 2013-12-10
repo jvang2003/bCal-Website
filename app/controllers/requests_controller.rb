@@ -9,8 +9,6 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
-    puts params[:controller]
-    puts params[:action]
   end
 
   def create
@@ -21,9 +19,8 @@ class RequestsController < ApplicationController
       to_pass[attr] = params[:request][attr]
     end
 
-    to_pass[:start_time] = Time.new(Time.new.year, hour=params[:time]['hour'].to_i, minute=params[:time]['hour'].to_i)
-    puts params['finish_time']
-    to_pass[:finish_time] = Time.new(Time.new.year, hour=10, minute=params['finish_time']['hour'].to_i)
+    to_pass[:start_time] = Time.new(Time.new.year, hour=params[:time]['hour'].to_i, minute=params[:time]['min'].to_i)
+    to_pass[:finish_time] = Time.new(Time.new.year, hour=params['finish_time']['hour'], minute=params['finish_time']['min'].to_i)
     # to_pass[:start_time] = DateTime.strptime("12/22/2011", "%m/%d/%Y")
     # to_pass[:start_time] = DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["start_time"]["(4i)"].to_i,params["start_time"]["(5i)"].to_i, 0
     # to_pass[:finish_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["finish_time"]["(4i)"].to_i,params["finish_time"]["(5i)"].to_i, 0
@@ -86,6 +83,5 @@ class RequestsController < ApplicationController
 
   def edit
     @request ||= Request.find params[:id]
-    puts @request.status
   end
 end

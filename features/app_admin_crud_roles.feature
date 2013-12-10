@@ -6,27 +6,25 @@ Feature: App admin can CRUD users to roles
 
 Background: roles have been added to the database
     Given the following users exist:
-    |calnet_id    | role              | name     | email                    |
-    |bob          | App Admin         | whatever | DontEmailMe1@noemail.com |
-    |alice        | Admin             | whatever | DontEmailMe1@noemai2.com |
+    |calnet_id    | role              | name  | email                    |
+    |bob          | App Admin         | bob   | DontEmailMe1@noemail.com |
+    |alice        | Admin             | alice | DontEmailMe1@noemai2.com |
 
     And I am logged in as an "App Admin"
-    And I am on the homepage
+    When I view the users
 
 Scenario: able to add new user
-    When I try to add a new user
-    And I fill in "mallory"
-    Then I should see "mallory" in the list of roles
+    When I try to add a new user with username "mallory"
+    Then I should see "mallory" in the list of users
 
 Scenario: able to delete user
-    When I view the users
-    And I try to delete user "bob"
-    Then I should not see "bob" in the list of roles
+    When I try to delete user "bob"
+    Then I should not see "bob" in the list of users
 
 Scenario: able to edit user
-    When I try to change calnet_id of "alice" to "alicia"
+    When I try to change the name of "alice" to "Alicia"
     And I view the users
-    Then I should see "alicia" in the list of roles
-    And I should not see "alice" in the list of roles
+    Then I should see "Alicia" in the list of users
+    And I should not see "alice" in the list of users
 
 

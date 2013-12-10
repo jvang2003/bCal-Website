@@ -25,12 +25,15 @@ class UsersController < ApplicationController
       end
     end
 
-
     @user ||= User.new user_params
 
     if @user.save
-      sign_in @user
-      redirect_back_or root_path
+      if current_user
+        redirect_back_or users_path
+      else
+        sign_in @user
+        redirect_back_or root_path
+      end
     else
       render :new
     end

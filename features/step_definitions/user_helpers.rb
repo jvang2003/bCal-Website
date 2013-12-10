@@ -5,10 +5,12 @@ Given /^the following users exist:$/ do |users_table|
     end
 end
 
-Given /^I am logged in as a(?:n)? "(.*?)"$/ do |name|
+Given /^I am logged in as a(?:n)? "(.*?)"$/ do |role|
+    login User.find_by_role(User.VALID_ROLES[role]).name
+end
+
+Given /^I am logged in as? "(.*?)"$/ do |name|
     login name
-    # fill_in "Calnet", :with =>
-    # click_button "submit_button"
 end
 
 def login username

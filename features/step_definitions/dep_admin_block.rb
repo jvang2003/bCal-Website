@@ -15,21 +15,14 @@ When /^I try to block "(.*)" on "(.*)" from "(.*)" to "(.*)"/ do |calendar, date
 		end_min = "0"
 	end
 
-	find(:xpath, '//input[@id="input1"]').set start_hour
-	
-
-	#field_2 = page.all(:xpath, '//a[@id="input2"]')
-	
-	
-
-
-
-
-
+	page.find(:xpath, '//input[@id="startHour"]').set start_hour
+	page.find(:xpath, '//input[@id="startMin"]').set start_min
+	page.find(:xpath, '//input[@id="endHour"]').set end_hour
+	page.find(:xpath, '//input[@id="endMin"]').set end_min
 
 end
 
-Then /^"(.*)" should not be able to be booked from "(.*)" to "(.*)"/ do |calendar, start_time, end_time|
+Then /^"(.*)" should not be able to be booked on "(.*)" from "(.*)" to "(.*)"/ do |calendar, date, start_time, end_time|
 	# not sure about how to block time slots yet
 	# check start_time less than end_time
 	visit("/")

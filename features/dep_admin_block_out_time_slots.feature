@@ -16,4 +16,4 @@ Background: calendars have been added to the database
 
 Scenario: block the first calendar from 10 am to 11 am
 	When I try to block "calendar1" on "12/10/2013" from "10:10" to "11:05"
-	Then "calendar1" should not be able to be booked from "10:10am" to "11:05am"
+	Then "calendar1" should not be able to be booked on "12/10/2013" from "10:10am" to "11:05am"

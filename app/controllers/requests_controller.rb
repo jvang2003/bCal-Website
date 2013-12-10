@@ -87,4 +87,5 @@ class RequestsController < ApplicationController
     @request.destroy
     redirect_to requests_path
   end
+  
 end

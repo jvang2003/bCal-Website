@@ -1,3 +1,6 @@
+= content_for :javascripts do
+  = javascript_include_tag 'request.js'
+
 = bootstrap_form_for @request do |f|
   = f.error_messages
   = f.select :place, Calendar.all.collect { |cal| [cal.name, cal.id] }, :include_blank => true

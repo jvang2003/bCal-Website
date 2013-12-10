@@ -72,11 +72,9 @@ class RequestsController < ApplicationController
   def update
     @request ||= Request.find(params[:id])
     prev_status = @request.status
-    puts @request.attributes
     to_pass = @request.attributes.pluck Request::FIELDS
     params[:request].pluck(Request::FIELDS).each { |key, val|  to_pass[key] = val if val}
     to_pass = handle_params(to_pass)
-    puts to_pass
     to_pass[:email] ||= params[:request][:email]
 
     @request.update_attributes to_pass

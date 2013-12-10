@@ -7,20 +7,16 @@ Feature: Any changes a user makes in our app will show up in Google Calendar
 Background: calendars have been added
 	Given I am logged in as a "Guest"
 
-	And the following calendars exist:
-    | name         |email |visibility  | fee_required |disabled|
-    | Test         |123   |public      | true         |true    |
-
 	Given the following calendars exist:
-	| name | email 				          |
-	| Test | bCalWebsiteTesting@gmail.com |
+	| name   | email 				        |
+	| Room 1 | bCalWebsiteTesting@gmail.com |
 
 	Given the following requests exist:
-	| reason                 | status   | details        | start_time  	       | finish_time         | user_id |
-	| We're having a partay  | Approved | fofofofofofofo | 2013-11-10 12:22:26  | 2013-11-10 19:22:26 | 1 |
+	| place    | people  | reason                 | status   | user_id |
+	| Room 1   | 4       | We're having a partay  | Pending  |  1      |	
 
 	And I am on the homepage
-	And I authenticate the calendar "Test" the refresh token "1/HOP_Fhq1XuuNWEc_DkDw0M7F8KG3I8YpFnXKGnjlbjs"
+	And I authenticate the calendar "Room 1" the refresh token "1/HOP_Fhq1XuuNWEc_DkDw0M7F8KG3I8YpFnXKGnjlbjs"
 
 Scenario: a created event should show up on my google calendar
 	When I create an event with request "1" and a calendar id "1"

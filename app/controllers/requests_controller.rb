@@ -101,19 +101,21 @@ class RequestsController < ApplicationController
 
     RequestMailer.status_changed(@request).deliver
 
-    if @request.status != "Approved" and @request.status == "Approved" and @request.place.try(:access_token)
-      @request.event = Event.new
-      if @request.place.check_collision(@request)
-          email = @request.place.owner.email
-          RequestMailer.collision_detected(@request.place,email).deliver
-      end
-      @request.event.update_gcal
-    elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and @request.place.try(:access_token)
-      if @request.event
-        @request.event.delete_event
-        @request.event.destroy
-      end
-    end
+    # if @request.status != "Approved" and @request.status == "Approved" and @request.place.try(:access_token)
+    #   @request.event = Event.new
+    #   if @request.place.check_collision(@request)
+    #       email = @request.place.owner.email
+    #       RequestMailer.collision_detected(@request.place,email).deliver
+    #   end
+    #   @request.event.update_gcal
+    # elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and @request.place.try(:access_token)
+    #   if @request.event
+    #     @request.event.delete_event
+    #     @request.event.destroy
+    #   end
+    # end
+
+    @request.email_verify(params[:status])
 
     flash[:notice] = "Your request has been updated."
     redirect_to requests_path

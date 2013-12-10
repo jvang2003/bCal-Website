@@ -26,9 +26,9 @@ class RequestsController < ApplicationController
     # to_pass[:finish_time]= DateTime.new date[2].to_i,date[0].to_i,date[1].to_i,params["finish_time"]["(4i)"].to_i,params["finish_time"]["(5i)"].to_i, 0
 
     to_pass[:status] = "Pending"
+    to_pass[:email] =current_user.email
     request = Request.create! to_pass
-    params[:email] = params[:request][:email]
-    RequestMailer.request_successful(params).deliver
+    RequestMailer.request_successful(request).deliver
 
     flash[:notice]= "Request has been submitted"
     redirect_to calendars_path

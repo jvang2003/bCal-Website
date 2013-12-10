@@ -26,7 +26,7 @@
 			%td
 				= "#{field_name.titlecase}: "
 			%td
-				- if item.length > 0
+				- if item && item.length > 0
 					= item
 				- else
 					%span.text-muted None

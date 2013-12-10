@@ -78,15 +78,4 @@ class UsersController < ApplicationController
     def user_params
       params[:user] # TODO: FIX SECURITY HOLE
     end
-
-    def is_same_controller_and_action?(url1, url2)
-      hash_url1 = Rails.application.routes.recognize_path(url1)
-      hash_url2 = Rails.application.routes.recognize_path(url2)
-
-      [:controller, :action].each do |key|
-        return false if hash_url1[key] != hash_url2[key]
-      end
-
-      return true
-    end
 end

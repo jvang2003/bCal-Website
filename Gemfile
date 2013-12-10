@@ -25,7 +25,6 @@ end
 
 group :test do
   gem 'cucumber-rails', :require => false
-  # gem 'capybara-mechanize' #not using right now, but might need for authorization scripts in tests
 end
 
 # Gems used only for assets and not required

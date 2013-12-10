@@ -12,7 +12,7 @@ class EventTable < TableCloth::Base
       end
     end
   end
-  column :attendees do |event|
+  column :number_of_attendees do |event|
     event.attendees.length
   end
 

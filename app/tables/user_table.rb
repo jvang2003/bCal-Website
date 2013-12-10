@@ -7,7 +7,7 @@ class UserTable < TableCloth::Base
   column :name
   column :email
   column :role do |user|
-    User.VALID_ROLES.key(user.role)
+    User::VALID_ROLES.key(user.role)
   end
 
   common_actions

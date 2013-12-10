@@ -9,14 +9,12 @@ class User < ActiveRecord::Base
   # validates :calnet_id, presence: true
   validates :email, presence: true
 
-  def User.VALID_ROLES
-    {
+  VALID_ROLES = {
       "Guest" => 0,
       "Admin" => 1,
       "Dept Admin" => 2,
       "App Admin" => 3,
     }
-  end
 
   def User.new_remember_token
     SecureRandom.urlsafe_base64

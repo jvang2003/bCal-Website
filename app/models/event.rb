@@ -6,11 +6,11 @@ class Event < ActiveRecord::Base
 	{
 		  'summary' => request.reason,
 		  'start' => {
-		    "dateTime" => convert_to_google_time_format(request.time)
+		    "dateTime" => convert_to_google_time_format(request.start_time)
                     #"dateTime" => "2013-11-29T18:30:00z"
 		  },
                   "end" => {
-                    "dateTime" => convert_to_google_time_format(request.time)
+                    "dateTime" => convert_to_google_time_format(request.finish_time)
                     #"dateTime" => "2013-11-29T19:30:00z"
                   },
                   "attendees" => create_attendees(request.people)
@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
   end
   def update_gcal
   	#TODO make this handle errors in updating to the api
-  	if self.request and self.request.status == "approved"
+  	if self.request and self.request.status == "Approved"
 	  	client = request.calendar.client
 	  	gcal = request.calendar.gcalendar
 

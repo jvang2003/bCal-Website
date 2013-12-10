@@ -1,6 +1,13 @@
 require 'google/api_client'
 
 class Request < ActiveRecord::Base
+  scope :mine, ->(user_id) do
+    where "user_id = ?", user_id
+  end
+  scope :filter_status, ->(keyword) do
+    where "status = ?", keyword
+  end
+
   attr_accessible :details, :people, :reason, :place, :start_time, :status, :course_related, :accept_different_room, :department, :finish_time, :email, :user_id
   attr_accessor :google_format_time
 

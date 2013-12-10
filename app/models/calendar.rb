@@ -1,6 +1,15 @@
 require 'google/api_client'
 
 class Calendar < ActiveRecord::Base
+
+  scope :mine, ->(user_id) do
+    where "owner_id = ?", user_id
+  end
+
+  scope :filtered, ->(filter, keyword) do
+    where "#{filter} = ?", keyword
+  end
+
   has_many :request
   has_many :blocked_times
   belongs_to :owner, :class_name => "User"

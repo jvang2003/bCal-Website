@@ -10,7 +10,7 @@ class CalendarsController < ApplicationController
   end
 
   def self.can_crud? user
-    user && user.role >= 1
+    user && user.role && user.role >= 1
   end
 
   def new
@@ -24,18 +24,23 @@ class CalendarsController < ApplicationController
   def index
     @filter = params[:filter]
     @keyword = params[:keyword]
+    @user_id = params[:user_id]
 
+    @calendars = Calendar.scoped
     if @filter && @keyword
       if not Calendar.column_names.include? @filter
         flash[:errors] = "You must search by a valid attribute"
         return
       end
 
-      @calendars = Calendar.where "#{@filter} = ?", @keyword
-    else
-      @calendars = Calendar.all
-      params[:keyword] = nil
+      @calendars = @calendars.filtered @filter, @keyword
     end
+
+    if @user_id
+      @calendars = @calendars.mine @user_id
+    end
+
+    # params[:keyword] = nil
 
     respond_to do |format|
       format.html

@@ -13,10 +13,6 @@ Background: calendars have been added to the database
     And I am logged in as public user "public_user"
     And I am on the homepage
 
-
 Scenario: able to add details
     When I try to submit a request for reserving a room
-    Then I will be able to fill in 11, Civil Engineering, 125 Cory, infosession, none, yes, no
-
-
-
+    Then I will be able to fill in 11, Civil Engineering, 125 Cory, 2, 0, 3, 30, infosession, none, yes, no

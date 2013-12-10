@@ -6,14 +6,18 @@ Feature: Any user can view and filter through the history of requests they have 
 
 Background: requests have been added
 
-	Given the following requests exist:
-	| place    | people  | reason                 | status   |
-	| Room 1   | 4       | We're having a partay  | Approved |
-	| Room 2   | 42      | Office hours           | Pending  |
-	| Room 3   | 5       | Serious business       | Rejected |
+    Given the following users exist:
+    |calnet_id    | role              | name  | email            |
+    | bill	      | Guest			  | Billy | bill@example.com |
+
+	And the following requests exist:
+	| place    | people  | reason                 | status   | user_id |
+	| Room 1   | 4       | We're having a partay  | Approved | bill	   |
+	| Room 2   | 42      | Office hours           | Pending  | bill    |
+	| Room 3   | 5       | Serious business       | Rejected | bill    |
 
 	And I am on the homepage
-	And I am logged in as public user "public_user"
+	And I am logged in as "bill"
 
 Scenario: show all history
 	When I view my request history

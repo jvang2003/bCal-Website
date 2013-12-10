@@ -1,7 +1,7 @@
 module CalendarsHelper
 	def events_to_csv events
 		CSV.generate do |csv|
-			csv << ["Event", "Starting", "Ending", "Number of Attendees"] # add column names first
+			csv << ["Summary", "Start", "End", "Number of attendees"] # add column names first
 
 			events.each do |e|
 				start_time = e.start.nil? ? "" : e.start.date_time.to_s

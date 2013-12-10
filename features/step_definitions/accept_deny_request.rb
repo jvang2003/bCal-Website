@@ -9,8 +9,7 @@ end
 
 When /^I (approve|deny) a request for "(.*?)"$/ do |approve, room|
     click_link "request_index"
-    room_id = Calendar.find_by_name(room).id.to_s
-    row = find_row room_id
+    row = find_row_for_room room
     row[row.length - 1].click_link "Update"
     select (approve == "approve" ? "Approved" : "Rejected"), :from => "request_status"
     click_button "Update Request"
@@ -19,8 +18,7 @@ end
 When /^I edit a request for "(.*)" assuming it was accepted previously$/ do |room|
     step "I approve a request for \"#{room}\""
 
-    room_id = Calendar.find_by_name(room).id.to_s
-    row = find_row room_id
+    row = find_row_for_room room
     row[row.length - 1].click_link "Update"
     select("Rejected", :from => "request_status")
     click_button("Update Request")

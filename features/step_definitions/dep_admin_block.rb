@@ -56,4 +56,9 @@ Then /^"(.*)" should not be able to be booked on "(.*)" from "(.*)" to "(.*)"/ d
 
 	click_button "Submit Request"
 
+	page.has_content?('Your request was automatically rejected because it conflicts blocked off time section on the requested calendar.')
+
+
+
+
 end

@@ -1,2 +1,9 @@
-%h1 BlockedTimes#new
-%p Find me in app/views/blocked_times/new.html.haml
+= content_for :javascripts do
+	= javascript_include_tag 'blocked_times.js'
+
+%h1 Block a section of time
+= form_for [@calendar, @blocked_time], url: {action: 'create'} do |f|
+	= label_tag :date, 'Date'
+	= text_field_tag :date ,nil,:required => true
+	%div#slider{:style => 'padding-bottom: 10px;'}
+	= submit_tag "Submit Request", :class => "btn btn-inverse btn-success", :data => {:confirm => "Ready to submit?"}

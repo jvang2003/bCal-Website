@@ -15,3 +15,13 @@ When(/^I try to change the name of "(.*?)" to "(.*?)"$/) do |old_name, new_name|
     click_button "Update User"
 end
 
+When(/^I try to change their name to "(.*?)"$/) do |new_name|
+    fill_in "user_name", :with => new_name
+    click_button "Update User"
+end
+
+Then(/^I should see an error$/) do
+    page.should have_content("You don't have privileges for user")
+end
+
+

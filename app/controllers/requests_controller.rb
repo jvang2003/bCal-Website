@@ -88,11 +88,11 @@ class RequestsController < ApplicationController
     if prev_status != "Approved" and @request.status == "Approved" and @request.place.try(:access_token)
       @event = Event.new
       @request.event = @event
-      @request.event.update_gcal
       if @request.place.check_collision(@request)
-          email = User.find_by_calnet_id(@request.place.owner).email
+          email = @request.place.owner.email
           RequestMailer.collision_detected(@request.place,email).deliver
       end
+      @request.event.update_gcal
     elsif params[:status] and (@request.status == "Rejected" or @request.status == "Pending") and @request.place.try(:access_token)
       if @request.event
         @request.event.delete_event

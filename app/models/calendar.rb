@@ -60,9 +60,9 @@ class Calendar < ActiveRecord::Base
     events=self.client.execute(:api_method => self.gcalendar.events.list, :parameters => {'calendarId' => self.email , 'timeMin' => request.start_time.iso8601})
     events=events.data.items
     events.each do |event|
-      if Time.iso8601(event.end.dateTime) < request.start_time
+      if event.end.dateTime < request.start_time
           collide=false
-      elsif Time.iso8601(event.start.dateTime) > request.finish_time
+      elsif event.start.dateTime > request.finish_time
           collide=false
       else
           collide=true
@@ -71,4 +71,5 @@ class Calendar < ActiveRecord::Base
       return collide
     end
   end
+
 end

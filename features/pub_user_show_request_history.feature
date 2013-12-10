@@ -10,6 +10,12 @@ Background: requests have been added
     |calnet_id    | role              | name  | email            |
     | bill	      | Guest			  | Billy | bill@example.com |
 
+    And the following calendars exist:
+    | name           |email |visibility  | fee_required |disabled|
+    | Room 1         |123   |public      | true         |true    |
+    | Room 2         |345   |private     | false        |false   |
+    | Room 3         |345   |private     | false        |false   |
+
 	And the following requests exist:
 	| place    | people  | reason                 | status   | user_id |
 	| Room 1   | 4       | We're having a partay  | Approved | bill	   |
@@ -32,7 +38,7 @@ Scenario: show only my approved requests
 	And I should not see room "Room 2"
 	And I should not see room "Room 3"
 
-Scenario: show only myy pending requests
+Scenario: show only my pending requests
 	When I view my request history
 	And I filter by Pending
 	Then I should see room "Room 2" with status "Pending"

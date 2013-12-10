@@ -6,6 +6,11 @@ Feature: Any changes a user makes in our app will show up in Google Calendar
 
 Background: calendars have been added
 	Given I am logged in as a "Guest"
+
+	And the following calendars exist:
+    | name         |email |visibility  | fee_required |disabled|
+    | Test         |123   |public      | true         |true    |
+
 	Given the following calendars exist:
 	| name | email 				          |
 	| Test | bCalWebsiteTesting@gmail.com |

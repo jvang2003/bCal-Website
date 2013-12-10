@@ -22,7 +22,7 @@ def find_row name
     rows.each do |row|
         if not found
             data = row.all('td')
-            if data.first.text == name
+            if data.first.text eql? name
                 found = data
             end
         end

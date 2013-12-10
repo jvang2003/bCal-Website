@@ -6,17 +6,18 @@ Feature: Staff User should be able to view/edit/approve/deny any reservations
 Background: requests have been added
     Given I am logged in as staff user "user1"
 
+    And the following calendars exist:
+    | name           |email |visibility  | fee_required |disabled|
+    | Room 1         |123   |public      | true         |true    |
+    | Room 2         |345   |private     | false        |false   |
+    | Room 3         |345   |private     | false        |false   |
+
     # assuming user1's id is 1 as it is the only given user in the db
 	Given the following requests exist:
 	| place    | people  | reason                 | status   | user_id |
 	| Room 1   | 4       | We're having a partay  | Pending  |  1      |
 	| Room 2   | 42      | Office hours           | Pending  |  1      |
 	| Room 3   | 5       | Serious business       | Pending  |  1      |
-
-    Given the following calendars exist:
-    |name           |email |visibility  | fee_required |disabled|
-    |Room 1         |123   |public      | true         |true    |
-    |calendar2      |345   |private     | false        |false   |
 
 	And I am on the homepage
 

@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   include UsersHelper
+
+  has_many :calendars
+
   attr_accessible :name, :calnet_id, :role, :email
 
   validates :name, presence: true

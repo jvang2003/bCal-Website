@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209082120) do
+ActiveRecord::Schema.define(:version => 20131210092002) do
 
   create_table "blocked_times", :force => true do |t|
     t.datetime "start_time"
@@ -23,18 +23,18 @@ ActiveRecord::Schema.define(:version => 20131209082120) do
 
   create_table "calendars", :force => true do |t|
     t.string   "name"
-    t.boolean  "fee_required",  :limit => 255
     t.string   "email"
     t.string   "visibility"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.boolean  "disabled"
     t.string   "access_token"
     t.string   "refresh_token"
     t.string   "building"
     t.string   "department"
     t.string   "usage"
-    t.string   "owner"
+    t.boolean  "fee_required",  :default => false
+    t.string   "owner_id"
   end
 
   create_table "events", :force => true do |t|

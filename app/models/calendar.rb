@@ -3,9 +3,10 @@ require 'google/api_client'
 class Calendar < ActiveRecord::Base
   has_many :request
   has_many :blocked_times
+  belongs_to :owner, :class_name => "User"
 
   attr_accessible :name, :email, :visibility, :fee_required,
-    :disabled, :refresh_token, :access_token, :building, :department, :usage, :owner
+    :disabled, :refresh_token, :access_token, :building, :department, :usage, :owner_id
   attr_accessor :gcalendar, :client
   after_initialize :init
   after_find :init

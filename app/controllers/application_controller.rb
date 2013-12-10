@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
   before_filter :require_login
+
   def self.can_view? user
     false
   end

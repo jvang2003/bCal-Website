@@ -25,7 +25,7 @@ class Event < ActiveRecord::Base
   end
   def update_gcal
   	#TODO make this handle errors in updating to the api
-  	if self.request and self.request.status == "approved"
+  	if self.request and self.request.status == "Approved"
 	  	client = request.calendar.client
 	  	gcal = request.calendar.gcalendar
 

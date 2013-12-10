@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     user && user.role >= 2
   end
 
-  before_filter :is_higher_admin?, :only => [:edit, :update, :destroy]
-  before_filter :is_dept_admin?, :only => [:index]
+  before_filter :require_higher_admin, :only => [:edit, :update, :destroy]
+  before_filter :require_dept_admin, :only => [:index]
   skip_before_filter :require_login, :only => [:new, :create]
 
   def new

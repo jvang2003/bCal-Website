@@ -2,10 +2,8 @@ class SessionsController < ApplicationController
   skip_before_filter :require_login, :only => :new
 
   def new
-    puts session
     if session["cas"] && session["cas"]["user"]
       user = User.find_by_calnet_id(session["cas"]["user"])
-      puts "found user #{user}"
       if user
         sign_in user
         redirect_back_or root_path

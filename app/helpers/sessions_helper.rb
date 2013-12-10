@@ -40,5 +40,10 @@ module SessionsHelper
     redirect_to params[:return_to] || default, :params => params
   end
 
+  def require_login
+    unless current_user
+      redirect_to sign_in_url(:params => {:return_to => request.original_url}), notice: "Please sign in."
+    end
+  end
 end
 

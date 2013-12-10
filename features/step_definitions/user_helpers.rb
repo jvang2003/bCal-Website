@@ -6,15 +6,16 @@ Given /^the following users exist:$/ do |users_table|
 end
 
 Given /^I am logged in as a(?:n)? "(.*?)"$/ do |name|
-    visit sign_in_path
-    fill_in "Calnet", :with => User.find_by_role(User.VALID_ROLES[name]).calnet_id
-    click_button "submit_button"
+    login name
+    # fill_in "Calnet", :with =>
+    # click_button "submit_button"
 end
 
 def login username
     visit sign_in_path
-    fill_in "Calnet", :with => username
-    click_button "submit_button"
+    fill_in 'username', with: username
+    fill_in 'password', with: 'any password'
+    click_button 'Login'
 end
 
 

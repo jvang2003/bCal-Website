@@ -12,8 +12,8 @@ When /^I (approve|deny) a request for "(.*?)"$/ do |approve, room|
 
     row = find_row room
     row[row.length - 1].click_link "Update"
-    select (approve == "approve" ? "Approved" : "Rejected"), :from => "status"
-    click_button "Update Status"
+    select (approve == "approve" ? "Approved" : "Rejected"), :from => "request_status"
+    click_button "Update Request"
 end
 
 When /^I edit a request for "(.*)" assuming it was accepted previously$/ do |room|
@@ -21,8 +21,8 @@ When /^I edit a request for "(.*)" assuming it was accepted previously$/ do |roo
 
     row = find_row room
     row[row.length - 1].click_link "Update"
-    select("Rejected", :from => "status")
-    click_button("Update Status")
+    select("Rejected", :from => "request_status")
+    click_button("Update Request")
 end
 
 Then /^I should see all the requests$/ do

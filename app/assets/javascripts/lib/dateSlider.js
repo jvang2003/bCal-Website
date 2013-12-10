@@ -20,40 +20,15 @@ var DateSlider = (function() {
 	  	return strTime;
 	};
 
-	function updateHiddenFields(e, data) {
+	function updateHiddenFields(e, data, one, two, three, four) {
 		console.log(data);
-		$('#input1').val(data.values.min.getHours());
-		$('#input2').val(data.values.min.getMinutes());
-		$('#input3').val(data.values.max.getHours());
-		$('#input4').val(data.values.max.getMinutes());
+		$(one).val(data.values.min.getHours());
+		$(two).val(data.values.min.getMinutes());
+		$(three).val(data.values.max.getHours());
+		$(four).val(data.values.max.getMinutes());
 	}
 
 	me.render = function(renderDiv, formId, nameStartHour, nameStartMin, nameEndHour, nameEndMin) {
-		var input1 = document.createElement("input");
-		input1.setAttribute("id", "input1");
-		input1.setAttribute("type", "hidden");
-		input1.setAttribute("name", nameStartHour);
-		// input.setAttribute("value", "value_you_want");
-		document.getElementById(formId).appendChild(input1);
-		var input2 = document.createElement("input");
-		input2.setAttribute("id", "input2");
-		input2.setAttribute("type", "hidden");
-		input2.setAttribute("name", nameStartMin);
-		// input.setAttribute("value", "value_you_want");
-		document.getElementById(formId).appendChild(input2);
-		var input3 = document.createElement("input");
-		input3.setAttribute("id", "input3");
-		input3.setAttribute("type", "hidden");
-		input3.setAttribute("name", nameEndHour);
-		// input.setAttribute("value", "value_you_want");
-		document.getElementById(formId).appendChild(input3);
-		var input4 = document.createElement("input");
-		input4.setAttribute("id", "input4");
-		input4.setAttribute("type", "hidden");
-		input4.setAttribute("name", nameEndMin);
-		// input.setAttribute("value", "value_you_want");
-		document.getElementById(formId).appendChild(input4);
-
 		$(renderDiv).dateRangeSlider({
 	  		step: {
 	  			'minutes': 5
@@ -93,13 +68,18 @@ var DateSlider = (function() {
 			}]
 		});
 
-		$(renderDiv).bind("userValuesChanged", updateHiddenFields);
+		$(renderDiv).bind("userValuesChanged", (function() {
+			return function(e, data) {
+				updateHiddenFields.apply(this, [e, data, nameStartHour, nameStartMin, nameEndHour, nameEndMin]);
+			};
+		})()
+		);
 		updateHiddenFields(null, {
 			values: {
 				min: defaultStart,
 				max: defaultEnd
 			}
-		});
+		}, nameStartHour, nameStartMin, nameEndHour, nameEndMin);
 	};
 	return me;
 })();

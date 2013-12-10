@@ -12,7 +12,7 @@ Then /^I will be able to fill in (.*)$/ do |event_details|
     fill_in(:request_people, :with => attributes[0])
     fill_in(:request_department, :with => attributes[1])
 
-    select(attributes[2], :from => :request_place)
+    select(attributes[2], :from => :request_place_id)
 
     # use hidden fields to bypass slider time-selector
     # and pick time from 2:00 to 3:30

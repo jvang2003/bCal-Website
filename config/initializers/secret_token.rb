@@ -9,11 +9,12 @@
 # if this change created a bug, check out the post here
 # http://daniel.fone.net.nz/blog/2013/05/20/a-better-way-to-manage-the-rails-secret-token/
 
+hard_coded_token = 'a172e66493427aee984d01e189e4a5be668e79488b15fd57de35da76b0a8c947423caa0e4da7657aa6a324c2522ddc5c5f97e4a70fa7b086576713588956dad7'
 if Rails.env.development? or Rails.env.test?
-  token = 'a172e66493427aee984d01e189e4a5be668e79488b15fd57de35da76b0a8c947423caa0e4da7657aa6a324c2522ddc5c5f97e4a70fa7b086576713588956dad7'
+  token = hard_coded_token
 elsif ENV['SECRET_TOKEN'] == nil or ENV['SECRET_TOKEN'].length < 30
 	puts "USING HARD CODED SECRET TOKEN IN DEPLOYMENT"
-  token = "07c58d8c35f1f1d97c579a4334b70a026a2885705a3e2684def83ef45b3a0b37dc3cf47dfd10ad374701a261324357e3f35eb8991074bec5666513ab592c6926"
+  token = hard_coded_token
 else
 	token = ENV['SECRET_TOKEN']
 end

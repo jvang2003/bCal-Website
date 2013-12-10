@@ -71,5 +71,4 @@ class Calendar < ActiveRecord::Base
       return collide
     end
   end
-
 end

@@ -1,0 +1,15 @@
+= content_for :javascripts do
+    = javascript_include_tag 'show_request.js'
+
+%h1 Overbookings
+= form_tag requests_path, :method => :get, :class => 'form-inline form-header' do
+    .form-group
+        = select_tag 'filter', options_for_select(%w(All Pending Approved Rejected).map { |e| [e,e] }, params[:filter] || "All"), :class => 'form-control'
+    .form-group
+        = button_tag(:type => :submit, :class => 'btn btn-default form-control') do
+            Filter
+
+- if @list.empty?
+    .jumbotron No OverBookings
+- else
+    = simple_table_for @list, with: RequestTable
